@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { TestComponent } from './test/test.component';
 import { ErrorComponent } from './error/error.component';
 import { AuthComponent } from './auth/auth.component';
 import { LogInComponent } from './log-in/log-in.component';
@@ -16,11 +15,11 @@ import { FlightComponent } from './admin/admin-panel/flight/flight.component';
 import { PassengerComponent } from './admin/admin-panel/passenger/passenger.component';
 import { TripComponent } from './admin/admin-panel/trip/trip.component';
 import { UserComponent } from './admin/admin-panel/user/user.component';
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent,
     ErrorComponent,
     AuthComponent,
     LogInComponent,
@@ -36,7 +35,8 @@ import { UserComponent } from './admin/admin-panel/user/user.component';
     UserComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
