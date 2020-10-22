@@ -9,10 +9,9 @@ import {GeneralService} from "../services/general.service";
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.css']
 })
-export class LogInComponent{
+export class LogInComponent implements OnInit {
   signInForm: FormGroup;
   loading = false;
-  hidePassword = true;
 
   constructor( private fb: FormBuilder,
                private router: Router,
@@ -30,13 +29,13 @@ export class LogInComponent{
   onSubmit() {
     this.loading = true;
 
-    // this.auth.signIn(this.signInForm.get('email').value, this.signInForm.get('password').value)
-    //   .subscribe(() => {
-    //     this.router.navigate(['']);
-    //     this.generalService.showSnackbar('Login was successful', 'Close');
-    //   }, () => {
-    //     this.generalService.showSnackbar('Failed to login', 'Close');
-    //     this.loading = false;
-    //   });
+    this.auth.signIn(this.signInForm.get('email').value, this.signInForm.get('password').value)
+      .subscribe(() => {
+        this.router.navigate(['']);
+        this.generalService.showSnackbar('Login was successful', 'Close');
+      }, () => {
+        this.generalService.showSnackbar('Failed to login', 'Close');
+        this.loading = false;
+      });
   }
 }

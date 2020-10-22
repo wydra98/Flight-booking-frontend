@@ -10,31 +10,27 @@
 <body>
 <div class="container-fluid">
   <div class="row">
-    <!-- IMAGE CONTAINER BEGIN -->
     <div class="col-lg-6 col-md-6 d-none d-md-block infinity-image-container"></div>
-    <!-- IMAGE CONTAINER END -->
-
-    <!-- FORM CONTAINER BEGIN -->
     <div class="col-lg-6 col-md-6 infinity-form-container">
       <div class="col-lg-9 col-md-12 col-sm-8 col-xs-12 infinity-form">
         <div class="text-center mb-4">
           <h4>Zaloguj się</h4>
         </div>
-        <!-- Form -->
-        <form class="px-3">
-          <!-- Input Box -->
+
+        <form class="px-3"  [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+
           <div class="form-input">
             <span><i class="fa fa-envelope"></i></span>
-            <input type="email" name="" placeholder="Adres e-mail" tabindex="10" required>
+            <input type="email"  formControlName="email" name="" placeholder="Adres e-mail" tabindex="10" required>
           </div>
 
           <div class="form-input">
             <span><i class="fa fa-lock"></i></span>
-            <input type="password" name="" placeholder="Hasło" required>
+            <input type="password" formControlName="password" name="" placeholder="Hasło" required>
           </div>
 
           <div class="mb-3">
-            <button type="submit" class="btn btn-block">Zaloguj się</button>
+            <button type="submit" class="btn btn-block" [disabled]="loading || !signInForm.valid">Zaloguj się</button>
           </div>
 
           <div class="text-center mb-5" style="color: #777;">Nie masz konta?

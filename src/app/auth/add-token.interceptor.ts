@@ -14,17 +14,9 @@ export class AddTokenInterceptor implements HttpInterceptor {
     const authToken = this.auth.getToken();
 
     // set auth header
-    req = req.clone({ setHeaders: { Authorization: 'Bearer ' + authToken } });
+    req = req.clone({ setHeaders: { Authorization: authToken } });
 
     // return request with token
     return next.handle(req);
   }
 }
-
-/* Matt way(maybe we use that)
-headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          Authorization: 'Bearer ' + user.token,
-        }
-*/
