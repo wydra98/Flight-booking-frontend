@@ -1,1 +1,52 @@
-<p>sign-up works!</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 d-none d-md-block infinity-image-container"></div>
+    <div class="col-lg-6 col-md-6 infinity-form-container">
+      <div class="col-lg-9 col-md-12 col-sm-8 col-xs-12 infinity-form">
+        <div class="text-center mb-4">
+          <h4>Stwórz konto</h4>
+        </div>
+        <form class="px-3">
+          <div class="form-input">
+            <span><i class="fa fa-user"></i></span>
+            <input type="text" name="" placeholder="Imię" tabindex="10" required>
+          </div>
+          <div class="form-input">
+            <span><i class="fa fa-user"></i></span>
+            <input type="text" name="" placeholder="Nazwisko" tabindex="10" required>
+          </div>
+          <div class="form-input">
+            <span><i class="fa fa-envelope"></i></span>
+            <input type="email" name="" placeholder="Adres e-mail" tabindex="10" required>
+          </div>
+          <div class="form-input">
+            <span><i class="fa fa-lock"></i></span>
+            <input type="password" name="" placeholder="Hasło" required>
+          </div>
+          <div class="form-input">
+            <span><i class="fa fa-lock"></i></span>
+            <input type="password" name="" placeholder="Powtórz hasło" required>
+          </div>
+          <div class="mb-3">
+            <button type="submit" class="btn btn-block">Zarejestruj się</button>
+          </div>
+          <div class="text-center mb-5" style="color: #777;">Masz już konto?
+            <a class="register-link" [routerLink]="['/logIn']">Zaloguj się</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

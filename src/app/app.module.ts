@@ -2,8 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { ErrorComponent } from './error/error.component';
-import { AuthComponent } from './auth/auth.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { FlightsComponent } from './user/booking/flights/flights.component';
@@ -17,11 +15,13 @@ import { TripComponent } from './admin/admin-panel/trip/trip.component';
 import { UserComponent } from './admin/admin-panel/user/user.component';
 import {AppRoutingModule} from "./app-routing.module";
 
+//angular material components
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+
 @NgModule({
   declarations: [
     AppComponent,
-    ErrorComponent,
-    AuthComponent,
     LogInComponent,
     SignUpComponent,
     FlightsComponent,
@@ -32,11 +32,12 @@ import {AppRoutingModule} from "./app-routing.module";
     FlightComponent,
     PassengerComponent,
     TripComponent,
-    UserComponent
+    UserComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
