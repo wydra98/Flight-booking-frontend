@@ -5,17 +5,22 @@ import { AuthorizationService } from './authorization.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuardService implements CanActivate {
+export class AuthLoginGuardService implements CanActivate {
   constructor(private auth: AuthorizationService, public router: Router) {}
 
   // if user isn't logged in we navigate him to LogIn page
   canActivate(): boolean {
     if (!this.auth.isAuthenticated()) {
       this.router.navigate(['logIn']);
-      this.auth.logout();
-      return false;
+      this.auth.logout(); // nie ma tokena zwroci false
     } else {
-      return true;
+      if (this.auth.isAdmin()){
+        this.router.navigate(['admin']);
+      }
+      else{
+        this.router.navigate(['user']);
+      }
     }
+    return false;
   }
 }
