@@ -12,18 +12,20 @@ import {AppRoutingModule} from "./app-routing.module";
 //angular material components
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from "@angular/forms";
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { UserPanelComponent } from './user/user-panel.component';
+import { AdminPanelComponent } from './admin/admin-panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogInComponent,
     SignUpComponent,
-    PageNotFoundComponent,
+    UserPanelComponent,
+    AdminPanelComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+   AppRoutingModule,
     MatSnackBarModule,
     ReactiveFormsModule,
     HttpClientModule,

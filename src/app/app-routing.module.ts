@@ -2,30 +2,47 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {LogInComponent} from './log-in/log-in.component';
 import {SignUpComponent} from "./sign-up/sign-up.component";
-import {AuthLoginGuardService} from "./auth/auth-login.service";
-import {AuthRegisterGuardService} from "./auth/auth-register.service";
-import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
+import {SearchFlightComponent} from "./user/search-flight/search-flight.component";
+import {FlightsComponent} from "./user/flights/flights.component";
+import {OrderComponent} from "./user/order/order.component";
+import {UserPanelComponent} from "./user/user-panel.component";
+import {AdminPanelComponent} from "./admin/admin-panel.component";
+import {AirlineComponent} from "./admin/airline/airline.component";
+import {AirportComponent} from "./admin/airport/airport.component";
+import {FlightComponent} from "./admin/flight/flight.component";
+import {PassengerComponent} from "./admin/passenger/passenger.component";
+import {TripComponent} from "./admin/trip/trip.component";
+import {UserComponent} from "./admin/user/user.component";
+import {AuthGuardUserService} from "./auth/auth-guard-user.service";
+import {AuthGuardAdminService} from "./auth/auth-guard-admin.service";
 
 const routes: Routes = [
   {
-    path: 'user',
-    loadChildren: () =>
-      import('./user/booking/booking.module').then((m) => m.BookingModule),
+    path: '', component: UserPanelComponent,
+    children: [
+      {path: '', redirectTo: '/search', pathMatch: 'full'},
+      {path: 'search', component: SearchFlightComponent},
+      {path: 'flights', component: FlightsComponent},
+      {path: 'order', component: OrderComponent},
+    ],
+    canActivate: [AuthGuardUserService]
   },
   {
-    path: 'tickets',
-    loadChildren: () =>
-      import('./user/tickets/tickets.module').then((m) => m.TicketsModule),
+    path: '', component: AdminPanelComponent,
+    children: [
+      {path: '', redirectTo: '/airline', pathMatch: 'full'},
+      {path: 'airline', component: AirlineComponent},
+      {path: 'airport', component: AirportComponent},
+      {path: 'flight', component: FlightComponent},
+      {path: 'passenger', component: PassengerComponent},
+      {path: 'trip', component: TripComponent},
+      {path: 'user', component: UserComponent}
+    ],
+    canActivate: [AuthGuardAdminService]
   },
-  {
-    path: 'admin',
-    loadChildren: () =>
-      import('./admin/admin-panel/admin.module').then((m) => m.AdminModule),
-  },
-  {path: 'logIn', component: LogInComponent, canActivate: [AuthLoginGuardService]},
-  {path: 'signUp', component: SignUpComponent, canActivate: [AuthRegisterGuardService]},
-  {path: '', pathMatch: 'full', redirectTo: 'logIn'},
-  {path: '**', component: PageNotFoundComponent}
+  {path: 'logIn', component: LogInComponent},
+  {path: 'signUp', component: SignUpComponent},
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
