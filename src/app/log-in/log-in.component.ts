@@ -31,7 +31,12 @@ export class LogInComponent implements OnInit {
 
     this.auth.signIn(this.signInForm.get('email').value, this.signInForm.get('password').value)
       .subscribe(() => {
-        this.router.navigate(['']);
+        if(this.auth.isAdmin()){
+          this.router.navigate(['/admin']);
+        }
+        else{
+          this.router.navigate(['/user']);
+        }
         this.generalService.showSnackbar('Login was successful', 'Close');
       }, () => {
         this.generalService.showSnackbar('Failed to login', 'Close');
