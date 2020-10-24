@@ -15,6 +15,7 @@ import {TripComponent} from "./admin/trip/trip.component";
 import {UserComponent} from "./admin/user/user.component";
 import {AuthGuardUserService} from "./auth/auth-guard-user.service";
 import {AuthGuardAdminService} from "./auth/auth-guard-admin.service";
+import {TicketComponent} from "./user/tickets/ticket/ticket.component";
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
       {path: 'search', component: SearchFlightComponent},
       {path: 'flights', component: FlightsComponent},
       {path: 'order', component: OrderComponent},
+      {path: 'ticket', component: TicketComponent},
     ],
     canActivate: [AuthGuardUserService]
   },

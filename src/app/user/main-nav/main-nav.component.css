@@ -1,0 +1,49 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.mat-drawer {
+  opacity: 0.80;
+  background-color: inherit;
+}
+
+.mat-drawer-container {
+  background-image: url('https://i.pinimg.com/originals/53/6a/5a/536a5a9cfb44d70694f8229ce292124b.jpg');
+  background-size: cover;
+  background-position: 40%;
+}
+
+.mat-toolbar {
+  background: inherit;
+  color: white;
+}
+
+.page-title {
+  text-decoration: inherit;
+  color: inherit;
+  width: 100%;
+  text-align: center;
+  font-size: 2.2rem;
+}
+
+.menu-title {
+  color: #673ab7;
+}
+
+.mat-nav-list > a:hover {
+  color: #673ab7;
+}
