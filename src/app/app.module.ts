@@ -27,6 +27,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { MatCardModule } from '@angular/material/card';
     UserPanelComponent,
     AdminPanelComponent,
     MainNavComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

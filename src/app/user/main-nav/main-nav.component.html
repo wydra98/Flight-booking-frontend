@@ -1,4 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
+
   <mat-sidenav #drawer class="sidenav" fixedInViewport
                [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                [mode]="(isHandset$ | async) ? 'over' : 'side'">
@@ -8,7 +9,9 @@
       <a mat-list-item [routerLink]="['/tickets']"><i class="fa fa-ticket"></i> Twoje bilety</a>
     </mat-nav-list>
   </mat-sidenav>
+
   <mat-sidenav-content>
+    <app-header></app-header>
     <mat-toolbar>
       <button
         type="button"
@@ -17,7 +20,6 @@
         (click)="drawer.toggle()">
         <i class="fa fa-bars"></i>
       </button>
-      <a [routerLink]="['/']" class="page-title">Odlot &nbsp;<i class="fa fa-plane"></i></a>
     </mat-toolbar>
        <ng-content></ng-content>
   </mat-sidenav-content>
