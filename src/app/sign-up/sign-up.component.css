@@ -1,20 +1,17 @@
-body{
-  background-color: #f3f3f3;
-}
 
-.infinity-image-container{
+.infinity-image-container {
   background: url('src/assets/pngwing.com.png') center no-repeat;
   background-size: 950px;
 }
 
-.infinity-form-container{
+.infinity-form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.infinity-form{
+.infinity-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,6 +20,11 @@ body{
 
 .infinity-form .form-input {
   position: relative;
+}
+
+::placeholder {
+  color: black;
+  opacity: 0.8;
 }
 
 .infinity-form h1 {
@@ -34,50 +36,40 @@ body{
   margin-bottom: 20px;
   height: 40px;
   border: none;
-  border-bottom: 2px solid #777;
+  border-bottom: 2px solid black;
   outline: none;
   background: transparent;
   padding-left: 40px;
-  color: #777;
+  color: black;
 }
 
 .infinity-form .form-input span {
   position: absolute;
   top: 8px;
   padding-left: 10px;
-  color: #777;
+  color: black;
 }
 
-.infinity-form .form-input input:focus,
-.infinity-form .form-input input:valid {
-  border-bottom: 2px solid #4285f4;
-}
-
-.infinity-form .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: #4285f4 !important;
-  border:0px;
-}
 
 .infinity-form button[type="submit"] {
   margin-top: 10px;
   border: none;
   cursor: pointer;
   border-radius: 20px;
-  background: linear-gradient(45deg, #4285f4, #709de8);   /*Button Color*/
+  background: #283590; /*Button Color*/
   color: #fff;
   transition: 0.5s;
 }
 
-.infinity-form button[type="submit"]:hover {
-  background: linear-gradient(45deg, #709de8, #4285f4);   /*Button color when hover*/
+.infinity-form button:hover {
+  background: #4285f4; /*Button color when hover*/
 }
 
-.forget-link , .login-link , .register-link {
-  color: #709de8;
+.register-link {
+  color: #283590;
 }
 
-.forget-link:hover , .login-link:hover , .register-link:hover {
+.register-link:hover {
   color: #4285f4;
-  text-decoration: none;
 }
 

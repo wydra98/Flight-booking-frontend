@@ -14,7 +14,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from "@angular/forms";
 import { UserPanelComponent } from './user/user-panel.component';
 import { AdminPanelComponent } from './admin/admin-panel.component';
-import { MainNavComponent } from './user/main-nav/main-nav.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -36,7 +35,6 @@ import { MatCardModule } from '@angular/material/card';
     SignUpComponent,
     UserPanelComponent,
     AdminPanelComponent,
-    MainNavComponent
   ],
   imports: [
     BrowserModule,
