@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthorizationService} from "../auth/authorization.service";
 import {FormGroup, Validators, FormBuilder} from "@angular/forms";
-import {GeneralService} from "../services/general.service";
 import {Router} from "@angular/router";
+import {SnackBarComponent} from "../snack-bar/snack-bar.component";
 
 @Component({
   selector: 'app-sign-up',
@@ -15,8 +15,8 @@ export class SignUpComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private auth: AuthorizationService,
-              private router: Router,
-              private generalService: GeneralService) {
+              private snackbar: SnackBarComponent,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -34,10 +34,10 @@ export class SignUpComponent implements OnInit {
     const form = this.signUpForm.value;
     this.auth.signUp(form.name, form.surname, form.email, form.phoneNumber, form.password)
       .subscribe(() => {
-        this.router.navigate(['signIn']);
-        this.generalService.showSnackbar('Register was succesful. You can now sign in', 'Close');
+        this.router.navigate(['logIn']);
+        this.snackbar.showSnackbar('Pomyślnie zalogowano', 'success');
       }, () => {
-        this.generalService.showSnackbar('Failed to register.', 'Close');
+        this.snackbar.showSnackbar('Nieudane logowanie', 'fail');
         this.loading = false;
       });
   }

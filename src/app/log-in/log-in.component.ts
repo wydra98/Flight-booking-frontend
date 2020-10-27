@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {FormGroup, Validators, FormBuilder} from "@angular/forms";
 import {AuthorizationService} from "../auth/authorization.service";
-import {GeneralService} from "../services/general.service";
+import {SnackBarComponent} from "../snack-bar/snack-bar.component";
 
 @Component({
   selector: 'app-log-in',
@@ -15,7 +15,7 @@ export class LogInComponent implements OnInit {
   constructor( private fb: FormBuilder,
                private router: Router,
                private auth: AuthorizationService,
-               private generalService: GeneralService
+               private snackbar: SnackBarComponent
   ) { }
 
   ngOnInit(): void {
@@ -30,13 +30,14 @@ export class LogInComponent implements OnInit {
       .subscribe(() => {
         if(this.auth.isAdmin()){
           this.router.navigate(['/airline']);
+          this.snackbar.showSnackbar('Pomyślnie zalogowano', 'success');
         }
         else{
           this.router.navigate(['/search']);
+          this.snackbar.showSnackbar('Pomyślnie zalogowano', 'success');
         }
-        this.generalService.showSnackbar('Login was successful', 'Close');
       }, () => {
-        this.generalService.showSnackbar('Failed to login', 'Close');
+        this.snackbar.showSnackbar('Nieudane logowanie', 'fail');
       });
   }
 }
