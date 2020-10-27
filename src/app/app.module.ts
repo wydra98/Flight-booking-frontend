@@ -27,7 +27,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
-import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -37,8 +36,7 @@ import { HeaderComponent } from './header/header.component';
     SignUpComponent,
     UserPanelComponent,
     AdminPanelComponent,
-    MainNavComponent,
-    HeaderComponent,
+    MainNavComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +56,7 @@ import { HeaderComponent } from './header/header.component';
     MatButtonModule,
     FormsModule,
     MatNativeDateModule,
-    MatCardModule
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

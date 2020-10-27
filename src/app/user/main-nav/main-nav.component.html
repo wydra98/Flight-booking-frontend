@@ -3,22 +3,23 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport
                [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                [mode]="(isHandset$ | async) ? 'over' : 'side'">
-    <mat-toolbar><span class="menu-title">Menu</span></mat-toolbar>
+    <mat-toolbar class ="menuToolbar"></mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['/booking']"><i class="fa fa-plane"></i> Rezerwuj lot</a>
-      <a mat-list-item [routerLink]="['/tickets']"><i class="fa fa-ticket"></i> Twoje bilety</a>
+      <a mat-list-item [routerLink]="['/search']"><i class="fa fa-home fa-lg"></i> <span style="font-weight: bold">Start</span></a>
+      <a mat-list-item [routerLink]="['/search']"><i class="fa fa-plane fa-lg"></i> <span style="font-weight: bold">Rezerwuj lot</span></a>
+      <a mat-list-item [routerLink]="['/ticket']"><i class="fa fa-ticket fa-lg"></i><span style="font-weight: bold">Twoje bilety</span></a>
+      <a mat-list-item (click) = "logout()"><i class="fa fa-sign-out fa-lg"></i><span style="font-weight: bold">Wyloguj się</span></a>
     </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <app-header></app-header>
     <mat-toolbar>
       <button
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()">
-        <i class="fa fa-bars"></i>
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
     </mat-toolbar>
        <ng-content></ng-content>
