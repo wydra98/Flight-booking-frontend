@@ -50,16 +50,12 @@ export class AuthorizationService {
     return localStorage.getItem('role');
   }
 
-  // signIn and logout:
   signIn(email: string, password: string): Observable<any> {
-    console.log("tutej")
     const params = new HttpParams()
       .set('email', email)
       .set('password', password);
     return this.http.post(this.localURL + '/login', params)
       .pipe(tap((response: any) => {
-        console.log(email + " " + " " + password)
-        console.log(response)
         this.saveToken(response.token);
         this.saveRole(response.userDto.role);
         this.saveId(response.userDto.id);
@@ -84,14 +80,13 @@ export class AuthorizationService {
     return this.isAuthenticated() && this.getUserRole() === 'ROLE_ADMIN';
   }
 
-  signUp(name: string, surname: string, email: string, phone: string, password: string): Observable<any> {
-    const user = {
-      nme: name,
-      surname: surname,
-      email: email,
-      password: password
-    };
-    return this.http.post(this.localURL + '/register', user);
+  signUp(name: string, surname: string, email: string, password: string): Observable<any> {
+    const params = new HttpParams()
+      .set('email', email)
+      .set('name', name)
+      .set('surname', surname)
+      .set('password', password);
+    return this.http.post(this.localURL + '/register', params);
   }
 
 }

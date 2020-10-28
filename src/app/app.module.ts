@@ -27,6 +27,7 @@ import {FormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatCardModule} from '@angular/material/card';
 import {SnackBarComponent} from './snack-bar/snack-bar.component';
+import {SearchFlightComponent} from "./user/search-flight/search-flight.component";
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {SnackBarComponent} from './snack-bar/snack-bar.component';
     UserPanelComponent,
     AdminPanelComponent,
     SnackBarComponent,
+    SearchFlightComponent
   ],
   imports: [
     BrowserModule,

@@ -19,23 +19,23 @@
         <form class="px-3" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
           <div class="form-input">
             <span><i class="fa fa-user"></i></span>
-            <input type="text" name="" placeholder="Imię" tabindex="10" required>
+            <input type="text" formControlName="name"  name="" placeholder="Imię" tabindex="10" required>
           </div>
           <div class="form-input">
             <span><i class="fa fa-user"></i></span>
-            <input type="text" name="" placeholder="Nazwisko" tabindex="10" required>
+            <input type="text" formControlName="surname"  name="" placeholder="Nazwisko" tabindex="10" required>
           </div>
           <div class="form-input">
             <span><i class="fa fa-envelope"></i></span>
-            <input type="email" name="" placeholder="Adres e-mail" tabindex="10" required>
+            <input type="email" formControlName="email"  name="" placeholder="Adres e-mail" tabindex="10" required>
           </div>
           <div class="form-input">
             <span><i class="fa fa-lock"></i></span>
-            <input type="password" name="" placeholder="Hasło" required>
+            <input type="password" formControlName="password"  name="" placeholder="Hasło" required>
           </div>
           <div class="form-input">
             <span><i class="fa fa-lock"></i></span>
-            <input type="password" name="" placeholder="Powtórz hasło" required>
+            <input type="password" formControlName="passwordRepeat"  name="" placeholder="Powtórz hasło" required>
           </div>
           <div class="mb-3">
             <button type="submit" class="btn btn-block">Zarejestruj się</button>

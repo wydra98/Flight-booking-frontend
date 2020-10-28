@@ -8,3 +8,18 @@ html, body {
 body {
   margin: 0;
 }
+
+.style-succes {
+  color: white;
+  background-color: rgb(67, 160, 71);
+}
+.style-succes .mat-simple-snackbar-action  {
+  color: white;
+}
+.style-error {
+  color: white;
+  background-color: rgb(211, 47, 47);
+}
+.style-error .mat-simple-snackbar-action {
+  color: white;
+}

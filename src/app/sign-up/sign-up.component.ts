@@ -11,7 +11,6 @@ import {SnackBarComponent} from "../snack-bar/snack-bar.component";
 })
 export class SignUpComponent implements OnInit {
   signUpForm: FormGroup;
-  loading = false;
 
   constructor(private fb: FormBuilder,
               private auth: AuthorizationService,
@@ -25,21 +24,23 @@ export class SignUpComponent implements OnInit {
       surname: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
+      passwordRepeat: ['', Validators.required],
     });
   }
 
   onSubmit() {
-    this.loading = true;
-
     const form = this.signUpForm.value;
-    this.auth.signUp(form.name, form.surname, form.email, form.phoneNumber, form.password)
-      .subscribe(() => {
-        this.router.navigate(['logIn']);
-        this.snackbar.showSnackbar('Pomyślnie zalogowano', 'success');
-      }, () => {
-        this.snackbar.showSnackbar('Nieudane logowanie', 'fail');
-        this.loading = false;
-      });
+    if (form.password == form.passwordRepeat) {
+      this.auth.signUp(form.name, form.surname, form.email, form.password)
+        .subscribe(() => {
+          this.router.navigate(['logIn']);
+          this.snackbar.showSnackbar('Pomyślnie zarejestrowano.', 'success');
+        }, () => {
+          this.snackbar.showSnackbar('Nieudana rejestracja.', 'fail');
+        })
+    } else {
+      this.snackbar.showSnackbar('Nieudana rejestracja.', 'fail');
+    }
   }
-
 }
+
