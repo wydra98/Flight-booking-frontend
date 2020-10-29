@@ -4,6 +4,8 @@
 // import { AirportService } from '../../services/airport.service';
 // import { SearchFlightFormBuilderService } from '../../services/search-flight-form-builder.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import {SearchFlightFormBuilderService} from "../../services/search-flight-form-builder.service";
+import {FormGroup} from "@angular/forms";
 // import { FormGroup } from '@angular/forms';
 // import { Airport } from '../../models/airport';
 // import { Router } from '@angular/router';
@@ -17,7 +19,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class SearchFlightComponent implements OnInit, OnDestroy {
    public readonly title = 'Dokąd teraz?';
    public readonly subtitle = 'Wypełnij formularz i znajdź idealną podróż';
-  // public form: FormGroup;
+   public form: FormGroup;
+   public checkboxState = false;
   // public autocompleteOptions: Observable<Airport[]>;
   // public minDateForDepartureDate: Date;
   // public minDateForArrivalDate: Date;
@@ -38,23 +41,31 @@ export class SearchFlightComponent implements OnInit, OnDestroy {
   //   'Dec': '12'
   // };
   //
-  // constructor(
-  //   private formBuilder: SearchFlightFormBuilderService,
+   constructor(
+     private formBuilder: SearchFlightFormBuilderService,
   //   private airportService: AirportService,
   //   private router: Router,
   //   private searchFlightService: SearchFlightService,
-  //   private orderingService: OrderingService) { }
-  //
+  //   private orderingService: OrderingService
+    ) { }
+
    ngOnInit() {
-     console.log("hej");
   //   this.orderingService.clearService();
-  //   this.form = this.formBuilder.buildForm();
+    this.form = this.formBuilder.buildForm();
   //   this.subscribeToBothWaysParameter();
   //   this.determineMinDateForDepartureDate();
    }
   //
    ngOnDestroy(): void {
   //   this.subscriptions.unsubscribe();
+   }
+
+   public changeState(){
+      if(!this.checkboxState){
+        this.checkboxState = true;
+      }
+      else
+        this.checkboxState = false;
    }
   //
   // public determineMinDateForArrivalDate(): void {

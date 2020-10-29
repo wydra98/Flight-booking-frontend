@@ -1,6 +1,8 @@
 // import { AirportService } from './airport.service';
 // import { FlightRequestQueryParams } from '../models/flight-request-query-params';
  import { Injectable } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AirportService} from "./airport.service";
 // import { FormBuilder, FormGroup, Validators, Form } from '@angular/forms';
 // import { Airport } from 'src/app/models/airport';
 
@@ -24,22 +26,22 @@ export class SearchFlightFormBuilderService {
   //   'Dec': '12'
   // };
   //
-  // constructor(
-  //   private formBuilder: FormBuilder,
-  //   private airportService: AirportService) { }
-  //
-  // public buildForm(): FormGroup {
-  //   return this.formBuilder.group({
-  //     sourceLocation: ['', Validators.required],
-  //     destinationLocation: ['', Validators.required],
-  //     departureDate: ['', Validators.required],
-  //     arrivalDate: [{ value: null, disabled: true }],
-  //     bothWays: [false],
-  //     passengersNumber: [1, [Validators.required, Validators.max(10), Validators.min(1)]]
-  //     // maxIntervalBetweenFlights: [8, [Validators.required, Validators.max(48), Validators.min(1)]],
-  //     // maxIntermediateFlights: [2, [Validators.required, Validators.max(4), Validators.min(0)]]
-  //   });
-  // }
+  constructor(
+    private formBuilder: FormBuilder,
+    private airportService: AirportService) { }
+
+  public buildForm(): FormGroup {
+    return this.formBuilder.group({
+      sourceLocation: ['', Validators.required],
+      destinationLocation: ['', Validators.required],
+      departureDate: ['', Validators.required],
+      arrivalDate: [{ value: null, disabled: true }],
+      bothWays: [false],
+      passengersNumber: [1, [Validators.required, Validators.max(10), Validators.min(1)]]
+       //maxIntervalBetweenFlights: [8, [Validators.required, Validators.max(48), Validators.min(1)]],
+       //maxIntermediateFlights: [2, [Validators.required, Validators.max(4), Validators.min(0)]]
+    });
+  }
   //
   // public mapFormGroupToParams(form: FormGroup): FlightRequestQueryParams {
   //   return {

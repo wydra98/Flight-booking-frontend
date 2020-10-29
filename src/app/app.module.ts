@@ -35,8 +35,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatCardModule} from '@angular/material/card';
-import { MainUserNavComponent } from './user/main-user-nav/main-user-nav.component';
-import { AdminMainNavComponent } from './admin/admin-main-nav/admin-main-nav.component';
+import {MainUserNavComponent} from './user/main-user-nav/main-user-nav.component';
+import {AdminMainNavComponent} from './admin/admin-main-nav/admin-main-nav.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 
 @NgModule({
@@ -79,8 +81,8 @@ import { AdminMainNavComponent } from './admin/admin-main-nav/admin-main-nav.com
     FormsModule,
     MatNativeDateModule,
     MatCardModule,
-    BrowserModule,
-    FormsModule
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [SnackBarComponent],
   bootstrap: [AppComponent]

@@ -1,29 +1,102 @@
-/*form {*/
-/*  text-align: center;*/
-/*}*/
+form {
+  text-align: center;
+}
 
-/*form > * {*/
-/*  margin-right: 2vw;*/
-/*}*/
+mat-card-subtitle{
+  margin: 0;
+}
 
-/*.mat-form-field, .mat-checkbox {*/
-/*  font-size: 1.2rem;*/
-/*}*/
+mat-toolbar{
+  background: white;
+  margin-bottom: 20px;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+}
 
-/*.mat-checkbox {*/
-/*  width: 45%;*/
-/*  display: inline-block;*/
-/*}*/
+mat-card{
+  margin: 0 2vw;
+}
 
-/*.passengers {*/
-/*  width: 15%;*/
-/*}*/
+mat-card-header{
+  margin-bottom: 40px;
+}
 
-/*.location {*/
-/*  width: 45%;*/
-/*}*/
+.location{
+  margin-right: 2vw;
+  margin-bottom: 3vw;
+}
 
-/*.date {*/
-/*  width: 15%;*/
-/*}*/
+.date{
+  margin-left: 2vw;
+  margin-bottom: 3vw;
+}
 
+.mat-form-field, .mat-checkbox {
+  font-size: 0.9rem;
+}
+
+.mat-checkbox {
+  width: 10%;
+  margin: 0 2vw;
+  display: inline-block;
+  margin-bottom: 3vw;
+
+}
+
+.passengers {
+  width: 15%;
+  display: inline-block;
+  margin-bottom: 3vw;
+
+}
+
+.location {
+  width: 35%;
+}
+
+.date {
+  width: 25%;
+}
+
+.passenger{
+  width: 10%;
+  margin-right: 2vw;
+  display: inline-block;
+  margin-bottom: 3vw;
+}
+
+.change1{
+  margin-right: 3vw;
+  width: 25%;
+  display: inline-block;
+  margin-bottom: 3vw;
+}
+
+.change2{
+  margin-left: 3vw;
+  width: 25%;
+  display: inline-block;
+  margin-bottom: 3vw;
+}
+
+.map{
+  margin-bottom: 3vw;
+}
+
+button {
+  font-size: 1.0rem;
+}
+
+
+@media (max-width: 1150px) {
+  .passenger{
+    width: 5%;
+    margin-right: 2vw;
+  }
+  .firstCheckbox{
+    width: 20%;
+    margin-left: 2vw;
+  }
+  .secondCheckbox{
+    width: 90%;
+  }
+}
