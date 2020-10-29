@@ -1,0 +1,31 @@
+<mat-sidenav-container class="sidenav-container">
+
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [mode]="(isHandset$ | async) ? 'over' : 'side'">
+    <mat-toolbar class ="menuToolbar"></mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/search']"><i class="fa fa-home fa-lg"></i> <span style="font-weight: bold">Start</span></a>
+      <a mat-list-item [routerLink]="['/airline']"><i class="fa fa-fighter-jet fa-lg"></i> <span style="font-weight: bold">Linie lotnicze</span></a>
+      <a mat-list-item [routerLink]="['/airport']"><i class="fa fa-plane fa-lg"></i> <span style="font-weight: bold">Lotniska</span></a>
+      <a mat-list-item [routerLink]="['/flight']"><i class="fa fa-globe fa-lg"></i> <span style="font-weight: bold">Loty</span></a>
+      <a mat-list-item [routerLink]="['/passenger']"><i class="fa fa-ravelry fa-lg"></i> <span style="font-weight: bold">Pasażerowie</span></a>
+      <a mat-list-item [routerLink]="['/user']"><i class="fa fa-user fa-lg"></i> <span style="font-weight: bold">Użytkownicy</span></a>
+      <a mat-list-item [routerLink]="['/trip']"><i class="fa fa-suitcase fa-lg"></i> <span style="font-weight: bold">Zarezerwowane loty</span></a>
+      <a mat-list-item (click) = "logout()"><i class="fa fa-sign-out fa-lg"></i><span style="font-weight: bold">Wyloguj się</span></a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,81 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 300px;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+}
+
+.sidenav .mat-toolbar {
+  background-color: white;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.mat-drawer-container {
+  background-color: #f3f3f3;
+}
+
+.mat-nav-list > a:hover {
+  color: #283590;
+}
+
+.mat-toolbar {
+  background-color: #283590;
+}
+
+.mat-icon{
+  color: white;
+}
+
+
+
+.fa-home{
+  margin-left: 13px;
+  margin-right: 13px;
+}
+
+.fa-fighter-jet{
+  margin-left: 13px;
+  margin-right: 9px;
+}
+
+.fa-plane{
+  margin-left: 13px;
+  margin-right: 15px;
+}
+
+.fa-globe{
+  margin-left: 12px;
+  margin-right: 15px;
+}
+
+.fa-ravelry{
+  margin-left: 6px;
+  margin-right: 12px;
+}
+
+.fa-user{
+  margin-left: 13px;
+  margin-right: 15px;
+}
+
+.fa-suitcase{
+  margin-left: 10px;
+  margin-right: 12px;
+}
+
+.fa-sign-out {
+  margin-left: 12px;
+  margin-right: 11px;
+}
+
+.menuToolbar{
+  background: url('src/assets/logo.png') no-repeat center;
+  background-size: contain;
+}

@@ -12,19 +12,8 @@ import {AuthorizationService} from "../auth/authorization.service";
 })
 export class AdminPanelComponent {
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
+  constructor() { }
 
-  constructor(private router: Router,
-              private breakpointObserver: BreakpointObserver,
-              private auth: AuthorizationService) {
-  }
-
-  logout() {
-    this.router.navigate(['/logIn']);
-    this.auth.logout();
+  ngOnInit(): void {
   }
 }
