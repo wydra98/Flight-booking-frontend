@@ -1,22 +1,22 @@
-import { OrderingService } from 'src/app/services/ordering.service';
-import { SearchFlightService } from 'src/app/services/search-flight.service';
-import { Observable, of, Subscription } from 'rxjs';
-import { AirportService } from '../../services/airport.service';
-import { SearchFlightFormBuilderService } from '../../services/search-flight-form-builder.service';
+// import { OrderingService } from 'src/app/services/ordering.service';
+// import { SearchFlightService } from 'src/app/services/search-flight.service';
+// import { Observable, of, Subscription } from 'rxjs';
+// import { AirportService } from '../../services/airport.service';
+// import { SearchFlightFormBuilderService } from '../../services/search-flight-form-builder.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Airport } from '../../models/airport';
-import { Router } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
+// import { FormGroup } from '@angular/forms';
+// import { Airport } from '../../models/airport';
+// import { Router } from '@angular/router';
+// import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-flight',
   templateUrl: './search-flight.component.html',
   styleUrls: ['./search-flight.component.css']
 })
-export class SearchFlightComponent /*implements OnInit, OnDestroy*/ {
-  // public readonly title = 'Dokąd teraz?';
-  // public readonly subtitle = 'Wypełnij formularz i znajdź idealną podróż';
+export class SearchFlightComponent implements OnInit, OnDestroy {
+   public readonly title = 'Dokąd teraz?';
+   public readonly subtitle = 'Wypełnij formularz i znajdź idealną podróż';
   // public form: FormGroup;
   // public autocompleteOptions: Observable<Airport[]>;
   // public minDateForDepartureDate: Date;
@@ -45,16 +45,17 @@ export class SearchFlightComponent /*implements OnInit, OnDestroy*/ {
   //   private searchFlightService: SearchFlightService,
   //   private orderingService: OrderingService) { }
   //
-  // ngOnInit() {
+   ngOnInit() {
+     console.log("hej");
   //   this.orderingService.clearService();
   //   this.form = this.formBuilder.buildForm();
   //   this.subscribeToBothWaysParameter();
   //   this.determineMinDateForDepartureDate();
-  // }
+   }
   //
-  // ngOnDestroy(): void {
+   ngOnDestroy(): void {
   //   this.subscriptions.unsubscribe();
-  // }
+   }
   //
   // public determineMinDateForArrivalDate(): void {
   //   this.minDateForArrivalDate = this.parseDate(this.form.controls.departureDate.value);

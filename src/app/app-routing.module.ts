@@ -13,9 +13,10 @@ import {FlightComponent} from "./admin/flight/flight.component";
 import {PassengerComponent} from "./admin/passenger/passenger.component";
 import {TripComponent} from "./admin/trip/trip.component";
 import {UserComponent} from "./admin/user/user.component";
+import {TicketComponent} from "./user/tickets/ticket/ticket.component";
 import {AuthGuardUserService} from "./auth/auth-guard-user.service";
 import {AuthGuardAdminService} from "./auth/auth-guard-admin.service";
-import {TicketComponent} from "./user/tickets/ticket/ticket.component";
+
 
 const routes: Routes = [
   {

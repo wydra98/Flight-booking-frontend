@@ -1,15 +1,15 @@
-import { Ticket } from '../models/ticket';
-import { Trip } from '../models/trip';
-import { environment, URL } from '../../environments/environment';
-import { FlightRequestQueryParams } from '../models/flight-request-query-params';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Subject, Observable, BehaviorSubject } from 'rxjs';
-
-enum FlightDirection {
-  TO_DESTINATION = 0,
-  FROM_DESTINATION = 1
-};
+// import { Ticket } from '../models/ticket';
+// import { Trip } from '../models/trip';
+// import { environment, URL } from '../../environments/environment';
+// import { FlightRequestQueryParams } from '../models/flight-request-query-params';
+ import { Injectable } from '@angular/core';
+// import { HttpClient } from '@angular/common/http';
+// import { Subject, Observable, BehaviorSubject } from 'rxjs';
+//
+// enum FlightDirection {
+//   TO_DESTINATION = 0,
+//   FROM_DESTINATION = 1
+// };
 
 @Injectable({
   providedIn: 'root',

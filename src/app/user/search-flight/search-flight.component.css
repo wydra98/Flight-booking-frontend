@@ -1,28 +1,29 @@
-form {
-  text-align: center;
-}
+/*form {*/
+/*  text-align: center;*/
+/*}*/
 
-form > * {
-  margin-right: 2vw;
-}
+/*form > * {*/
+/*  margin-right: 2vw;*/
+/*}*/
 
-.mat-form-field, .mat-checkbox {
-  font-size: 1.2rem;
-}
+/*.mat-form-field, .mat-checkbox {*/
+/*  font-size: 1.2rem;*/
+/*}*/
 
-.mat-checkbox {
-  width: 45%;
-  display: inline-block;
-}
+/*.mat-checkbox {*/
+/*  width: 45%;*/
+/*  display: inline-block;*/
+/*}*/
 
-.passengers {
-  width: 15%;
-}
+/*.passengers {*/
+/*  width: 15%;*/
+/*}*/
 
-.location {
-  width: 45%;
-}
+/*.location {*/
+/*  width: 45%;*/
+/*}*/
 
-.date {
-  width: 15%;
-}
+/*.date {*/
+/*  width: 15%;*/
+/*}*/
+
