@@ -1,3 +1,7 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+
 
 @import '~@angular/material/theming';
 // Plus imports for other components in your app.
@@ -31,3 +35,25 @@ $flight-booking-theme: mat-light-theme((
 // that you are using.
 @include angular-material-theme($flight-booking-theme);
 
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.style-succes {
+  color: white;
+  background-color: rgb(67, 160, 71);
+}
+.style-succes .mat-simple-snackbar-action  {
+  color: white;
+}
+.style-error {
+  color: white;
+  background-color: rgb(211, 47, 47);
+}
+.style-error .mat-simple-snackbar-action {
+  color: white;
+}

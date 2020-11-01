@@ -39,6 +39,12 @@ import {MainUserNavComponent} from './user/main-user-nav/main-user-nav.component
 import {AdminMainNavComponent} from './admin/admin-main-nav/admin-main-nav.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {AddTokenInterceptor} from "./auth/add-token.interceptor";
+import {ResponseInterceptor} from "./auth/response.interceptor";
+import {MatSelectModule} from "@angular/material/select";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatRadioModule} from "@angular/material/radio";
 
 
 @NgModule({
@@ -62,29 +68,44 @@ import {MatInputModule} from "@angular/material/input";
     UserComponent,
     TicketComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatSnackBarModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    ReactiveFormsModule,
-    MatListModule,
-    MatIconModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatProgressSpinnerModule,
-    MatExpansionModule,
-    MatCheckboxModule,
-    LayoutModule,
-    MatButtonModule,
-    FormsModule,
-    MatNativeDateModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatSnackBarModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        ReactiveFormsModule,
+        MatListModule,
+        MatIconModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatProgressSpinnerModule,
+        MatExpansionModule,
+        MatCheckboxModule,
+        LayoutModule,
+        MatButtonModule,
+        FormsModule,
+        MatNativeDateModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatAutocompleteModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatRadioModule
+    ],
+  providers: [SnackBarComponent,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AddTokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ResponseInterceptor,
+      multi: true,
+    },
   ],
-  providers: [SnackBarComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

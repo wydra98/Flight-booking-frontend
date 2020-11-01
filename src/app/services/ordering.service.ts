@@ -4,6 +4,13 @@
 // import { BookingRequest } from '../models/booking-request';
 // import { Passenger } from '../models/passenger';
  import { Injectable } from '@angular/core';
+import {Router} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
+import {SearchFlightService} from "./search-flight.service";
+import {Trip} from "../models/trip";
+import {BehaviorSubject} from "rxjs";
+import {Passenger} from "../models/passenger";
+import {map} from "rxjs/operators";
 // import { Trip } from '../models/trip';
 // import { Router, Params } from '@angular/router';
 // import { HttpClient } from '@angular/common/http';
@@ -13,27 +20,26 @@
   providedIn: 'root'
 })
 export class OrderingService {
-  // private flightsToRender = new BehaviorSubject<Trip[]>([]);
-  // private flightsFromDestination: Trip[];
-  // private chosenFlightToDestination: Trip;
-  // private chosenFlightFromDestination: Trip;
-  // private bothWayTrip: boolean;
-  // private passengers: Passenger[];
-  // private rebuildComponentWasTriggered = false;
-  // private readonly FLIGHTS_COMPONENT_FIRST_STEP_TITLE = 'Wybierz podróż do miejsca docelowego';
-  // private readonly FLIGHTS_COMPONENT_SECOND_STEP_TITLE = 'Wybierz podróż z miejsca docelowego';
-  //
-  //
-  // constructor(
-  //   private router: Router,
-  //   private httpClient: HttpClient,
-  //   private searchFlightService: SearchFlightService,
-  //   private errorService: ErrorService
-  // ) {
-  //   this.checkIfTripIsBothWay();
-  //   this.getFetchedTripsToDestination();
-  //   this.getFetchedTripsFromDestination();
-  // }
+   private flightsToRender = new BehaviorSubject<Trip[]>([]);
+  private flightsFromDestination: Trip[];
+  private chosenFlightToDestination: Trip;
+  private chosenFlightFromDestination: Trip;
+  private bothWayTrip: boolean;
+  private passengers: Passenger[];
+  private rebuildComponentWasTriggered = false;
+  private readonly FLIGHTS_COMPONENT_FIRST_STEP_TITLE = 'Wybierz podróż do miejsca docelowego';
+  private readonly FLIGHTS_COMPONENT_SECOND_STEP_TITLE = 'Wybierz podróż z miejsca docelowego';
+
+
+  constructor(
+    private router: Router,
+    private httpClient: HttpClient,
+    private searchFlightService: SearchFlightService,
+  ) {
+    this.checkIfTripIsBothWay();
+    this.getFetchedTripsToDestination();
+    this.getFetchedTripsFromDestination();
+  }
   //
   // public onChosenFlight(flight: Trip): void {
   //   if (!this.shouldNavigateToOrderPage(flight)) { return; }
@@ -58,27 +64,27 @@ export class OrderingService {
   //   return this.searchFlightService.getPassengersNumber();
   // }
   //
-  // public clearService(): void {
-  //   this.flightsToRender.next([]);
-  //   this.flightsFromDestination = null;
-  //   this.chosenFlightFromDestination = null;
-  //   this.chosenFlightToDestination = null;
-  //   this.rebuildComponentWasTriggered = false;
-  // }
+  public clearService(): void {
+    this.flightsToRender.next([]);
+    this.flightsFromDestination = null;
+    this.chosenFlightFromDestination = null;
+    this.chosenFlightToDestination = null;
+    this.rebuildComponentWasTriggered = false;
+  }
+
+  private getFetchedTripsFromDestination() {
+    this.searchFlightService.getFoundTripsFromDestination().subscribe((trips: Trip[]) => { this.flightsFromDestination = trips; });
+  }
+
+  private getFetchedTripsToDestination() {
+    this.searchFlightService.getFoundTripsToDestination().subscribe((trips: Trip[]) => { this.flightsToRender.next(trips); });
+  }
   //
-  // private getFetchedTripsFromDestination() {
-  //   this.searchFlightService.getFoundTripsFromDestination().subscribe((trips: Trip[]) => { this.flightsFromDestination = trips; });
-  // }
-  //
-  // private getFetchedTripsToDestination() {
-  //   this.searchFlightService.getFoundTripsToDestination().subscribe((trips: Trip[]) => { this.flightsToRender.next(trips); });
-  // }
-  //
-  // private checkIfTripIsBothWay() {
-  //   this.searchFlightService.getFoundTripsFromDestination().pipe(
-  //     map((trips: Trip[]) => !!trips.length)
-  //   ).subscribe((isBothWay: boolean) => { this.bothWayTrip = isBothWay; });
-  // }
+  private checkIfTripIsBothWay() {
+    this.searchFlightService.getFoundTripsFromDestination().pipe(
+      map((trips: Trip[]) => !!trips.length)
+    ).subscribe((isBothWay: boolean) => { this.bothWayTrip = isBothWay; });
+  }
   //
   // private shouldNavigateToOrderPage(flight: Trip): boolean {
   //   if (!this.chosenFlightToDestination) {
