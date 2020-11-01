@@ -10,7 +10,6 @@ import {FlightRequestQueryParams} from "../models/flight-request-query-params";
 })
 export class SearchFlightFormBuilderService {
 
-
   private readonly MONTHS = {
     'Jan': '01',
     'Feb': '02',
@@ -47,13 +46,9 @@ export class SearchFlightFormBuilderService {
 
   public mapFormGroupToParams(form: FormGroup): FlightRequestQueryParams {
     let checkBoxValue = true;
-    console.log('checkBox ' + form.controls['checkBox'].value)
-   if(form.controls['checkBox'].value == 'oneWay'){
-     checkBoxValue = false;
-   }
-
-
-
+    if (form.controls['checkBox'].value == 'oneWay') {
+      checkBoxValue = false;
+    }
     return {
       srcAirportId: this.findAirportId(form.controls['sourceLocation'].value),
       dstAirportId: this.findAirportId(form.controls['destinationLocation'].value),
@@ -67,7 +62,7 @@ export class SearchFlightFormBuilderService {
   }
 
   private parseDate(date: string): string {
-    let [ weekDay, month, day, year ] = date.toString().split(' ');
+    let [weekDay, month, day, year] = date.toString().split(' ');
     month = this.MONTHS[month];
     return `${year}-${month}-${day}`;
   }
@@ -156,7 +151,6 @@ export class SearchFlightFormBuilderService {
   //
   //   return arraysToDisable
   // }
-
 
 
   private findAirportId(airportDn: string): number {

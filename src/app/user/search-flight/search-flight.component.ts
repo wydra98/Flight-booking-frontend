@@ -7,9 +7,6 @@ import {Airport} from "../../models/airport";
 import {SearchFlightService} from "../../services/search-flight.service";
 import {OrderingService} from "../../services/ordering.service";
 import {Router} from "@angular/router";
-import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
-import {map} from "rxjs/operators";
-
 
 @Component({
   selector: 'app-search-flight',
@@ -28,8 +25,7 @@ export class SearchFlightComponent implements OnInit{
     private airportService: AirportService,
     private router: Router,
     private searchFlightService: SearchFlightService,
-    private orderingService: OrderingService,
-    private snackbar: SnackBarComponent
+    private orderingService: OrderingService
   ) {}
 
   ngOnInit() {
@@ -56,9 +52,7 @@ export class SearchFlightComponent implements OnInit{
     this.airports = this.airportService.fetchAirports()
       //.pipe(
        // map(this.formBuilder.disableOptionChosenInAnotherLocationField(property, this.form)));
-
   }
-
 
   public onSubmit(): void {
     this.searchFlightService.fetchAvailableFlights(this.formBuilder.mapFormGroupToParams(this.form));

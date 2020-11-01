@@ -4,13 +4,14 @@
 // import { BookingRequest } from '../models/booking-request';
 // import { Passenger } from '../models/passenger';
  import { Injectable } from '@angular/core';
-import {Router} from "@angular/router";
+import {Params, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {SearchFlightService} from "./search-flight.service";
 import {Trip} from "../models/trip";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable, of} from "rxjs";
 import {Passenger} from "../models/passenger";
 import {map} from "rxjs/operators";
+import {BookingRequest} from "../models/booking-request";
 // import { Trip } from '../models/trip';
 // import { Router, Params } from '@angular/router';
 // import { HttpClient } from '@angular/common/http';
@@ -40,30 +41,30 @@ export class OrderingService {
     this.getFetchedTripsToDestination();
     this.getFetchedTripsFromDestination();
   }
-  //
-  // public onChosenFlight(flight: Trip): void {
-  //   if (!this.shouldNavigateToOrderPage(flight)) { return; }
-  //   this.navigateToOrderPage();
-  //
-  // }
-  //
-  // public onPassengerFormFilled(passenger: Passenger[]): void {
-  //   this.passengers = passenger;
-  //   this.orderFlight();
-  // }
-  //
-  // public getFlightsToOrder(): Observable<Trip[]> {
-  //   return this.flightsToRender.asObservable();
-  // }
-  //
-  // public getComponentTitle = (): Observable<string> => (
-  //   !this.rebuildComponentWasTriggered ? of(this.FLIGHTS_COMPONENT_FIRST_STEP_TITLE) : of(this.FLIGHTS_COMPONENT_SECOND_STEP_TITLE)
-  // );
-  //
-  // public getPassengersNumber(): number {
-  //   return this.searchFlightService.getPassengersNumber();
-  // }
-  //
+
+  public onChosenFlight(flight: Trip): void {
+    if (!this.shouldNavigateToOrderPage(flight)) { return; }
+    this.navigateToOrderPage();
+
+  }
+
+  public onPassengerFormFilled(passenger: Passenger[]): void {
+    this.passengers = passenger;
+    this.orderFlight();
+  }
+
+  public getFlightsToOrder(): Observable<Trip[]> {
+    return this.flightsToRender.asObservable();
+  }
+
+  public getComponentTitle = (): Observable<string> => (
+    !this.rebuildComponentWasTriggered ? of(this.FLIGHTS_COMPONENT_FIRST_STEP_TITLE) : of(this.FLIGHTS_COMPONENT_SECOND_STEP_TITLE)
+  );
+
+  public getPassengersNumber(): number {
+    return this.searchFlightService.getPassengersNumber();
+  }
+
   public clearService(): void {
     this.flightsToRender.next([]);
     this.flightsFromDestination = null;
@@ -79,76 +80,76 @@ export class OrderingService {
   private getFetchedTripsToDestination() {
     this.searchFlightService.getFoundTripsToDestination().subscribe((trips: Trip[]) => { this.flightsToRender.next(trips); });
   }
-  //
+
   private checkIfTripIsBothWay() {
     this.searchFlightService.getFoundTripsFromDestination().pipe(
       map((trips: Trip[]) => !!trips.length)
     ).subscribe((isBothWay: boolean) => { this.bothWayTrip = isBothWay; });
   }
-  //
-  // private shouldNavigateToOrderPage(flight: Trip): boolean {
-  //   if (!this.chosenFlightToDestination) {
-  //     this.chosenFlightToDestination = flight;
-  //     return this.determineAndHandleIfOneWayTrip();
-  //   }
-  //
-  //   this.chosenFlightFromDestination = flight;
-  //   return true;
-  // }
-  //
-  // private determineAndHandleIfOneWayTrip(): boolean {
-  //   if (!this.bothWayTrip) { return true; }
-  //   this.rebuildFlightsComponent();
-  //   return false;
-  // }
-  //
-  // private rebuildFlightsComponent(): void {
-  //   this.rebuildComponentWasTriggered = true;
-  //   this.flightsToRender.next(this.flightsFromDestination);
-  // }
-  //
-  // private orderFlight(): void {
-  //   const bookingRequest = this.composeBookingRequest();
-  //   this.postBookingRequest(bookingRequest).subscribe(
-  //     this.navigateToTripSummary(),
-  //     this.handleBookingRequestError()
-  //   );
-  // }
-  //
-  // private handleBookingRequestError(): (error: any) => void {
-  //   return (error: any) => { this.errorService.handleError(error); };
-  // }
-  //
-  // private navigateToTripSummary(): (response: { tripId: string }) => void {
-  //   return (response: { tripId: string }) => {
-  //     const { tripId } = response;
-  //     console.log('received code: ', tripId);
-  //     this.router.navigate(['/tickets'], { queryParams: this.composeQueryParams(tripId) });
-  //   };
-  // }
-  //
-  //
-  // private composeQueryParams(tripId: string): Params {
-  //   return {
-  //     code: tripId
-  //   };
-  // }
-  //
-  // private postBookingRequest(bookingRequest: BookingRequest): Observable<{ tripId: string }> {
-  //   return this.httpClient.post<{ tripId: string }>(
-  //     URL + '/trips/createTrip',
-  //     bookingRequest
-  //   );
-  // }
-  //
-  // private composeBookingRequest(): BookingRequest {
-  //   return {
-  //     tripDto: this.chosenFlightToDestination,
-  //     passengersDto: [...this.passengers]
-  //   };
-  // }
-  //
-  // private navigateToOrderPage(): void {
-  //   this.router.navigate(['/booking/order']);
-  // }
+
+  private shouldNavigateToOrderPage(flight: Trip): boolean {
+    if (!this.chosenFlightToDestination) {
+      this.chosenFlightToDestination = flight;
+      return this.determineAndHandleIfOneWayTrip();
+    }
+
+    this.chosenFlightFromDestination = flight;
+    return true;
+  }
+
+  private determineAndHandleIfOneWayTrip(): boolean {
+    if (!this.bothWayTrip) { return true; }
+    this.rebuildFlightsComponent();
+    return false;
+  }
+
+  private rebuildFlightsComponent(): void {
+    this.rebuildComponentWasTriggered = true;
+    this.flightsToRender.next(this.flightsFromDestination);
+  }
+
+  private orderFlight(): void {
+    const bookingRequest = this.composeBookingRequest();
+    this.postBookingRequest(bookingRequest).subscribe(
+      this.navigateToTripSummary(),
+     // this.handleBookingRequestError()
+    );
+  }
+
+ // private handleBookingRequestError(): (error: any) => void {
+ //   return (error: any) => { this.errorService.handleError(error); };
+ // }
+
+  private navigateToTripSummary(): (response: { tripId: string }) => void {
+    return (response: { tripId: string }) => {
+      const { tripId } = response;
+      console.log('received code: ', tripId);
+      this.router.navigate(['/tickets'], { queryParams: this.composeQueryParams(tripId) });
+    };
+  }
+
+
+  private composeQueryParams(tripId: string): Params {
+    return {
+      code: tripId
+    };
+  }
+
+  private postBookingRequest(bookingRequest: BookingRequest): Observable<{ tripId: string }> {
+    return this.httpClient.post<{ tripId: string }>(
+      URL + '/trips/createTrip',
+      bookingRequest
+    );
+  }
+
+  private composeBookingRequest(): BookingRequest {
+    return {
+      tripDto: this.chosenFlightToDestination,
+      passengersDto: [...this.passengers]
+    };
+  }
+
+  private navigateToOrderPage(): void {
+    this.router.navigate(['/booking/order']);
+  }
 }

@@ -1,1 +1,24 @@
-<p>flights works!</p>
+<mat-toolbar>
+  Znalezione loty
+</mat-toolbar>
+
+<div class="title">{{title$ | async}}</div>
+
+<ng-container *ngIf="!isDataFetched; else flightList">
+  <div class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-container>
+
+<ng-template #flightList>
+  <ul *ngFor="let flight of flights" >
+    <app-flight [flight]="flight" (chosenFlight)="onFlightSelection($event)"></app-flight>
+  </ul>
+</ng-template>
+
+
+<ng-container *ngIf="!flights.length && isDataFetched" #flightsNotFound id="not-found">
+  <mat-card>
+    <mat-card-header>Brak lotów o zadanych parametrach!</mat-card-header>
+  </mat-card>
+</ng-container>
