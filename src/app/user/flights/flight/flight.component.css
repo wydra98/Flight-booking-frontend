@@ -1,0 +1,32 @@
+.mat-card {
+  width: 80vw;
+}
+
+.mat-card *:not(i) {
+  font-family: 'Source Code Pro', monospace;
+}
+
+.mat-card .title {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.mat-card-subtitle {
+  margin: 1vh 4vw;
+  font-size: 1.1rem;
+}
+
+.mat-card-content {
+  margin: 0 5vw;
+}
+
+.mat-card-actions {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+button:hover {
+  background-color: #673ab7;
+  color: white;
+}

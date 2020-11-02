@@ -1,1 +1,30 @@
-<p>flight works!</p>
+<mat-card>
+  <mat-card-header>
+    <div class="title">{{viewData.sourcePlace}} &nbsp; <i class="fa fa-arrow-right"></i> &nbsp; {{viewData.destinationPlace}}</div>
+  </mat-card-header>
+  <mat-card-subtitle>
+    {{viewData.departureDate}}, {{viewData.departureTime}}<sup>{{viewData.departureTimezone}}</sup> &nbsp; <i class="fa fa-arrow-right"></i>
+    &nbsp; {{viewData.arrivalDate}} {{viewData.arrivalTime}}<sup>{{viewData.arrivalTimezone}}</sup><br/>
+    Liczba przesiadek: {{viewData.numberOfTransfers}}
+  </mat-card-subtitle>
+  <mat-card-content>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Przesiadki: {{viewData.numberOfTransfers}}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul class="interFlightWrapper" *ngFor="let interFlight of viewData.flights">
+          <li class="interFlightRow">
+            <span>Wylot dnia <b>{{interFlight.departureDate}}</b> o godzinie {{interFlight.departureTime}}<sup>{{interFlight.departureTimezone}}</sup> z <b>{{interFlight.srcPlace}}</b>
+              do <b>{{interFlight.dstPlace}}</b> dnia <b>{{interFlight.arrivalDate}}</b> o godzinie {{interFlight.arrivalTime}}<sup>{{interFlight.arrivalTimezone}}</sup>
+              linią <b>{{interFlight.airline}}</b>
+            </span>
+          </li>
+        </ul>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="primary" (click)="onFlightSelection()">Zarezerwuj za <b>{{viewData.price}} PLN</b></button>
+  </mat-card-actions>
+</mat-card>

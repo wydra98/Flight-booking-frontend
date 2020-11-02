@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { TripViewDataService } from '../../../services/flight-view-data.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Trip } from 'src/app/models/trip';
+import { Ticket } from 'src/app/models/ticket';
+import { Airport } from 'src/app/models/airport';
+import {FlightViewData} from "./flight-view-data";
 
 @Component({
   selector: 'app-flight',
@@ -6,10 +11,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./flight.component.css']
 })
 export class FlightComponent implements OnInit {
+  @Input() flight: Trip;
+  @Output() chosenFlight = new EventEmitter<Trip>();
+  public sourcePlace: string;
+  public destinationPlace: string;
+  public viewData: FlightViewData;
 
-  constructor() { }
+  constructor(private flightViewDataService: TripViewDataService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    this.initializeViewData();
   }
 
+  public onFlightSelection(): void {
+    this.chosenFlight.next(this.flight);
+  }
+
+  private initializeViewData(): void {
+    this.viewData = this.flightViewDataService.toViewData(this.flight);
+  }
 }

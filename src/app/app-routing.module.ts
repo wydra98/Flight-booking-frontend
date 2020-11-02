@@ -9,13 +9,13 @@ import {UserPanelComponent} from "./user/user-panel.component";
 import {AdminPanelComponent} from "./admin/admin-panel.component";
 import {AirlineComponent} from "./admin/airline/airline.component";
 import {AirportComponent} from "./admin/airport/airport.component";
-import {FlightComponent} from "./admin/flight/flight.component";
 import {PassengerComponent} from "./admin/passenger/passenger.component";
 import {TripComponent} from "./admin/trip/trip.component";
 import {UserComponent} from "./admin/user/user.component";
 import {TicketComponent} from "./user/tickets/ticket/ticket.component";
 import {AuthGuardUserService} from "./auth/auth-guard-user.service";
 import {AuthGuardAdminService} from "./auth/auth-guard-admin.service";
+import {FlightAdminComponent} from "./admin/flight-admin/flight-admin.component";
 
 
 const routes: Routes = [
@@ -36,7 +36,7 @@ const routes: Routes = [
       {path: '', redirectTo: '/airline', pathMatch: 'full'},
       {path: 'airline', component: AirlineComponent},
       {path: 'airport', component: AirportComponent},
-      {path: 'flight', component: FlightComponent},
+      {path: 'flight', component: FlightAdminComponent},
       {path: 'passenger', component: PassengerComponent},
       {path: 'trip', component: TripComponent},
       {path: 'user', component: UserComponent}

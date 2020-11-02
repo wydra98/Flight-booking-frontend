@@ -15,7 +15,7 @@ import {UserPanelComponent} from "./user/user-panel.component";
 import {AdminPanelComponent} from "./admin/admin-panel.component";
 import {AirlineComponent} from "./admin/airline/airline.component";
 import {AirportComponent} from "./admin/airport/airport.component";
-import {FlightComponent} from "./admin/flight/flight.component";
+import {FlightComponent} from "./user/flights/flight/flight.component";
 import {PassengerComponent} from "./admin/passenger/passenger.component";
 import {TripComponent} from "./admin/trip/trip.component";
 import {UserComponent} from "./admin/user/user.component";
@@ -45,6 +45,7 @@ import {ResponseInterceptor} from "./auth/response.interceptor";
 import {MatSelectModule} from "@angular/material/select";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatRadioModule} from "@angular/material/radio";
+import { FlightAdminComponent } from './admin/flight-admin/flight-admin.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import {MatRadioModule} from "@angular/material/radio";
     PassengerComponent,
     TripComponent,
     UserComponent,
-    TicketComponent
+    TicketComponent,
+    FlightAdminComponent
   ],
     imports: [
         BrowserModule,
