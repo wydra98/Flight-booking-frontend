@@ -12,9 +12,9 @@
     <form [formGroup]="form">
       <mat-form-field class="location">
         <mat-label>Skąd:</mat-label>
-        <mat-select formControlName="sourceLocation" (click)="getAirports($event)" >
-          <mat-option *ngFor="let option of airports | async" [value]="option.city.concat(', ', option.country)">
-            {{option.city}}, {{option.country}}</mat-option>
+        <mat-select formControlName="sourceLocation" (selectionChange)="changed($event.value, 0)">
+          <mat-option *ngFor="let type of types$ | async" [value]="type.text" [disabled]="!type.allowed">
+            {{type.text}}</mat-option>
         </mat-select>
 
       </mat-form-field>
@@ -29,9 +29,9 @@
       <br>
       <mat-form-field class="location">
         <mat-label>Dokąd:</mat-label>
-        <mat-select formControlName="destinationLocation" (click)="getAirports($event)" >
-          <mat-option *ngFor="let option of airports | async" [value]="option.city.concat(', ', option.country)">
-            {{option.city}}, {{option.country}}
+        <mat-select formControlName="destinationLocation" (selectionChange)="changed($event.value, 1)">
+          <mat-option *ngFor="let type of types$ | async" [value]="type.text" [disabled]="!type.allowed">
+            {{type.text}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -46,18 +46,18 @@
       <br>
       <mat-form-field class="change1">
         <mat-label>Pierwsza przesiadka:</mat-label>
-        <mat-select formControlName="changeLocation1" (click)="getAirports($event)" >
-          <mat-option *ngFor="let option of airports | async" [value]="option.city.concat(', ', option.country)">
-            {{option.city}}, {{option.country}}
+        <mat-select formControlName="changeLocation1" (selectionChange)="changed($event.value, 2)">
+          <mat-option *ngFor="let type of types$ | async" [value]="type.text" [disabled]="!type.allowed">
+            {{type.text}}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="change2">
         <mat-label>Druga przesiadka:</mat-label>
-        <mat-select formControlName="changeLocation2" (click)="getAirports($event)" >
-          <mat-option *ngFor="let option of airports | async" [value]="option.city.concat(', ', option.country)">
-            {{option.city}}, {{option.country}}
+        <mat-select formControlName="changeLocation2" (selectionChange)="changed($event.value, 3)">
+          <mat-option *ngFor="let type of types$ | async" [value]="type.text" [disabled]="!type.allowed">
+            {{type.text}}
           </mat-option>
         </mat-select>
       </mat-form-field>

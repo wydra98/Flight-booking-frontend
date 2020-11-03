@@ -17,7 +17,7 @@ import {AuthGuardUserService} from "./auth/auth-guard-user.service";
 import {AuthGuardAdminService} from "./auth/auth-guard-admin.service";
 import {FlightAdminComponent} from "./admin/flight-admin/flight-admin.component";
 
-
+//let multiply = (a, b) => { return a * b; };
 const routes: Routes = [
   {
     path: '', component: UserPanelComponent,

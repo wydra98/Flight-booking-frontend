@@ -2,11 +2,18 @@ import {AirportService} from '../../services/airport.service';
 import {Component, OnInit} from '@angular/core';
 import {SearchFlightFormBuilderService} from "../../services/search-flight-form-builder.service";
 import {FormGroup} from "@angular/forms";
-import {async, Observable, of} from "rxjs";
+import {async, BehaviorSubject, Observable, of, Subscription} from "rxjs";
 import {Airport} from "../../models/airport";
 import {SearchFlightService} from "../../services/search-flight.service";
 import {OrderingService} from "../../services/ordering.service";
 import {Router} from "@angular/router";
+import {flatMap, map, mergeAll, tap, toArray} from "rxjs/operators";
+import {Type} from "./Type";
+
+let typeColumn = ['Nowy Jork, USA', 'Chicago, USA', 'Warszawa, Polska', 'Pekin, Chiny', 'Berlin, Niemcy', 'Szanghaj, Chiny',
+                  'Toronto, Kanada', 'Sydney, Australia', 'Tokio, Japonia','Rio de Janeiro, Brazylia','Oslo, Norwegia',
+                  'Buenos Aires, Brazylia','Paryż, Francja','Londyn, Wielka Brytania', 'Los Angeles, Usa','Moskwa, Rosja',
+                  'Kair, Egipt','Kraków, Polska', 'Delhi, Indie', 'Kijów, Ukraina'];
 
 @Component({
   selector: 'app-search-flight',
@@ -16,8 +23,10 @@ import {Router} from "@angular/router";
 export class SearchFlightComponent implements OnInit{
   public readonly title = 'Dokąd lecimy?';
   public readonly subtitle = 'Wypełnij formularz i znajdź idealną podróż';
+  public airports: Array<Airport>;
+  public types$ = new BehaviorSubject([]);
+  public values: Array<string> = [];
   public form: FormGroup;
-  public airports: Observable<Airport[]>;
   public minDate: Date;
 
   constructor(
@@ -31,27 +40,30 @@ export class SearchFlightComponent implements OnInit{
   ngOnInit() {
     this.orderingService.clearService();
     this.form = this.formBuilder.buildForm();
-    this.fetchAirports()
+    this.airportService.fetchAirports();
     this.determineMinDate();
+    this.createTypesList();
   }
 
-  public fetchAirports(): void {
-    this.airports = this.airportService.fetchAirports();
-  }
 
   private determineMinDate(): void {
     const todayDate = new Date();
     this.minDate = new Date(todayDate);
   }
 
-  public getAirports($event: any): void {
+  changed(data, optI){
+    this.values[optI] = data;
+    this.createTypesList();
+  }
 
-    const property = $event.target.getAttribute('formControlName');
+  private createTypesList() {
+    let types = [];
+    typeColumn.forEach((type) => {
+      let selected = this.values.includes(type);
+      types.push(new Type(type, !selected));
+    });
 
-    this.airports = of([])
-    this.airports = this.airportService.fetchAirports()
-      //.pipe(
-       // map(this.formBuilder.disableOptionChosenInAnotherLocationField(property, this.form)));
+    this.types$.next(types);
   }
 
   public onSubmit(): void {

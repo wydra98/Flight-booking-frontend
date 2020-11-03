@@ -43,7 +43,6 @@ export class SearchFlightFormBuilderService {
     });
   }
 
-
   public mapFormGroupToParams(form: FormGroup): FlightRequestQueryParams {
     let checkBoxValue = true;
     if (form.controls['checkBox'].value == 'oneWay') {
@@ -67,94 +66,9 @@ export class SearchFlightFormBuilderService {
     return `${year}-${month}-${day}`;
   }
 
-
-  // public disableOptionChosenInAnotherLocationField(property: string, form: FormGroup): (value: Airport[]) => Airport[] {
-  //   return (airports: Airport[]): Airport[] => {
-  //     console.log('airporstto disable   ' )
-  //
-  //     let airportIdToDisable = this.getAirportToDisable(property, form);
-  //     if (airportIdToDisable.length == 0) {
-  //       return;
-  //     }
-  //     console.log('airporstto disable   ' )
-  //
-  //
-  //     let airports2 = airports.filter((airport: Airport) => {
-  //       let flag = true;
-  //       for (let airportsDis of airportIdToDisable){
-  //         if(airportsDis == airport.id){
-  //           flag = false
-  //         }
-  //       }
-  //       return flag;
-  //     })
-  //
-  //     console.log('airporst2' + airports2)
-  //     return airports2
-  //   }
-  // }
-
-
-  // private getAirportToDisable(property: string, form: FormGroup): number[] {
-  //
-  //   let arraysToDisable = [];
-  //    console.log('property'+ property)
-  //   switch (property) {
-  //     case 'sourceLocation':
-  //       if (form.controls['destinationLocation'].value != '') {
-  //         arraysToDisable.push(this.findAirportId(form.controls['destinationLocation'].value).toString())
-  //       }
-  //       if (form.controls['changeLocation1'].value != '') {
-  //         arraysToDisable.push(this.findAirportId(form.controls['changeLocation1'].value).toString())
-  //       }
-  //       if (form.controls['changeLocation2'].value != '') {
-  //         arraysToDisable.push(this.findAirportId(form.controls['changeLocation2'].value).toString())
-  //       }
-  //       break;
-  //
-  //     case 'destinationLocation':
-  //       if (form.controls['sourceLocation'].value != '') {
-  //         arraysToDisable.push(this.findAirportId(form.controls['sourceLocation'].value).toString())
-  //       }
-  //       if (form.controls['changeLocation1'].value != '') {
-  //         arraysToDisable.push(this.findAirportId(form.controls['changeLocation1'].value).toString())
-  //       }
-  //       if (form.controls['changeLocation2'].value != '') {
-  //         arraysToDisable.push(this.findAirportId(form.controls['changeLocation2'].value).toString())
-  //       }
-  //       break;
-  //
-  //     case 'changeLocation1':
-  //       if (form.controls['sourceLocation'].value != '') {
-  //         arraysToDisable.push(this.findAirportId(form.controls['sourceLocation'].value).toString())
-  //       }
-  //       if (form.controls['destinationLocation'].value != '') {
-  //         arraysToDisable.push(this.findAirportId(form.controls['destinationLocation'].value).toString())
-  //       }
-  //       if (form.controls['changeLocation2'].value != '') {
-  //         arraysToDisable.push(this.findAirportId(form.controls['changeLocation2'].value).toString())
-  //       }
-  //       break;
-  //
-  //     case 'changeLocation2':
-  //       if (form.controls['sourceLocation'].value != '') {
-  //         arraysToDisable.push(this.findAirportId(form.controls['sourceLocation'].value).toString())
-  //       }
-  //       if (form.controls['destinationLocation'].value != '') {
-  //         arraysToDisable.push(this.findAirportId(form.controls['destinationLocation'].value).toString())
-  //       }
-  //       if (form.controls['changeLocation1'].value != '') {
-  //         arraysToDisable.push(this.findAirportId(form.controls['changeLocation1'].value).toString())
-  //       }
-  //       break;
-  //   }
-  //
-  //   return arraysToDisable
-  // }
-
-
   private findAirportId(airportDn: string): number {
-    return this.airportService.getAirports().find((airport: Airport) => airport.city.toUpperCase().includes(airportDn.toUpperCase().split(',')[0])).id;
+    return this.airportService.getAirports().find((airport: Airport) =>
+      airport.city.toUpperCase().includes(airportDn.toUpperCase().split(',')[0])).id
+    ;
   }
-
 }

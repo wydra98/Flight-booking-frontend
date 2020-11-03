@@ -65,6 +65,7 @@ export class AuthorizationService {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('userRole');
+    localStorage.removeItem('id');
     this.isLoggedInSubject.next(false);
     this.isAdminSubject.next(false);
   }

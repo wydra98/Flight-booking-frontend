@@ -1,9 +1,4 @@
-// import { SearchFlightService } from './search-flight.service';
-// import { URL } from '../../environments/environment';
-// import { Observable, BehaviorSubject, of } from 'rxjs';
-// import { BookingRequest } from '../models/booking-request';
-// import { Passenger } from '../models/passenger';
- import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {Params, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {SearchFlightService} from "./search-flight.service";
@@ -12,10 +7,7 @@ import {BehaviorSubject, Observable, of} from "rxjs";
 import {Passenger} from "../models/passenger";
 import {map} from "rxjs/operators";
 import {BookingRequest} from "../models/booking-request";
-// import { Trip } from '../models/trip';
-// import { Router, Params } from '@angular/router';
-// import { HttpClient } from '@angular/common/http';
-// import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
