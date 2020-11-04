@@ -1,11 +1,13 @@
 <mat-card>
+
   <mat-card-header>
-    <div class="title">{{viewData.sourcePlace}} &nbsp; <i class="fa fa-arrow-right"></i> &nbsp; {{viewData.destinationPlace}}</div>
+    <div class="title"><span style ="margin-right: 1vw">{{viewData.sourcePlace}}</span> <i style="margin: 0 0.2vw" class="fa fa-circle-o"></i><i class="fa fa-minus"></i><i class="fa fa-minus"></i><i class="fa fa-minus"></i>
+      <i class="fa fa-minus"></i> <i style="margin: 0 0.2vw; font-size: large"  class="fa fa-play"></i> <span style ="margin-left: 1vw">{{viewData.destinationPlace}}</span> </div>
   </mat-card-header>
+
   <mat-card-subtitle>
-    {{viewData.departureDate}}, {{viewData.departureTime}}<sup>{{viewData.departureTimezone}}</sup> &nbsp; <i class="fa fa-arrow-right"></i>
-    &nbsp; {{viewData.arrivalDate}} {{viewData.arrivalTime}}<sup>{{viewData.arrivalTimezone}}</sup><br/>
-    Liczba przesiadek: {{viewData.numberOfTransfers}}
+    {{viewData.departureDate}}, {{viewData.departureTime}}<sup>{{viewData.departureTimezone}}</sup><i style="margin-right: 0.7vw; margin-left: 0.9vw"  class="fa fa-arrow-right"></i>
+    {{viewData.arrivalDate}} {{viewData.arrivalTime}}<sup>{{viewData.arrivalTimezone}}</sup><br/>
   </mat-card-subtitle>
   <mat-card-content>
     <mat-accordion>

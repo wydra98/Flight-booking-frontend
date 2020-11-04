@@ -1,16 +1,9 @@
-import { environment, URL } from '../../environments/environment';
+import { URL } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import {Trip} from "../models/trip";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {FlightRequestQueryParams} from "../models/flight-request-query-params";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {SnackBarComponent} from "../snack-bar/snack-bar.component";
-
-enum FlightDirection {
-  TO_DESTINATION = 0,
-  FROM_DESTINATION = 1
-};
 
 @Injectable({
   providedIn: 'root',
@@ -21,18 +14,15 @@ export class SearchFlightService {
   private passengersNumber: number;
 
   constructor(
-    private httpClient: HttpClient,
-    private snackbar: SnackBarComponent) {}
-
-  private readonly FLIGHTS_URL = URL + '/trips/findTrips';
+    private httpClient: HttpClient) {}
 
   public fetchAvailableFlights(params: FlightRequestQueryParams): void {
     this.passengersNumber = params.passengerNumber;
 
-    this.httpClient.get<[Trip[], Trip[]]>(this.FLIGHTS_URL, this.createHttpOptions(params))
+    this.httpClient.get<[Trip[], Trip[]]>(URL + '/trips/findTrips', this.createHttpOptions(params))
       .subscribe(
-        this.onTripsReceived(),
-        this.handleFetchTripError()
+          this.onTripsReceived(),
+          this.handleFetchTripError()
       );
   }
 
@@ -41,8 +31,9 @@ export class SearchFlightService {
   }
 
   private handleFetchTripError(): (error: any) => void {
-    return (error: any) => {this.snackbar.showSnackbar('Błąd odczytu danych', 'fail');};
+    return (error: any) => { console.log('hej') };
   }
+
 
   public getFoundTripsToDestination(): Observable<Trip[]> {
     return this.tripsToDestination.asObservable();
@@ -54,9 +45,8 @@ export class SearchFlightService {
 
   private onTripsReceived(): (value: [Trip[], Trip[]]) => void {
     return (trips: [Trip[], Trip[]]) => {
-      console.log('Received trips: ', trips);
-      this.tripsToDestination.next(trips[FlightDirection.TO_DESTINATION]);
-      this.tripsFromDestination.next(trips[FlightDirection.FROM_DESTINATION]);
+      this.tripsToDestination.next(trips[0]);
+      this.tripsFromDestination.next(trips[1]);
     };
   }
 

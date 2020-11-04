@@ -32,9 +32,8 @@ export class TripViewDataService {
   }
 
   private extractPlace(airport: Airport): string {
-    return airport.name + ', '
-      + airport.city + ', '
-      + airport.country;
+    return airport.city + ', '
+         + airport.country;
   }
 
   private extractIntermediateFlights(trip: Trip): IntermediateConnection[] {

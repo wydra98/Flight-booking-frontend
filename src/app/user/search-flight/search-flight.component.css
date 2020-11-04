@@ -2,8 +2,15 @@ form {
   text-align: center;
 }
 
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}
+
 mat-card-subtitle{
   margin: 0;
+}
+.mat-step{
+  color: #283590
 }
 
 mat-toolbar{
@@ -40,7 +47,6 @@ mat-card-header{
   margin: 0 2vw;
   display: inline-block;
   margin-bottom: 3vw;
-
 }
 
 .passengers {
@@ -85,6 +91,11 @@ mat-card-header{
 
 button {
   font-size: 1.0rem;
+}
+
+mat-horizontal-stepper{
+  margin: 0 2vw;
+  background: #f3f3f3;
 }
 
 

@@ -1,24 +1,30 @@
 <mat-toolbar>
-  Znalezione loty
+  <div class="title">{{title$ | async}}</div>
 </mat-toolbar>
 
-<div class="title">{{title$ | async}}</div>
+<mat-horizontal-stepper linear [selectedIndex]="1">
+  <mat-step label="Wypełnij formularz"></mat-step>
+  <mat-step label="Wybierz lot"></mat-step>
+  <mat-step label="Podaj pasażera"></mat-step>
+  <mat-step label="Koniec"></mat-step>
+</mat-horizontal-stepper>
 
 <ng-container *ngIf="!isDataFetched; else flightList">
-  <div class="spinner">
-    <mat-spinner></mat-spinner>
-  </div>
+  <mat-card>
+    <div class="spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </mat-card>
 </ng-container>
 
 <ng-template #flightList>
-  <ul *ngFor="let flight of flights" >
+  <mat-list *ngFor="let flight of flights">
     <app-flight [flight]="flight" (chosenFlight)="onFlightSelection($event)"></app-flight>
-  </ul>
+  </mat-list>
 </ng-template>
 
-
-<ng-container *ngIf="!flights.length && isDataFetched" #flightsNotFound id="not-found">
+<ng-container *ngIf="!flights.length && isDataFetched">
   <mat-card>
-    <mat-card-header>Brak lotów o zadanych parametrach!</mat-card-header>
+    Brak lotów o zadanych parametrach!
   </mat-card>
 </ng-container>

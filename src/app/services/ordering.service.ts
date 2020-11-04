@@ -103,14 +103,9 @@ export class OrderingService {
   private orderFlight(): void {
     const bookingRequest = this.composeBookingRequest();
     this.postBookingRequest(bookingRequest).subscribe(
-      this.navigateToTripSummary(),
-     // this.handleBookingRequestError()
+      this.navigateToTripSummary()
     );
   }
-
- // private handleBookingRequestError(): (error: any) => void {
- //   return (error: any) => { this.errorService.handleError(error); };
- // }
 
   private navigateToTripSummary(): (response: { tripId: string }) => void {
     return (response: { tripId: string }) => {
@@ -119,7 +114,6 @@ export class OrderingService {
       this.router.navigate(['/tickets'], { queryParams: this.composeQueryParams(tripId) });
     };
   }
-
 
   private composeQueryParams(tripId: string): Params {
     return {

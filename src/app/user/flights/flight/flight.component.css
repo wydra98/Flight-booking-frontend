@@ -1,20 +1,23 @@
 .mat-card {
-  width: 80vw;
+  margin: 0 auto;
+  text-align: center;
+}
+i{
+  font-size: medium
 }
 
-.mat-card *:not(i) {
-  font-family: 'Source Code Pro', monospace;
-}
-
-.mat-card .title {
+.title {
+  margin: 2vh 0;
+  margin-right: 3vw;
   width: 100%;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .mat-card-subtitle {
-  margin: 1vh 4vw;
-  font-size: 1.1rem;
+  margin: 2vh 4vw;
+  font-size: 1.0rem;
+  color: black;
 }
 
 .mat-card-content {

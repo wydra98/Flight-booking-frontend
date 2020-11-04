@@ -1,22 +1,40 @@
-.title {
-  color: white;
-  font-size: 1.5rem;
+mat-toolbar{
+  background: white;
+  margin-bottom: 20px;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+}
+
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}
+
+mat-horizontal-stepper{
+  margin: 0 2vw;
+  background: #f3f3f3;
+}
+
+
+mat-list{
+  margin-left: 2vw;
+  margin-right: 2vw;
+}
+
+mat-list {
+  margin: 0 5vw;
+}
+
+.ng-container{
+  margin: 0 2vw;
   text-align: center;
-  margin: 2vh 0;
-  width: 100%;
 }
 
-ul {
-  display: table;
-  margin: 0 auto;
-}
-
-#flightsNotFound {
-  color: orange;
+.mat-card{
+  margin: 0 2vw;
+  text-align: center;
 }
 
 .spinner ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
-  stroke: white;
+  stroke: #283590;
 }
 
 .spinner {

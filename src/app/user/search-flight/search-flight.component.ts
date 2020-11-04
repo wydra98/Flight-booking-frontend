@@ -2,28 +2,25 @@ import {AirportService} from '../../services/airport.service';
 import {Component, OnInit} from '@angular/core';
 import {SearchFlightFormBuilderService} from "../../services/search-flight-form-builder.service";
 import {FormGroup} from "@angular/forms";
-import {async, BehaviorSubject, Observable, of, Subscription} from "rxjs";
-import {Airport} from "../../models/airport";
+import {BehaviorSubject} from "rxjs";
 import {SearchFlightService} from "../../services/search-flight.service";
 import {OrderingService} from "../../services/ordering.service";
 import {Router} from "@angular/router";
-import {flatMap, map, mergeAll, tap, toArray} from "rxjs/operators";
 import {Type} from "./Type";
 
 let typeColumn = ['Nowy Jork, USA', 'Chicago, USA', 'Warszawa, Polska', 'Pekin, Chiny', 'Berlin, Niemcy', 'Szanghaj, Chiny',
-                  'Toronto, Kanada', 'Sydney, Australia', 'Tokio, Japonia','Rio de Janeiro, Brazylia','Oslo, Norwegia',
-                  'Buenos Aires, Brazylia','Paryż, Francja','Londyn, Wielka Brytania', 'Los Angeles, Usa','Moskwa, Rosja',
-                  'Kair, Egipt','Kraków, Polska', 'Delhi, Indie', 'Kijów, Ukraina'];
+  'Toronto, Kanada', 'Sydney, Australia', 'Tokio, Japonia', 'Rio de Janeiro, Brazylia', 'Oslo, Norwegia',
+  'Buenos Aires, Brazylia', 'Paryż, Francja', 'Londyn, Wielka Brytania', 'Los Angeles, Usa', 'Moskwa, Rosja',
+  'Kair, Egipt', 'Kraków, Polska', 'Delhi, Indie', 'Kijów, Ukraina'];
 
 @Component({
   selector: 'app-search-flight',
   templateUrl: './search-flight.component.html',
   styleUrls: ['./search-flight.component.css']
 })
-export class SearchFlightComponent implements OnInit{
+export class SearchFlightComponent implements OnInit {
   public readonly title = 'Dokąd lecimy?';
   public readonly subtitle = 'Wypełnij formularz i znajdź idealną podróż';
-  public airports: Array<Airport>;
   public types$ = new BehaviorSubject([]);
   public values: Array<string> = [];
   public form: FormGroup;
@@ -35,7 +32,8 @@ export class SearchFlightComponent implements OnInit{
     private router: Router,
     private searchFlightService: SearchFlightService,
     private orderingService: OrderingService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.orderingService.clearService();
@@ -51,7 +49,7 @@ export class SearchFlightComponent implements OnInit{
     this.minDate = new Date(todayDate);
   }
 
-  changed(data, optI){
+  changed(data, optI) {
     this.values[optI] = data;
     this.createTypesList();
   }
@@ -69,7 +67,7 @@ export class SearchFlightComponent implements OnInit{
   public onSubmit(): void {
     this.searchFlightService.fetchAvailableFlights(this.formBuilder.mapFormGroupToParams(this.form));
     this.router.navigate(['/flights']);
-   }
+  }
 }
 
 

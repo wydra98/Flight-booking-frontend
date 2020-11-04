@@ -46,6 +46,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatRadioModule} from "@angular/material/radio";
 import { FlightAdminComponent } from './admin/flight-admin/flight-admin.component';
+import {MatStepperModule} from "@angular/material/stepper";
 
 
 @NgModule({
@@ -94,7 +95,8 @@ import { FlightAdminComponent } from './admin/flight-admin/flight-admin.componen
         MatAutocompleteModule,
         MatSelectModule,
         MatDatepickerModule,
-        MatRadioModule
+        MatRadioModule,
+        MatStepperModule
     ],
   providers: [SnackBarComponent,
     {
