@@ -20,7 +20,7 @@ mat-toolbar{
 }
 
 mat-card{
-  margin: 2vh 2vw;
+  margin: 0 5vw 2vh 5vw;
   padding-bottom: 4vh;
 }
 
@@ -91,7 +91,7 @@ mat-card-header{
 }
 
 mat-horizontal-stepper{
-  margin: 0 2vw;
+  margin: 0 5vw;
   background: #f3f3f3;
 }
 
@@ -108,14 +108,33 @@ button{
 @media (max-width: 1150px) {
   .passenger{
     width: 10%;
-    margin-right: 2vw;
   }
   .firstCheckbox{
     width: 20%;
-    margin-left: 2vw;
   }
   .secondCheckbox{
-    width: 90%;
-    margin-left: 40vw;
+    width: 20%;
   }
 }
+
+@media (max-width: 850px) {
+  .secondCheckbox{
+    display: block;
+    width: 20%;
+    margin: 0 20vw;
+  }
+}
+
+/*@media (max-width: 1150px) {*/
+/*  .passenger{*/
+/*    width: 10%;*/
+/*    margin-right: 2vw;*/
+/*  }*/
+/*  .firstCheckbox{*/
+/*    width: 20%;*/
+/*    margin-left: 2vw;*/
+/*  }*/
+/*  .secondCheckbox{*/
+/*    width: 20%;*/
+/*  }*/
+/*}*/

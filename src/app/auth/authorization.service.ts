@@ -38,6 +38,11 @@ export class AuthorizationService {
     localStorage.setItem('id', String(id));
   }
 
+  saveName(name: string) {
+    localStorage.removeItem('name');
+    localStorage.setItem('name', name);
+  }
+
   getToken() {
     return localStorage.getItem('token');
   }
@@ -50,15 +55,21 @@ export class AuthorizationService {
     return localStorage.getItem('role');
   }
 
+  getName() {
+    return localStorage.getItem('name');
+  }
+
   signIn(email: string, password: string): Observable<any> {
     const params = new HttpParams()
       .set('email', email)
       .set('password', password);
     return this.http.post(this.localURL + '/login', params)
       .pipe(tap((response: any) => {
+        console.log("Imiem " + response.userDto.name)
         this.saveToken(response.token);
         this.saveRole(response.userDto.role);
         this.saveId(response.userDto.id);
+        this.saveName(response.userDto.name);
       }));
   }
 
@@ -66,6 +77,7 @@ export class AuthorizationService {
     localStorage.removeItem('token');
     localStorage.removeItem('userRole');
     localStorage.removeItem('id');
+    localStorage.removeItem('name');
     this.isLoggedInSubject.next(false);
     this.isAdminSubject.next(false);
   }

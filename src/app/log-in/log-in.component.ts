@@ -33,7 +33,7 @@ export class LogInComponent implements OnInit {
           this.snackbar.showSnackbar('Pomyślnie zalogowano', 'success');
         }
         else{
-          this.router.navigate(['/search']);
+          this.router.navigate(['/startUser']);
           this.snackbar.showSnackbar('Pomyślnie zalogowano', 'success');
         }
       }, () => {

@@ -9,7 +9,7 @@ mat-toolbar{
 }
 
 mat-horizontal-stepper{
-  margin: 0 2vw;
+  margin: 0 5vw;
   background: #f3f3f3;
 }
 
@@ -29,7 +29,7 @@ mat-list {
 }
 
 .mat-card{
-  margin: 0 2vw;
+  margin: 0 5vw;
   text-align: center;
 }
 

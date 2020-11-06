@@ -16,13 +16,15 @@ import {TicketComponent} from "./user/tickets/ticket/ticket.component";
 import {AuthGuardUserService} from "./auth/auth-guard-user.service";
 import {AuthGuardAdminService} from "./auth/auth-guard-admin.service";
 import {FlightAdminComponent} from "./admin/flight-admin/flight-admin.component";
+import {StartUserPanelComponent} from "./user/start-user-panel/start-user-panel.component";
 
 //let multiply = (a, b) => { return a * b; };
 const routes: Routes = [
   {
     path: '', component: UserPanelComponent,
     children: [
-      {path: '', redirectTo: '/search', pathMatch: 'full'},
+      {path: '', redirectTo: '/startUser', pathMatch: 'full'},
+      {path: 'startUser', component: StartUserPanelComponent},
       {path: 'search', component: SearchFlightComponent},
       {path: 'flights', component: FlightsComponent},
       {path: 'order', component: OrderComponent},

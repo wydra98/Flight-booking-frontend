@@ -47,6 +47,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatRadioModule} from "@angular/material/radio";
 import { FlightAdminComponent } from './admin/flight-admin/flight-admin.component';
 import {MatStepperModule} from "@angular/material/stepper";
+import { StartUserPanelComponent } from './user/start-user-panel/start-user-panel.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import {MatStepperModule} from "@angular/material/stepper";
     TripComponent,
     UserComponent,
     TicketComponent,
-    FlightAdminComponent
+    FlightAdminComponent,
+    StartUserPanelComponent
   ],
     imports: [
         BrowserModule,

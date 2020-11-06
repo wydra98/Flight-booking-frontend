@@ -1,0 +1,30 @@
+<mat-toolbar>
+  O aplikacji
+</mat-toolbar>
+
+<mat-card>
+  <mat-card-content class="wrapper">
+
+    <mat-card-content>
+      <mat-card-header>
+        <mat-card-title>Witaj, {{name}}!</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        ESky to aplikacja umożliwiająca podróżowanie po całym świecie. <br>
+        Oferujemy: <br>
+        <ul>
+          <li>Szybką i wygodną wyszukiwarkę połączeń lotniczych</li>
+          <li>Rozbudowany system połączeń pośrednich i przesiadek</li>
+          <li>Możliwość zarządzania swoimi rezerwacjami</li>
+          <li>Możliwość rejestracji grupowych</li>
+          <li>Zniżki dla najmłodszych</li>
+          <li>Atrakcyjne ceny</li>
+        </ul>
+        Poznaj nas i odkryj najlepsze okazje! <br>
+        Jeśli chcesz przejść do wyszukiwania lotu przejdź tutaj: <br><br>
+        <a [routerLink]="['/search']"><i class="fa fa-plane fa-lg"></i> Rezerwuj swój lot!</a>
+      </mat-card-content>
+    </mat-card-content>
+    <mat-icon class="menuToolbar"></mat-icon>
+  </mat-card-content>
+</mat-card>
