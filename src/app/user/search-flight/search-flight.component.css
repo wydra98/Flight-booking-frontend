@@ -6,7 +6,7 @@ form {
   pointer-events: none !important;
 }
 
-mat-card-subtitle{
+.subtitle{
   margin: 0;
 }
 .mat-step{
@@ -20,7 +20,8 @@ mat-toolbar{
 }
 
 mat-card{
-  margin: 0 2vw;
+  margin: 2vh 2vw;
+  padding-bottom: 4vh;
 }
 
 mat-card-header{
@@ -29,13 +30,13 @@ mat-card-header{
 
 .location{
   margin-right: 2vw;
-  margin-bottom: 3vw;
+  margin-bottom: 3vh;
   font-size: 1.9rem;
 }
 
 .date{
   margin-left: 2vw;
-  margin-bottom: 3vw;
+  margin-bottom: 3vh;
 }
 
 .mat-form-field, .mat-checkbox {
@@ -46,13 +47,13 @@ mat-card-header{
   width: 10%;
   margin: 0 2vw;
   display: inline-block;
-  margin-bottom: 3vw;
+  margin-bottom: 3vh;
 }
 
 .passengers {
   width: 15%;
   display: inline-block;
-  margin-bottom: 3vw;
+  margin-bottom: 3vh;
 
 }
 
@@ -68,7 +69,7 @@ mat-card-header{
   width: 10%;
   margin-right: 2vw;
   display: inline-block;
-  margin-bottom: 3vw;
+  margin-bottom: 1vh;
 }
 
 .change1{
@@ -89,13 +90,18 @@ mat-card-header{
   margin-bottom: 3vw;
 }
 
-button {
-  font-size: 1.0rem;
-}
-
 mat-horizontal-stepper{
   margin: 0 2vw;
   background: #f3f3f3;
+}
+
+.mat-card-actions {
+  text-align: center;
+  padding: 0
+}
+
+button{
+  font-size: 1.3rem;
 }
 
 
@@ -111,6 +117,5 @@ mat-horizontal-stepper{
   .secondCheckbox{
     width: 90%;
     margin-left: 40vw;
-
   }
 }

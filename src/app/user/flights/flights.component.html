@@ -10,11 +10,7 @@
 </mat-horizontal-stepper>
 
 <ng-container *ngIf="!isDataFetched; else flightList">
-  <mat-card>
-    <div class="spinner">
       <mat-spinner></mat-spinner>
-    </div>
-  </mat-card>
 </ng-container>
 
 <ng-template #flightList>

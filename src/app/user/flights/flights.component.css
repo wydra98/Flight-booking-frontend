@@ -33,13 +33,11 @@ mat-list {
   text-align: center;
 }
 
-.spinner ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+mat-spinner ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
   stroke: #283590;
 }
 
-.spinner {
-  display: block;
-  width: 100%;
+mat-spinner {
   text-align: center;
-  margin: 4vh 47vw;
+  margin: 25vh auto;
 }

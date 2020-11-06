@@ -15,6 +15,8 @@ export interface FlightViewData {
 export class IntermediateConnection {
   departureDate: string;
   departureTime: string;
+  sourceAirport: string;
+  destinationAirport: string;
   departureTimezone: string;
   arrivalDate: string;
   arrivalTime: string;

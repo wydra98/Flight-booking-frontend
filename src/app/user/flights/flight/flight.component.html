@@ -1,32 +1,46 @@
 <mat-card>
 
   <mat-card-header>
-    <div class="title"><span style ="margin-right: 1vw">{{viewData.sourcePlace}}</span> <i style="margin: 0 0.2vw" class="fa fa-circle-o"></i><i class="fa fa-minus"></i><i class="fa fa-minus"></i><i class="fa fa-minus"></i>
-      <i class="fa fa-minus"></i> <i style="margin: 0 0.2vw; font-size: large"  class="fa fa-play"></i> <span style ="margin-left: 1vw">{{viewData.destinationPlace}}</span> </div>
+    <div class="title"><span style="margin-right: 1vw">{{viewData.sourcePlace}}</span> <i style="margin: 0 0.2vw"
+                                                                                          class="fa fa-circle-o"></i><i
+      class="fa fa-minus"></i><i class="fa fa-minus"></i><i class="fa fa-minus"></i>
+      <i class="fa fa-minus"></i> <i style="margin: 0 0.2vw; font-size: large" class="fa fa-play"></i> <span
+        style="margin-left: 1vw">{{viewData.destinationPlace}}</span></div>
   </mat-card-header>
 
-  <mat-card-subtitle>
-    {{viewData.departureDate}}, {{viewData.departureTime}}<sup>{{viewData.departureTimezone}}</sup><i style="margin-right: 0.7vw; margin-left: 0.9vw"  class="fa fa-arrow-right"></i>
-    {{viewData.arrivalDate}} {{viewData.arrivalTime}}<sup>{{viewData.arrivalTimezone}}</sup><br/>
-  </mat-card-subtitle>
+  <div class="subtitle">
+    <div class="date" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-calendar"></i>Data i
+      czas:     {{viewData.departureDate}}, {{viewData.departureTime}}<sup>{{viewData.departureTimezone}}</sup><i
+        style="margin-right: 0.7vw; margin-left: 0.9vw" class="fa fa-arrow-right"></i>
+      {{viewData.arrivalDate}} {{viewData.arrivalTime}}<sup>{{viewData.arrivalTimezone}}</sup></div>
+    <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-share"></i>Liczba przesiadek:
+      <b>{{viewData.numberOfTransfers}}</b></div>
+    <div class="map" style="margin: 1vw 0"><a href=""><i style="margin-right: 1.3vw" class="fa fa-map-marker"></i>Zobacz
+      na mapie </a></div>
+  </div>
   <mat-card-content>
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title>Przesiadki: {{viewData.numberOfTransfers}}</mat-panel-title>
+          <mat-panel-title>Szczegóły podróży</mat-panel-title>
         </mat-expansion-panel-header>
-        <ul class="interFlightWrapper" *ngFor="let interFlight of viewData.flights">
-          <li class="interFlightRow">
-            <span>Wylot dnia <b>{{interFlight.departureDate}}</b> o godzinie {{interFlight.departureTime}}<sup>{{interFlight.departureTimezone}}</sup> z <b>{{interFlight.srcPlace}}</b>
-              do <b>{{interFlight.dstPlace}}</b> dnia <b>{{interFlight.arrivalDate}}</b> o godzinie {{interFlight.arrivalTime}}<sup>{{interFlight.arrivalTimezone}}</sup>
-              linią <b>{{interFlight.airline}}</b>
+        <ol>
+          <ng-container *ngFor="let interFlight of viewData.flights;">
+            <li class="interFlightRow">
+            <span>
+              Lot z <b>{{interFlight.srcPlace}}</b> z lotniska <b>{{interFlight.sourceAirport}}</b> dnia <b>{{interFlight.departureDate}}</b> o godzinie <b>{{interFlight.departureTime}}
+              <sup>{{interFlight.departureTimezone}}</sup></b>
+              do <b>{{interFlight.dstPlace}}</b> z lotniska <b>{{interFlight.destinationAirport}}</b> dnia <b>{{interFlight.arrivalDate}}</b> o godzinie <b>{{interFlight.arrivalTime}}
+              <sup>{{interFlight.arrivalTimezone}}</sup></b> linią <b>{{interFlight.airline}}</b>
             </span>
-          </li>
-        </ul>
+            </li>
+          </ng-container>
+        </ol>
       </mat-expansion-panel>
     </mat-accordion>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button color="primary" (click)="onFlightSelection()">Zarezerwuj za <b>{{viewData.price}} PLN</b></button>
+    <button mat-button color="primary" (click)="onFlightSelection()">Zarezerwuj za <b>{{viewData.price}} PLN</b>
+    </button>
   </mat-card-actions>
 </mat-card>

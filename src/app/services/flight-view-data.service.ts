@@ -28,7 +28,7 @@ export class TripViewDataService {
 
   private extractTimezone(timezone: number): string {
     if (timezone >= 0) { return `+${timezone}`; }
-    else { return `-${timezone}`; }
+    else { return `${timezone}`; }
   }
 
   private extractPlace(airport: Airport): string {
@@ -36,11 +36,17 @@ export class TripViewDataService {
          + airport.country;
   }
 
+  private extractAirport(airport: Airport): string {
+    return airport.name;
+  }
+
   private extractIntermediateFlights(trip: Trip): IntermediateConnection[] {
     return trip.arraysTicket.map((ticket: Ticket) => {
       return {
         srcPlace: this.extractPlace(ticket.flightDto.srcAirport),
         dstPlace: this.extractPlace(ticket.flightDto.dstAirport),
+        sourceAirport: this.extractAirport(trip.arraysTicket[trip.arraysTicket.length - 1].flightDto.dstAirport),
+        destinationAirport: this.extractAirport(trip.arraysTicket[trip.arraysTicket.length - 1].flightDto.dstAirport),
         airline: ticket.flightDto.airline.name,
         arrivalDate: ticket.arrivalDate,
         arrivalTime: ticket.arrivalTime,

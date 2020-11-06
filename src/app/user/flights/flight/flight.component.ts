@@ -1,8 +1,6 @@
 import { TripViewDataService } from '../../../services/flight-view-data.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Trip } from 'src/app/models/trip';
-import { Ticket } from 'src/app/models/ticket';
-import { Airport } from 'src/app/models/airport';
 import {FlightViewData} from "./flight-view-data";
 
 @Component({

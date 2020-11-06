@@ -1,8 +1,8 @@
 .mat-card {
-  margin: 0 auto;
-  text-align: center;
+  margin: 1vh auto;
 }
-i{
+
+i {
   font-size: medium
 }
 
@@ -11,7 +11,7 @@ i{
   margin-right: 3vw;
   width: 100%;
   text-align: center;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 
 .mat-card-subtitle {
@@ -20,8 +20,8 @@ i{
   color: black;
 }
 
-.mat-card-content {
-  margin: 0 5vw;
+.mat-card{
+  padding: 2vh 5vw;
 }
 
 .mat-card-actions {
@@ -29,7 +29,19 @@ i{
   font-size: 1.2rem;
 }
 
+button {
+  margin: 2vh 0;
+}
+
 button:hover {
-  background-color: #673ab7;
+  background-color: #283590;
   color: white;
 }
+
+li{
+  margin: 1vh 0
+}
+
+
+
+
