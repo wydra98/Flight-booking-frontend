@@ -51,6 +51,10 @@ export class SearchFlightFormBuilderService {
     return {
       srcAirportId: this.findAirportId(form.controls['sourceLocation'].value),
       dstAirportId: this.findAirportId(form.controls['destinationLocation'].value),
+      firstChangeId: form.controls['changeLocation1'].value ?
+        this.findAirportId(form.controls['changeLocation1'].value) : null,
+      secondChangeId: form.controls['changeLocation2'].value ?
+        this.findAirportId(form.controls['changeLocation2'].value) : null,
       departureDate: this.parseDate(form.controls['departureDate'].value),
       arrivalDate: form.controls['arrivalDate'].value ?
         this.parseDate(form.controls['arrivalDate'].value)
@@ -68,7 +72,6 @@ export class SearchFlightFormBuilderService {
 
   private findAirportId(airportDn: string): number {
     return this.airportService.getAirports().find((airport: Airport) =>
-      airport.city.toUpperCase().includes(airportDn.toUpperCase().split(',')[0])).id
-    ;
+      airport.city.toUpperCase().includes(airportDn.toUpperCase().split(',')[0])).id;
   }
 }

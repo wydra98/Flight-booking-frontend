@@ -45,6 +45,7 @@ export class SearchFlightService {
 
   private onTripsReceived(): (value: [Trip[], Trip[]]) => void {
     return (trips: [Trip[], Trip[]]) => {
+      console.log(trips)
       this.tripsToDestination.next(trips[0]);
       this.tripsFromDestination.next(trips[1]);
     };

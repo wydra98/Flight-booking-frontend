@@ -104,7 +104,6 @@ button{
   font-size: 1.3rem;
 }
 
-
 @media (max-width: 1150px) {
   .passenger{
     width: 10%;
@@ -125,16 +124,4 @@ button{
   }
 }
 
-/*@media (max-width: 1150px) {*/
-/*  .passenger{*/
-/*    width: 10%;*/
-/*    margin-right: 2vw;*/
-/*  }*/
-/*  .firstCheckbox{*/
-/*    width: 20%;*/
-/*    margin-left: 2vw;*/
-/*  }*/
-/*  .secondCheckbox{*/
-/*    width: 20%;*/
-/*  }*/
-/*}*/
+

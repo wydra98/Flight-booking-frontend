@@ -15,6 +15,7 @@ export class TripViewDataService {
       sourcePlace: this.extractPlace(trip.arraysTicket[0].flightDto.srcAirport),
       destinationPlace: this.extractPlace(trip.arraysTicket[trip.arraysTicket.length - 1].flightDto.dstAirport),
       numberOfTransfers: trip.arraysTicket.length - 1,
+      normalOffer: trip.normalOffer,
       price: trip.totalPrice,
       arrivalDate: trip.arrivalDate,
       departureDate: trip.departureDate,
@@ -45,8 +46,8 @@ export class TripViewDataService {
       return {
         srcPlace: this.extractPlace(ticket.flightDto.srcAirport),
         dstPlace: this.extractPlace(ticket.flightDto.dstAirport),
-        sourceAirport: this.extractAirport(trip.arraysTicket[trip.arraysTicket.length - 1].flightDto.dstAirport),
-        destinationAirport: this.extractAirport(trip.arraysTicket[trip.arraysTicket.length - 1].flightDto.dstAirport),
+        sourceAirport: this.extractAirport(ticket.flightDto.srcAirport),
+        destinationAirport: this.extractAirport(ticket.flightDto.dstAirport),
         airline: ticket.flightDto.airline.name,
         arrivalDate: ticket.arrivalDate,
         arrivalTime: ticket.arrivalTime,

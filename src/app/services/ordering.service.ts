@@ -23,7 +23,6 @@ export class OrderingService {
   private readonly FLIGHTS_COMPONENT_FIRST_STEP_TITLE = 'Wybierz podróż do miejsca docelowego';
   private readonly FLIGHTS_COMPONENT_SECOND_STEP_TITLE = 'Wybierz podróż z miejsca docelowego';
 
-
   constructor(
     private router: Router,
     private httpClient: HttpClient,
@@ -32,12 +31,6 @@ export class OrderingService {
     this.checkIfTripIsBothWay();
     this.getFetchedTripsToDestination();
     this.getFetchedTripsFromDestination();
-  }
-
-  public onChosenFlight(flight: Trip): void {
-    if (!this.shouldNavigateToOrderPage(flight)) { return; }
-    this.navigateToOrderPage();
-
   }
 
   public onPassengerFormFilled(passenger: Passenger[]): void {
@@ -79,12 +72,16 @@ export class OrderingService {
     ).subscribe((isBothWay: boolean) => { this.bothWayTrip = isBothWay; });
   }
 
+  public onChosenFlight(flight: Trip): void {
+    if (!this.shouldNavigateToOrderPage(flight)) { return; }
+    this.navigateToOrderPage();
+  }
+
   private shouldNavigateToOrderPage(flight: Trip): boolean {
     if (!this.chosenFlightToDestination) {
       this.chosenFlightToDestination = flight;
       return this.determineAndHandleIfOneWayTrip();
     }
-
     this.chosenFlightFromDestination = flight;
     return true;
   }
@@ -110,7 +107,6 @@ export class OrderingService {
   private navigateToTripSummary(): (response: { tripId: string }) => void {
     return (response: { tripId: string }) => {
       const { tripId } = response;
-      console.log('received code: ', tripId);
       this.router.navigate(['/tickets'], { queryParams: this.composeQueryParams(tripId) });
     };
   }
@@ -136,6 +132,6 @@ export class OrderingService {
   }
 
   private navigateToOrderPage(): void {
-    this.router.navigate(['/booking/order']);
+    this.router.navigate(['/order']);
   }
 }

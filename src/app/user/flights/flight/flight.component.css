@@ -42,6 +42,9 @@ li{
   margin: 1vh 0
 }
 
+mat-card-content{
+  position: relative;
+}
 
 
 

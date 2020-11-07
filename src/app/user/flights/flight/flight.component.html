@@ -15,10 +15,15 @@
       {{viewData.arrivalDate}} {{viewData.arrivalTime}}<sup>{{viewData.arrivalTimezone}}</sup></div>
     <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-share"></i>Liczba przesiadek:
       <b>{{viewData.numberOfTransfers}}</b></div>
+    <ng-container *ngIf="!viewData.normalOffer">
+      <div style="color: green; margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-check-square"></i>Podróż z szukaną przesiadką!</div>
+    </ng-container>
     <div class="map" style="margin: 1vw 0"><a href=""><i style="margin-right: 1.3vw" class="fa fa-map-marker"></i>Zobacz
       na mapie </a></div>
   </div>
   <mat-card-content>
+
+
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -28,9 +33,9 @@
           <ng-container *ngFor="let interFlight of viewData.flights;">
             <li class="interFlightRow">
             <span>
-              Lot z <b>{{interFlight.srcPlace}}</b> z lotniska <b>{{interFlight.sourceAirport}}</b> dnia <b>{{interFlight.departureDate}}</b> o godzinie <b>{{interFlight.departureTime}}
+              Lot z miasta <b>{{interFlight.srcPlace}}</b> z <b>{{interFlight.sourceAirport}}</b> dnia <b>{{interFlight.departureDate}}</b> o godzinie <b>{{interFlight.departureTime}}
               <sup>{{interFlight.departureTimezone}}</sup></b>
-              do <b>{{interFlight.dstPlace}}</b> z lotniska <b>{{interFlight.destinationAirport}}</b> dnia <b>{{interFlight.arrivalDate}}</b> o godzinie <b>{{interFlight.arrivalTime}}
+              do miasta <b>{{interFlight.dstPlace}}</b> do <b>{{interFlight.destinationAirport}}</b> dnia <b>{{interFlight.arrivalDate}}</b> o godzinie <b>{{interFlight.arrivalTime}}
               <sup>{{interFlight.arrivalTimezone}}</sup></b> linią <b>{{interFlight.airline}}</b>
             </span>
             </li>

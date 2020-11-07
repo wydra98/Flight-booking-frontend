@@ -7,6 +7,7 @@ export interface Trip {
   arrivalDate: string;
   arrivalTime: string;
   totalPrice: number;
+  normalOffer: boolean;
   purchaseDate?: string;
   purchaseTime?: string;
 }
