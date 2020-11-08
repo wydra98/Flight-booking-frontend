@@ -8,6 +8,7 @@ mat-toolbar{
   pointer-events: none !important;
 }
 
+
 mat-horizontal-stepper{
   margin: 0 5vw;
   background: #f3f3f3;

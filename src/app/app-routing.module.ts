@@ -17,8 +17,8 @@ import {AuthGuardUserService} from "./auth/auth-guard-user.service";
 import {AuthGuardAdminService} from "./auth/auth-guard-admin.service";
 import {FlightAdminComponent} from "./admin/flight-admin/flight-admin.component";
 import {StartUserPanelComponent} from "./user/start-user-panel/start-user-panel.component";
+import {FinishComponent} from "./user/finish/finish.component";
 
-//let multiply = (a, b) => { return a * b; };
 const routes: Routes = [
   {
     path: '', component: UserPanelComponent,
@@ -29,6 +29,7 @@ const routes: Routes = [
       {path: 'flights', component: FlightsComponent},
       {path: 'order', component: OrderComponent},
       {path: 'ticket', component: TicketComponent},
+      {path: 'finish', component: FinishComponent},
     ],
     canActivate: [AuthGuardUserService]
   },

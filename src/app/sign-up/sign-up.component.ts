@@ -33,13 +33,13 @@ export class SignUpComponent implements OnInit {
     if (form.password == form.passwordRepeat) {
       this.auth.signUp(form.name, form.surname, form.email, form.password)
         .subscribe(() => {
-          this.router.navigate(['logIn']);
-          this.snackbar.showSnackbar('Pomyślnie zarejestrowano.', 'success');
-        }, () => {
-          this.snackbar.showSnackbar('Nieudana rejestracja.', 'fail');
-        })
-    } else {
-      this.snackbar.showSnackbar('Nieudana rejestracja.', 'fail');
+            this.router.navigate(['logIn']);
+            this.snackbar.showSnackbar('Pomyślnie zarejestrowano.', 'success');
+          }, (err: any) => {
+            console.log(err)
+            this.snackbar.showSnackbar(err.error, 'fail');
+          }
+        )
     }
   }
 }

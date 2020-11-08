@@ -1,6 +1,6 @@
 import {AirportService} from '../../services/airport.service';
 import {Component, OnInit} from '@angular/core';
-import {SearchFlightFormBuilderService} from "../../services/search-flight-form-builder.service";
+import {SearchFlightFormBuilderService} from "./search-flight-form-builder.service";
 import {FormGroup} from "@angular/forms";
 import {BehaviorSubject} from "rxjs";
 import {SearchFlightService} from "../../services/search-flight.service";
@@ -32,8 +32,7 @@ export class SearchFlightComponent implements OnInit {
     private router: Router,
     private searchFlightService: SearchFlightService,
     private orderingService: OrderingService
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.orderingService.clearService();
@@ -42,7 +41,6 @@ export class SearchFlightComponent implements OnInit {
     this.determineMinDate();
     this.createTypesList();
   }
-
 
   private determineMinDate(): void {
     const todayDate = new Date();
@@ -65,8 +63,7 @@ export class SearchFlightComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    this.searchFlightService.fetchAvailableFlights(this.formBuilder.mapFormGroupToParams(this.form));
-    this.router.navigate(['/flights']);
+    this.searchFlightService.fetchAvailableFlights(this.formBuilder.mapFormGroupToParams(this.form))
   }
 }
 

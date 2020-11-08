@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormGroup, Validators, FormBuilder} from "@angular/forms";
 import {AuthorizationService} from "../auth/authorization.service";
@@ -12,11 +12,12 @@ import {SnackBarComponent} from "../snack-bar/snack-bar.component";
 export class LogInComponent implements OnInit {
   signInForm: FormGroup;
 
-  constructor( private fb: FormBuilder,
-               private router: Router,
-               private auth: AuthorizationService,
-               private snackbar: SnackBarComponent
-  ) { }
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private auth: AuthorizationService,
+              private snackbar: SnackBarComponent
+  ) {
+  }
 
   ngOnInit(): void {
     this.signInForm = this.fb.group({
@@ -28,16 +29,17 @@ export class LogInComponent implements OnInit {
   onSubmit() {
     this.auth.signIn(this.signInForm.get('email').value, this.signInForm.get('password').value)
       .subscribe(() => {
-        if(this.auth.isAdmin()){
-          this.router.navigate(['/airline']);
-          this.snackbar.showSnackbar('Pomyślnie zalogowano', 'success');
+          if (this.auth.isAdmin()) {
+            this.router.navigate(['/airline']);
+            this.snackbar.showSnackbar('Pomyślnie zalogowano', 'success');
+          } else {
+            this.router.navigate(['/startUser']);
+            this.snackbar.showSnackbar('Pomyślnie zalogowano', 'success');
+          }
+        },
+        (err: any) => {
+          this.snackbar.showSnackbar(err.error, 'fail');
         }
-        else{
-          this.router.navigate(['/startUser']);
-          this.snackbar.showSnackbar('Pomyślnie zalogowano', 'success');
-        }
-      }, () => {
-        this.snackbar.showSnackbar('Nieudane logowanie', 'fail');
-      });
+      );
   }
 }

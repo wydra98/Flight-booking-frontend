@@ -25,7 +25,6 @@ export class AirportService {
   }
 
   private fillAirports(): void {
-
     this.httpClient.get<Airport[]>(URL + '/airports')
       .subscribe(
         this.onSuccess()

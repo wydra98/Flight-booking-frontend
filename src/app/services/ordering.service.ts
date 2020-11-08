@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import {Params, Router} from "@angular/router";
+import {Injectable} from '@angular/core';
+import {URL} from '../../environments/environment';
+import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {SearchFlightService} from "./search-flight.service";
 import {Trip} from "../models/trip";
@@ -7,13 +8,15 @@ import {BehaviorSubject, Observable, of} from "rxjs";
 import {Passenger} from "../models/passenger";
 import {map} from "rxjs/operators";
 import {BookingRequest} from "../models/booking-request";
-
+import {SnackBarComponent} from "../snack-bar/snack-bar.component";
+import {AuthorizationService} from "../auth/authorization.service";
+import {FlightRequestQueryParams} from "../models/flight-request-query-params";
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderingService {
-   private flightsToRender = new BehaviorSubject<Trip[]>([]);
+  private flightsToRender = new BehaviorSubject<Trip[]>([]);
   private flightsFromDestination: Trip[];
   private chosenFlightToDestination: Trip;
   private chosenFlightFromDestination: Trip;
@@ -27,6 +30,8 @@ export class OrderingService {
     private router: Router,
     private httpClient: HttpClient,
     private searchFlightService: SearchFlightService,
+    private snackbar: SnackBarComponent,
+    private auth: AuthorizationService
   ) {
     this.checkIfTripIsBothWay();
     this.getFetchedTripsToDestination();
@@ -59,22 +64,30 @@ export class OrderingService {
   }
 
   private getFetchedTripsFromDestination() {
-    this.searchFlightService.getFoundTripsFromDestination().subscribe((trips: Trip[]) => { this.flightsFromDestination = trips; });
+    this.searchFlightService.getFoundTripsFromDestination().subscribe((trips: Trip[]) => {
+      this.flightsFromDestination = trips;
+    });
   }
 
   private getFetchedTripsToDestination() {
-    this.searchFlightService.getFoundTripsToDestination().subscribe((trips: Trip[]) => { this.flightsToRender.next(trips); });
+    this.searchFlightService.getFoundTripsToDestination().subscribe((trips: Trip[]) => {
+      this.flightsToRender.next(trips);
+    });
   }
 
   private checkIfTripIsBothWay() {
     this.searchFlightService.getFoundTripsFromDestination().pipe(
       map((trips: Trip[]) => !!trips.length)
-    ).subscribe((isBothWay: boolean) => { this.bothWayTrip = isBothWay; });
+    ).subscribe((isBothWay: boolean) => {
+      this.bothWayTrip = isBothWay;
+    });
   }
 
   public onChosenFlight(flight: Trip): void {
-    if (!this.shouldNavigateToOrderPage(flight)) { return; }
-    this.navigateToOrderPage();
+    if (!this.shouldNavigateToOrderPage(flight)) {
+      return;
+    }
+    this.router.navigate(['/order']);
   }
 
   private shouldNavigateToOrderPage(flight: Trip): boolean {
@@ -87,7 +100,9 @@ export class OrderingService {
   }
 
   private determineAndHandleIfOneWayTrip(): boolean {
-    if (!this.bothWayTrip) { return true; }
+    if (!this.bothWayTrip) {
+      return true;
+    }
     this.rebuildFlightsComponent();
     return false;
   }
@@ -97,41 +112,32 @@ export class OrderingService {
     this.flightsToRender.next(this.flightsFromDestination);
   }
 
-  private orderFlight(): void {
-    const bookingRequest = this.composeBookingRequest();
-    this.postBookingRequest(bookingRequest).subscribe(
-      this.navigateToTripSummary()
-    );
-  }
-
-  private navigateToTripSummary(): (response: { tripId: string }) => void {
-    return (response: { tripId: string }) => {
-      const { tripId } = response;
-      this.router.navigate(['/tickets'], { queryParams: this.composeQueryParams(tripId) });
-    };
-  }
-
-  private composeQueryParams(tripId: string): Params {
-    return {
-      code: tripId
-    };
-  }
-
-  private postBookingRequest(bookingRequest: BookingRequest): Observable<{ tripId: string }> {
-    return this.httpClient.post<{ tripId: string }>(
-      URL + '/trips/createTrip',
-      bookingRequest
-    );
-  }
-
   private composeBookingRequest(): BookingRequest {
     return {
+      userId: parseInt(this.auth.getId()),
       tripDto: this.chosenFlightToDestination,
       passengersDto: [...this.passengers]
     };
   }
 
-  private navigateToOrderPage(): void {
-    this.router.navigate(['/order']);
+  private createHttpOptions(params: BookingRequest): object {
+    return {
+      params,
+      responseType: 'json',
+    };
   }
+
+  private orderFlight(): void {
+    const bookingRequest = this.composeBookingRequest();
+    this.httpClient.post(URL + '/trips/createTrip', bookingRequest).subscribe(
+      () => {
+        this.router.navigate(['/finish']);
+        this.snackbar.showSnackbar('Zarezerwowano lot', 'success');
+      },
+      (err: any) => {
+        this.snackbar.showSnackbar(err.error, 'fail');
+      }
+    );
+  }
+
 }

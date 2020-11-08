@@ -1,0 +1,58 @@
+mat-card{
+  margin: 0vh 5vw;
+  align-items: center;
+  padding: 2vh 5vw;
+}
+
+mat-horizontal-stepper{
+  margin: 0 5vw;
+  background: #f3f3f3;
+}
+
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}
+
+.wrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+mat-card-header{
+  margin-bottom: 10px;
+  margin-left: 0;
+}
+
+mat-card-title{
+  margin-left: -16px;
+}
+
+mat-toolbar{
+  background: white;
+  margin-bottom: 20px;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+}
+
+.menuToolbar{
+  height: 40vh;
+  width: 30vw;
+  background: url('src/assets/pngwing.com.png') no-repeat center;
+  background-size: contain;
+}
+
+
+mat-card-content{
+  font-size: 1.0rem;
+}
+
+.wrapper > mat-card-content{
+  padding: 1vh 0;
+}
+
+@media (max-width: 1150px) {
+  .menuToolbar{
+    display: none;
+  }
+}

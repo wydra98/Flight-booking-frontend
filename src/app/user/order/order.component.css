@@ -1,0 +1,44 @@
+mat-toolbar{
+  background: white;
+  margin-bottom: 20px;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+}
+
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}
+
+mat-card-header{
+  margin-bottom: 30px;
+}
+
+mat-horizontal-stepper{
+  margin: 0 5vw;
+  background: #f3f3f3;
+}
+
+.mat-card .mat-form-field {
+  margin: 1vh 5%;
+  width: 40%;
+}
+
+.mat-card{
+  padding: 3vh 16px;
+}
+
+mat-list {
+  margin: 1vh 5vw;
+}
+
+button {
+  display: block;
+  width: 25%;
+  margin: 3vh auto;
+  background: white;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+}
+
+button:valid {
+  background: #283590;
+  color: white;
+}

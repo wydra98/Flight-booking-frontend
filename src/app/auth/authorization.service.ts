@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import { URL } from '../../environments/environment';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {tap, map} from 'rxjs/operators';
 import {Observable, BehaviorSubject} from 'rxjs';
@@ -12,7 +13,6 @@ export class AuthorizationService {
   private jwtHelper = new JwtHelperService();
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
   private isAdminSubject = new BehaviorSubject<boolean>(this.isAdmin());
-  private localURL = "http://localhost:8080";
 
   constructor(private http: HttpClient) {
   }
@@ -63,9 +63,8 @@ export class AuthorizationService {
     const params = new HttpParams()
       .set('email', email)
       .set('password', password);
-    return this.http.post(this.localURL + '/login', params)
+    return this.http.post(URL + '/login', params)
       .pipe(tap((response: any) => {
-        console.log("Imiem " + response.userDto.name)
         this.saveToken(response.token);
         this.saveRole(response.userDto.role);
         this.saveId(response.userDto.id);
@@ -99,7 +98,7 @@ export class AuthorizationService {
       .set('name', name)
       .set('surname', surname)
       .set('password', password);
-    return this.http.post(this.localURL + '/register', params);
+    return this.http.post(URL + '/register', params);
   }
 
 }

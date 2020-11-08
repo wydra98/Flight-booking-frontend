@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AirportService} from "./airport.service";
-import {Airport} from "../models/airport";
-import {FlightRequestQueryParams} from "../models/flight-request-query-params";
+import {AirportService} from "../../services/airport.service";
+import {Airport} from "../../models/airport";
+import {FlightRequestQueryParams} from "../../models/flight-request-query-params";
 
 
 @Injectable({

@@ -1,0 +1,29 @@
+<mat-toolbar>
+  Koniec
+</mat-toolbar>
+
+<mat-horizontal-stepper linear [selectedIndex]="3">
+  <mat-step label="Wypełnij formularz"></mat-step>
+  <mat-step label="Wybierz lot"></mat-step>
+  <mat-step label="Podaj pasażera"></mat-step>
+  <mat-step label="Koniec"></mat-step>
+</mat-horizontal-stepper>
+
+
+<mat-card>
+  <mat-card-content class="wrapper">
+
+    <mat-card-content>
+      <mat-card-header>
+        <mat-card-title>Gratulacje {{name}}!</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        Właśnie udało ci się zarezerwować podróż. <br>
+        Aby zobaczyć stan zarezerwowanej podróży przejdź tutaj: <br><br>
+        <a [routerLink]="['/ticket']"><i class="fa fa-ticket"></i> Twoje bilety</a><br><br>
+        Życzymy dalekich lotów! <br><br>
+      </mat-card-content>
+    </mat-card-content>
+    <mat-icon class="menuToolbar"></mat-icon>
+  </mat-card-content>
+</mat-card>

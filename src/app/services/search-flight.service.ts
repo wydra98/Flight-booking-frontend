@@ -1,9 +1,11 @@
-import { URL } from '../../environments/environment';
-import { Injectable } from '@angular/core';
+import {URL} from '../../environments/environment';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import {Trip} from "../models/trip";
 import {HttpClient} from "@angular/common/http";
 import {FlightRequestQueryParams} from "../models/flight-request-query-params";
+import {Router} from "@angular/router";
+import {SnackBarComponent} from "../snack-bar/snack-bar.component";
 
 @Injectable({
   providedIn: 'root',
@@ -14,15 +16,24 @@ export class SearchFlightService {
   private passengersNumber: number;
 
   constructor(
-    private httpClient: HttpClient) {}
+    private httpClient: HttpClient,
+    private router: Router,
+    private snackbar: SnackBarComponent) {
+  }
 
   public fetchAvailableFlights(params: FlightRequestQueryParams): void {
     this.passengersNumber = params.passengerNumber;
 
     this.httpClient.get<[Trip[], Trip[]]>(URL + '/trips/findTrips', this.createHttpOptions(params))
       .subscribe(
-          this.onTripsReceived(),
-          this.handleFetchTripError()
+        (trips: [Trip[], Trip[]]) => {
+          this.tripsToDestination.next(trips[0]);
+          this.tripsFromDestination.next(trips[1]);
+          this.router.navigate(['/flights']);
+        },
+        (err: any) => {
+          this.snackbar.showSnackbar(err.error, 'fail');
+        }
       );
   }
 
@@ -30,25 +41,12 @@ export class SearchFlightService {
     return this.passengersNumber;
   }
 
-  private handleFetchTripError(): (error: any) => void {
-    return (error: any) => { console.log('hej') };
-  }
-
-
   public getFoundTripsToDestination(): Observable<Trip[]> {
     return this.tripsToDestination.asObservable();
   }
 
   public getFoundTripsFromDestination(): Observable<Trip[]> {
     return this.tripsFromDestination.asObservable();
-  }
-
-  private onTripsReceived(): (value: [Trip[], Trip[]]) => void {
-    return (trips: [Trip[], Trip[]]) => {
-      console.log(trips)
-      this.tripsToDestination.next(trips[0]);
-      this.tripsFromDestination.next(trips[1]);
-    };
   }
 
   private createHttpOptions(params: FlightRequestQueryParams): object {

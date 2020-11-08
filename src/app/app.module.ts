@@ -48,6 +48,7 @@ import {MatRadioModule} from "@angular/material/radio";
 import { FlightAdminComponent } from './admin/flight-admin/flight-admin.component';
 import {MatStepperModule} from "@angular/material/stepper";
 import { StartUserPanelComponent } from './user/start-user-panel/start-user-panel.component';
+import { FinishComponent } from './user/finish/finish.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { StartUserPanelComponent } from './user/start-user-panel/start-user-pane
     UserComponent,
     TicketComponent,
     FlightAdminComponent,
-    StartUserPanelComponent
+    StartUserPanelComponent,
+    FinishComponent
   ],
     imports: [
         BrowserModule,
