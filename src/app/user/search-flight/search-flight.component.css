@@ -21,9 +21,6 @@ mat-card{
   padding-bottom: 4vh;
 }
 
-mat-card-header{
-  margin-bottom: 40px;
-}
 
 .mat-radio-button  {
   width: 15%;

@@ -2,7 +2,7 @@ import {AirportService} from '../../services/airport.service';
 import {Component, OnInit} from '@angular/core';
 import {SearchFlightFormBuilderService} from "./search-flight-form-builder.service";
 import {FormGroup} from "@angular/forms";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Subscription} from "rxjs";
 import {SearchFlightService} from "../../services/search-flight.service";
 import {OrderingService} from "../../services/ordering.service";
 import {Router} from "@angular/router";
@@ -23,6 +23,7 @@ export class SearchFlightComponent implements OnInit {
   public readonly subtitle = 'Wypełnij formularz i znajdź idealną podróż';
   public types$ = new BehaviorSubject([]);
   public values: Array<string> = [];
+  private subscriptions = new Subscription();
   public form: FormGroup;
   public minDate: Date;
 
@@ -38,6 +39,7 @@ export class SearchFlightComponent implements OnInit {
     this.orderingService.clearService();
     this.form = this.formBuilder.buildForm();
     this.airportService.fetchAirports();
+    this.subscribeToBothWaysParameter();
     this.determineMinDate();
     this.createTypesList();
   }
@@ -60,6 +62,16 @@ export class SearchFlightComponent implements OnInit {
     });
 
     this.types$.next(types);
+  }
+
+  private subscribeToBothWaysParameter(): void {
+    this.subscriptions.add(this.form.controls['checkBox'].valueChanges.subscribe(
+      (response: string) => {
+        if(response == "bothWay")
+          { this.formBuilder.addRequiredValidatorToArrivalDate(this.form); }
+        else { this.formBuilder.removeRequiredValidatorToArrivalDate(this.form); }
+      }
+    ));
   }
 
   public onSubmit(): void {

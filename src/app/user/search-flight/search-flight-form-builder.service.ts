@@ -37,9 +37,13 @@ export class SearchFlightFormBuilderService {
       departureDate: ['', Validators.required],
       arrivalDate: [''],
       passengersNumber: [1, [Validators.required, Validators.max(10), Validators.min(1)]],
+      changeNumber: [0, [Validators.required, Validators.max(4), Validators.min(0)]],
+      timeNumber: [6, [Validators.required, Validators.max(12), Validators.min(0)]],
       changeLocation1: [''],
       changeLocation2: [''],
-      checkBox: ['', Validators.required]
+      changeLocation3: [''],
+      changeLocation4: [''],
+      checkBox: ['', Validators.required],
     });
   }
 
@@ -55,13 +59,31 @@ export class SearchFlightFormBuilderService {
         this.findAirportId(form.controls['changeLocation1'].value) : null,
       secondChangeId: form.controls['changeLocation2'].value ?
         this.findAirportId(form.controls['changeLocation2'].value) : null,
+      thirdChangeId: form.controls['changeLocation3'].value ?
+        this.findAirportId(form.controls['changeLocation3'].value) : null,
+      fourthChangeId: form.controls['changeLocation4'].value ?
+        this.findAirportId(form.controls['changeLocation4'].value) : null,
       departureDate: this.parseDate(form.controls['departureDate'].value),
       arrivalDate: form.controls['arrivalDate'].value ?
         this.parseDate(form.controls['arrivalDate'].value)
         : null,
       passengerNumber: form.controls['passengersNumber'].value,
+      changeNumber: form.controls['changeNumber'].value,
+      timeNumber: form.controls['timeNumber'].value,
       twoTrip: checkBoxValue
     };
+  }
+
+  public addRequiredValidatorToArrivalDate(form: FormGroup): void {
+    form.controls.arrivalDate.enable();
+    form.controls.arrivalDate.setValidators(Validators.required);
+    form.controls.arrivalDate.updateValueAndValidity();
+  }
+
+  public removeRequiredValidatorToArrivalDate(form: FormGroup): void {
+    form.controls.arrivalDate.disable();
+    form.controls.arrivalDate.setValidators(null);
+    form.controls.arrivalDate.updateValueAndValidity();
   }
 
   private parseDate(date: string): string {
