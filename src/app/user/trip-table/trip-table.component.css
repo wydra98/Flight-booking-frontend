@@ -1,0 +1,20 @@
+.full-width-table {
+  width: 100%;
+}
+
+mat-toolbar{
+  background: white;
+  margin-bottom: 20px;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+}
+
+.mat-elevation-z8{
+  margin: 5vh auto 0 auto;
+  width: 90%;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+}
+
+a:hover{
+  cursor: pointer;
+}
+

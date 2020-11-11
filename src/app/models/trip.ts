@@ -1,6 +1,7 @@
-import { Ticket } from './ticket';
+import {Ticket} from './ticket';
 
 export interface Trip {
+  id: number;
   arraysTicket: Ticket[];
   departureDate: string;
   departureTime: string;
@@ -10,4 +11,5 @@ export interface Trip {
   normalOffer: boolean;
   purchaseDate?: string;
   purchaseTime?: string;
+  passengerNumber?: number;
 }

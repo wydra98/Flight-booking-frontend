@@ -19,7 +19,6 @@ import {FlightComponent} from "./user/flights/flight/flight.component";
 import {PassengerComponent} from "./admin/passenger/passenger.component";
 import {TripComponent} from "./admin/trip/trip.component";
 import {UserComponent} from "./admin/user/user.component";
-import {TicketComponent} from "./user/tickets/ticket/ticket.component";
 
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {ReactiveFormsModule} from "@angular/forms";
@@ -52,7 +51,10 @@ import { FinishComponent } from './user/finish/finish.component';
 import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { StartAdminPanelComponent } from './admin/start-admin-panel/start-admin-panel.component';
-
+import { TripTableComponent } from './user/trip-table/trip-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -73,12 +75,12 @@ import { StartAdminPanelComponent } from './admin/start-admin-panel/start-admin-
     PassengerComponent,
     TripComponent,
     UserComponent,
-    TicketComponent,
     FlightAdminComponent,
     StartUserPanelComponent,
     FinishComponent,
     MatConfirmDialogComponent,
-    StartAdminPanelComponent
+    StartAdminPanelComponent,
+    TripTableComponent,
   ],
     imports: [
         BrowserModule,
@@ -106,7 +108,10 @@ import { StartAdminPanelComponent } from './admin/start-admin-panel/start-admin-
         MatDatepickerModule,
         MatRadioModule,
         MatStepperModule,
-        MatDialogModule
+        MatDialogModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule
     ],
   providers: [SnackBarComponent,
     {

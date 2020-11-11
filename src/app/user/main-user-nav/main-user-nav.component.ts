@@ -28,7 +28,7 @@ export class MainUserNavComponent {
   }
 
   logout() {
-    this.dialogService.openConfirmDialog('Czy chcesz się wylogować?')
+    this.dialogService.openConfirmDialog('Czy na pewno chcesz się wylogować?')
       .afterClosed().subscribe(res => {
       if (res) {
         this.router.navigate(['/logIn']);

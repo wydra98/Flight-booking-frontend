@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Trip } from 'src/app/models/trip';
-import { FlightViewData, IntermediateConnection } from 'src/app/user/flights/flight/flight-view-data';
+import { FlightViewData, IntermediateConnection } from 'src/app/user/flights/flight-view-data';
 import { Ticket } from 'src/app/models/ticket';
 import { Airport } from 'src/app/models/airport';
 

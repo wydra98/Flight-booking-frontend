@@ -12,13 +12,13 @@ import {AirportComponent} from "./admin/airport/airport.component";
 import {PassengerComponent} from "./admin/passenger/passenger.component";
 import {TripComponent} from "./admin/trip/trip.component";
 import {UserComponent} from "./admin/user/user.component";
-import {TicketComponent} from "./user/tickets/ticket/ticket.component";
 import {AuthGuardUserService} from "./auth/auth-guard-user.service";
 import {AuthGuardAdminService} from "./auth/auth-guard-admin.service";
 import {FlightAdminComponent} from "./admin/flight-admin/flight-admin.component";
 import {StartUserPanelComponent} from "./user/start-user-panel/start-user-panel.component";
 import {FinishComponent} from "./user/finish/finish.component";
 import {StartAdminPanelComponent} from "./admin/start-admin-panel/start-admin-panel.component";
+import {TripTableComponent} from "./user/trip-table/trip-table.component";
 
 const routes: Routes = [
   {
@@ -29,7 +29,7 @@ const routes: Routes = [
       {path: 'search', component: SearchFlightComponent},
       {path: 'flights', component: FlightsComponent},
       {path: 'order', component: OrderComponent},
-      {path: 'ticket', component: TicketComponent},
+      {path: 'ticket', component: TripTableComponent},
       {path: 'finish', component: FinishComponent},
     ],
     canActivate: [AuthGuardUserService]

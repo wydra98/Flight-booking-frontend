@@ -10,15 +10,31 @@ form {
   color: #283590
 }
 
+mat-card{
+  background: #f3f3f3;
+}
+
+.mat-card:not([class*=mat-elevation-z]){
+  box-shadow: none;
+  border: none;
+}
+
+mat-card-header{
+  padding-top: 2vh;
+  padding-left: 2vw;
+}
 mat-toolbar{
   background: white;
   margin-bottom: 20px;
   box-shadow: 3px 0 6px rgba(0,0,0,0.24);
 }
 
-mat-card{
+.outCard{
+  background: white;
   margin: 0 5vw 2vh 5vw;
   padding-bottom: 4vh;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+
 }
 
 

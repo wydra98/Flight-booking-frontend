@@ -1,0 +1,78 @@
+<mat-toolbar>
+  <div class="title">Twoje bilety</div>
+</mat-toolbar>
+
+<div class="mat-elevation-z8">
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let row">{{row.additionalId}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="departurePlace">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Miejsce wylotu</th>
+      <td mat-cell *matCellDef="let row">{{row.departurePlace}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="departureTime">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Data wylotu</th>
+      <td mat-cell *matCellDef="let row">{{row.departureDate}}, {{row.departureTime}}<sup>{{row.departureTimezone}}</sup></td>
+    </ng-container>
+
+    <ng-container matColumnDef="arrivalPlace">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Miejsce przylotu</th>
+      <td mat-cell *matCellDef="let row">{{row.arrivalPlace}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="arrivalTime">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Data przylotu</th>
+      <td mat-cell *matCellDef="let row">{{row.arrivalDate}}, {{row.arrivalTime}}<sup>{{row.arrivalTimezone}}</sup></td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cena</th>
+      <td mat-cell *matCellDef="let row">{{row.price}} PLN </td>
+    </ng-container>
+
+    <ng-container matColumnDef="passengers">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>L. pasażerów</th>
+      <td mat-cell *matCellDef="let row">{{row.passengers}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="changes">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>L. przesiadek</th>
+      <td mat-cell *matCellDef="let row">{{row.numberOfTransfers}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="details">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Szczegóły</th>
+      <td mat-cell *matCellDef="let row">
+        <a style="color: #283590"><i class="fa fa-info-circle fa-lg"></i> Info</a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Anuluj</th>
+      <td mat-cell *matCellDef="let row">
+        <a style="color: red"><i class="fa fa-trash fa-lg"></i> Anuluj</a>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator
+      [length]="dataSource?.tripsToView.length"
+      [pageIndex]="0"
+      [pageSize]="50"
+      [pageSizeOptions]="[1,25, 50, 100, 250]">
+  </mat-paginator>
+</div>
+
+<br>
+<br>
+<br>
+<br>

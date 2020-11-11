@@ -27,14 +27,9 @@ export class AirportService {
   private fillAirports(): void {
     this.httpClient.get<Airport[]>(URL + '/airports')
       .subscribe(
-        this.onSuccess()
+        (airports: any) => {
+          this.airports = airports;
+        }
       )
-  }
-
-  private onSuccess(): (value: Airport[]) => void {
-    return (airports: any) => {
-      console.log(airports[0])
-      this.airports = airports;
-    };
   }
 }
