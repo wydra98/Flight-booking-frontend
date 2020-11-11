@@ -46,10 +46,22 @@
 
       <mat-form-field class="date">
         <mat-label>Data przylotu:</mat-label>
-        <input matInput [matDatepicker]="arrivalDp" formControlName="arrivalDate" [min]="minDate"/>
+        <input matInput [matDatepicker]="arrivalDp" formControlName="arrivalDate" [min]="minDateForDepartureDate"/>
         <mat-datepicker-toggle matSuffix [for]="arrivalDp"></mat-datepicker-toggle>
         <mat-datepicker #arrivalDp></mat-datepicker>
       </mat-form-field>
+
+      <mat-form-field class="passenger">
+        <mat-label>Maksymalna liczba przesiadek:</mat-label>
+        <input matInput type="number" formControlName="maxChanges"/>
+      </mat-form-field>
+
+      <mat-form-field class="passenger">
+        <mat-label>Maksymalny czas między przesiadkami:</mat-label>
+        <input matInput type="number" formControlName="maxTimeBetweenChanges"/>
+      </mat-form-field>
+
+      <br>
 
       <mat-form-field class="passenger">
         <mat-label>Liczba pasażerów:</mat-label>
@@ -57,21 +69,12 @@
       </mat-form-field>
 
       <mat-radio-group formControlName="checkBox" >
-        <mat-radio-button color="primary" value="bothWay" class="firstCheckbox"[checked]=true>W dwie strony</mat-radio-button>
+        <mat-radio-button color="primary" value="bothWay" class="firstCheckbox">W dwie strony</mat-radio-button>
         <mat-radio-button color="primary" value="oneWay" class="secondCheckbox" >W jedną stronę</mat-radio-button>
       </mat-radio-group>
-      <br>
 
-      <mat-form-field class="passenger">
-        <mat-label>Maksymalna liczba przesiadek:</mat-label>
-        <input matInput type="number" formControlName="changeNumber"/>
-      </mat-form-field>
-
-      <mat-form-field class="passenger">
-        <mat-label>Maksymalny czas między przesiadkami:</mat-label>
-        <input matInput type="number" formControlName="timeNumber"/>
-      </mat-form-field>
       <br><br>
+
       <mat-card-subtitle style="font-size: 1rem">Opcjonalnie:</mat-card-subtitle>
 
 

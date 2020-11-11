@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { OrderingService } from '../../services/ordering.service';
 import { Trip } from 'src/app/models/trip';
-import { Observable } from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {absoluteFromSourceFile} from "@angular/compiler-cli/src/ngtsc/file_system";
 
 @Component({
   selector: 'app-flights',
   templateUrl: './flights.component.html',
   styleUrls: ['./flights.component.css']
 })
-export class FlightsComponent implements OnInit {
+export class FlightsComponent implements OnInit, OnDestroy{
   public flights: Trip[];
   public title$: Observable<string>;
   public isDataFetched = false;
@@ -18,6 +19,8 @@ export class FlightsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFlights();
+    this.getSignal();
+    this.isDataFetched = false;
     this.getComponentsTitle()
   }
 
@@ -25,13 +28,19 @@ export class FlightsComponent implements OnInit {
     this.orderingService.onChosenFlight(chosenFlight);
   }
 
+  private getSignal(): void {
+    this.orderingService.getSignal().subscribe(
+      (signal) => {
+        this.isDataFetched = signal;
+      }
+    );
+  }
+
   private getFlights(): void {
-    this.isDataFetched = false;
     this.orderingService.getFlightsToOrder().subscribe(
       (flights) => {
         this.flights = flights;
         this.assignComponentsTitle();
-        setTimeout(() => { this.isDataFetched = true; }, 3000);
       }
     );
   }
@@ -42,5 +51,10 @@ export class FlightsComponent implements OnInit {
 
   private getComponentsTitle(): Observable<string> {
     return this.orderingService.getComponentTitle();
+  }
+
+  ngOnDestroy(): void {
+    console.log("To działa wgl?")
+    this.isDataFetched = false;
   }
 }

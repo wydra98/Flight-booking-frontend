@@ -37,8 +37,8 @@ export class SearchFlightFormBuilderService {
       departureDate: ['', Validators.required],
       arrivalDate: [''],
       passengersNumber: [1, [Validators.required, Validators.max(10), Validators.min(1)]],
-      changeNumber: [0, [Validators.required, Validators.max(4), Validators.min(0)]],
-      timeNumber: [6, [Validators.required, Validators.max(12), Validators.min(0)]],
+      maxChanges: [0, [Validators.required, Validators.max(4), Validators.min(0)]],
+      maxTimeBetweenChanges: [6, [Validators.required, Validators.max(12), Validators.min(0)]],
       changeLocation1: [''],
       changeLocation2: [''],
       changeLocation3: [''],
@@ -68,8 +68,8 @@ export class SearchFlightFormBuilderService {
         this.parseDate(form.controls['arrivalDate'].value)
         : null,
       passengerNumber: form.controls['passengersNumber'].value,
-      changeNumber: form.controls['changeNumber'].value,
-      timeNumber: form.controls['timeNumber'].value,
+      maxChanges: form.controls['maxChanges'].value,
+      maxTimeBetweenChanges: form.controls['maxTimeBetweenChanges'].value,
       twoTrip: checkBoxValue
     };
   }
