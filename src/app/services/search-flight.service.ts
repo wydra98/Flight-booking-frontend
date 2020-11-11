@@ -13,6 +13,7 @@ import {SnackBarComponent} from "../snack-bar/snack-bar.component";
 export class SearchFlightService {
   private tripsToDestination = new BehaviorSubject<Trip[]>([]);
   private tripsFromDestination = new BehaviorSubject<Trip[]>([]);
+  public signal = new BehaviorSubject<boolean>(false);
   private passengersNumber: number;
 
   constructor(
@@ -29,7 +30,7 @@ export class SearchFlightService {
         (trips: [Trip[], Trip[]]) => {
           this.tripsToDestination.next(trips[0]);
           this.tripsFromDestination.next(trips[1]);
-          this.router.navigate(['/flights']);
+          this.signal.next(true);
         },
         (err: any) => {
           this.snackbar.showSnackbar(err.error, 'fail');
@@ -47,6 +48,10 @@ export class SearchFlightService {
 
   public getFoundTripsFromDestination(): Observable<Trip[]> {
     return this.tripsFromDestination.asObservable();
+  }
+
+  public getSignal(): Observable<boolean> {
+    return this.signal.asObservable();
   }
 
   private createHttpOptions(params: FlightRequestQueryParams): object {

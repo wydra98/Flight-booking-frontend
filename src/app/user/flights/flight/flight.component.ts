@@ -2,6 +2,7 @@ import { TripViewDataService } from '../../../services/flight-view-data.service'
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Trip } from 'src/app/models/trip';
 import {FlightViewData} from "./flight-view-data";
+import {SearchFlightService} from "../../../services/search-flight.service";
 
 @Component({
   selector: 'app-flight',
@@ -14,8 +15,9 @@ export class FlightComponent implements OnInit {
   public sourcePlace: string;
   public destinationPlace: string;
   public viewData: FlightViewData;
+  public passengerNumber = this.searchFlightService.getPassengersNumber();
 
-  constructor(private flightViewDataService: TripViewDataService) { }
+  constructor(private flightViewDataService: TripViewDataService,private searchFlightService: SearchFlightService) { }
 
   public ngOnInit(): void {
     this.initializeViewData();

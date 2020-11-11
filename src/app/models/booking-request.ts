@@ -4,5 +4,5 @@ import {Trip} from "./trip";
 export class BookingRequest {
   userId: number
   passengersDto: Passenger[];
-  tripDto: Trip;
+  tripsDto: Trip[];
 }

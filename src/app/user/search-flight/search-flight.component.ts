@@ -48,7 +48,8 @@ export class SearchFlightComponent implements OnInit {
     private router: Router,
     private searchFlightService: SearchFlightService,
     private orderingService: OrderingService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.orderingService.clearService();
@@ -66,13 +67,6 @@ export class SearchFlightComponent implements OnInit {
     this.minDate = new Date(todayDate);
   }
 
-  public determineMinDateForArrival(): void {
-    console.log("1");
-    console.log(this.form.controls.departureDate.value);
-    console.log("2");
-      this.minDateForDepartureDate = this.parseDate(this.form.controls.departureDate.value);
-    }
-
   changed(data, optI) {
     this.values[optI] = data;
     this.createTypesList();
@@ -89,27 +83,27 @@ export class SearchFlightComponent implements OnInit {
   }
 
   private parseDate(date: string): Date {
-    let [ weekDay, month, day, year ] = date.toString().split(' ');
+    let [weekDay, month, day, year] = date.toString().split(' ');
     month = this.MONTHS[month];
     return new Date(parseInt(year), parseInt(month), parseInt(day));
   }
 
   private parseDateDeparture(date: string): Date {
-    let [ weekDay, month, day, year ] = date.toString().split(' ');
+    let [weekDay, month, day, year] = date.toString().split(' ');
     month = this.MONTHS[month];
-    console.log(year)
-    console.log(month)
-    console.log(day)
-    return new Date(parseInt(year), parseInt(month)-1,parseInt(day));
+    return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
   }
 
-// zasybskrybuje sobie
   private subscribeToBothWaysParameter(): void {
     this.subscriptions.add(this.form.controls['checkBox'].valueChanges.subscribe(
       (response: string) => {
-        if(response == "bothWay")
-        { this.formBuilder.addRequiredValidatorToArrivalDate(this.form); }
-        else { this.formBuilder.removeRequiredValidatorToArrivalDate(this.form); }
+        if (response == "bothWay") {
+          this.formBuilder.addRequiredValidatorToArrivalDate(this.form);
+        } else {
+          this.formBuilder.removeRequiredValidatorToArrivalDate(this.form);
+          this.form.controls['arrivalDate'].setValue('')
+        }
+
       }
     ));
   }
@@ -117,8 +111,12 @@ export class SearchFlightComponent implements OnInit {
   private subscribeToMinDateDeparture(): void {
     this.subscriptions.add(this.form.controls.departureDate.valueChanges.subscribe(
       () => {
-        if(this.form.controls.departureDate.value > this.form.controls.arrivalDate.value){
+        console.log(this.form.controls['checkBox'].value)
+        if (this.form.controls.departureDate.value > this.form.controls.arrivalDate.value) {
           this.form.controls['arrivalDate'].setValue(this.parseDateDeparture(this.form.controls.departureDate.value))
+        }
+        if(this.form.controls['checkBox'].value != "bothWay"){
+          this.form.controls['arrivalDate'].setValue('')
         }
         this.minDateForDepartureDate = this.parseDateDeparture(this.form.controls.departureDate.value);
       }

@@ -15,6 +15,8 @@
       {{viewData.arrivalDate}} {{viewData.arrivalTime}}<sup>{{viewData.arrivalTimezone}}</sup></div>
     <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-share"></i>Liczba przesiadek:
       <b>{{viewData.numberOfTransfers}}</b></div>
+    <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-money"></i>Cena za podróż dla jednej osoby:
+      <b>{{viewData.price}} PLN</b></div>
     <ng-container *ngIf="!viewData.normalOffer">
       <div style="color: green; margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-check-square"></i>Podróż z szukaną przesiadką!</div>
     </ng-container>
@@ -42,8 +44,19 @@
       </mat-expansion-panel>
     </mat-accordion>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-button color="primary" (click)="onFlightSelection()">Zarezerwuj za <b>{{viewData.price}} PLN</b>
-    </button>
-  </mat-card-actions>
+
+  <ng-container *ngIf="this.passengerNumber == 1; else morePassengers">
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="onFlightSelection()">Zarezerwuj dla {{this.passengerNumber}} osoby za <b>{{viewData.price * this.passengerNumber}} PLN</b>
+      </button>
+    </mat-card-actions>
+  </ng-container>
+
+  <ng-template #morePassengers>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="onFlightSelection()">Zarezerwuj dla {{this.passengerNumber}} osób za <b>{{viewData.price * this.passengerNumber}} PLN</b>
+      </button>
+    </mat-card-actions>
+  </ng-template>
+
 </mat-card>

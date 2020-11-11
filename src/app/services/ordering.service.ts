@@ -10,7 +10,6 @@ import {map} from "rxjs/operators";
 import {BookingRequest} from "../models/booking-request";
 import {SnackBarComponent} from "../snack-bar/snack-bar.component";
 import {AuthorizationService} from "../auth/authorization.service";
-import {FlightRequestQueryParams} from "../models/flight-request-query-params";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +19,7 @@ export class OrderingService {
   private flightsFromDestination: Trip[];
   private chosenFlightToDestination: Trip;
   private chosenFlightFromDestination: Trip;
+  private signal = new BehaviorSubject<boolean>(false);
   private bothWayTrip: boolean;
   private passengers: Passenger[];
   private rebuildComponentWasTriggered = false;
@@ -36,6 +36,7 @@ export class OrderingService {
     this.checkIfTripIsBothWay();
     this.getFetchedTripsToDestination();
     this.getFetchedTripsFromDestination();
+    this.getFetchedSignalToChange();
   }
 
   public onPassengerFormFilled(passenger: Passenger[]): void {
@@ -45,6 +46,10 @@ export class OrderingService {
 
   public getFlightsToOrder(): Observable<Trip[]> {
     return this.flightsToRender.asObservable();
+  }
+
+  public getSignal(): Observable<boolean> {
+    return this.signal.asObservable();
   }
 
   public getComponentTitle = (): Observable<string> => (
@@ -61,6 +66,12 @@ export class OrderingService {
     this.chosenFlightFromDestination = null;
     this.chosenFlightToDestination = null;
     this.rebuildComponentWasTriggered = false;
+  }
+
+  private getFetchedSignalToChange() {
+    this.searchFlightService.getSignal().subscribe((signal: boolean) => {
+      this.signal.next(signal);
+    });
   }
 
   private getFetchedTripsFromDestination() {
@@ -115,7 +126,7 @@ export class OrderingService {
   private composeBookingRequest(): BookingRequest {
     return {
       userId: parseInt(this.auth.getId()),
-      tripDto: this.chosenFlightToDestination,
+      tripsDto: [this.chosenFlightToDestination,this.chosenFlightFromDestination],
       passengersDto: [...this.passengers]
     };
   }

@@ -1,8 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { OrderingService } from '../../services/ordering.service';
 import { Trip } from 'src/app/models/trip';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {absoluteFromSourceFile} from "@angular/compiler-cli/src/ngtsc/file_system";
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-flights',
@@ -21,7 +20,8 @@ export class FlightsComponent implements OnInit, OnDestroy{
     this.getFlights();
     this.getSignal();
     this.isDataFetched = false;
-    this.getComponentsTitle()
+    this.getComponentsTitle();
+    setTimeout( ()  => this.isDataFetched = true,20000)
   }
 
   public onFlightSelection(chosenFlight: Trip): void {
@@ -54,7 +54,6 @@ export class FlightsComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    console.log("To działa wgl?")
     this.isDataFetched = false;
   }
 }

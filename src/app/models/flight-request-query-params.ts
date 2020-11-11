@@ -7,8 +7,8 @@ export class FlightRequestQueryParams {
   fourthChangeId: number;
   dstAirportId: number;
   passengerNumber: number;
-  changeNumber: number;
-  timeNumber: number;
+  maxChanges: number;
+  maxTimeBetweenChanges: number;
   srcAirportId: number;
   twoTrip: boolean;
 }
