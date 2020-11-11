@@ -131,13 +131,6 @@ export class OrderingService {
     };
   }
 
-  private createHttpOptions(params: BookingRequest): object {
-    return {
-      params,
-      responseType: 'json',
-    };
-  }
-
   private orderFlight(): void {
     const bookingRequest = this.composeBookingRequest();
     this.httpClient.post(URL + '/trips/createTrip', bookingRequest).subscribe(

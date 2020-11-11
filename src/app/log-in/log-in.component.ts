@@ -30,7 +30,7 @@ export class LogInComponent implements OnInit {
     this.auth.signIn(this.signInForm.get('email').value, this.signInForm.get('password').value)
       .subscribe(() => {
           if (this.auth.isAdmin()) {
-            this.router.navigate(['/airline']);
+            this.router.navigate(['/startAdmin']);
             this.snackbar.showSnackbar('Pomyślnie zalogowano', 'success');
           } else {
             this.router.navigate(['/startUser']);

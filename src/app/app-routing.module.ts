@@ -18,6 +18,7 @@ import {AuthGuardAdminService} from "./auth/auth-guard-admin.service";
 import {FlightAdminComponent} from "./admin/flight-admin/flight-admin.component";
 import {StartUserPanelComponent} from "./user/start-user-panel/start-user-panel.component";
 import {FinishComponent} from "./user/finish/finish.component";
+import {StartAdminPanelComponent} from "./admin/start-admin-panel/start-admin-panel.component";
 
 const routes: Routes = [
   {
@@ -36,7 +37,8 @@ const routes: Routes = [
   {
     path: '', component: AdminPanelComponent,
     children: [
-      {path: '', redirectTo: '/airline', pathMatch: 'full'},
+      {path: '', redirectTo: '/startAdmin', pathMatch: 'full'},
+      {path: 'startAdmin', component: StartAdminPanelComponent},
       {path: 'airline', component: AirlineComponent},
       {path: 'airport', component: AirportComponent},
       {path: 'flight', component: FlightAdminComponent},

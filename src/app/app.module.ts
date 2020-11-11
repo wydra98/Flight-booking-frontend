@@ -49,6 +49,9 @@ import { FlightAdminComponent } from './admin/flight-admin/flight-admin.componen
 import {MatStepperModule} from "@angular/material/stepper";
 import { StartUserPanelComponent } from './user/start-user-panel/start-user-panel.component';
 import { FinishComponent } from './user/finish/finish.component';
+import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import { StartAdminPanelComponent } from './admin/start-admin-panel/start-admin-panel.component';
 
 
 @NgModule({
@@ -73,7 +76,9 @@ import { FinishComponent } from './user/finish/finish.component';
     TicketComponent,
     FlightAdminComponent,
     StartUserPanelComponent,
-    FinishComponent
+    FinishComponent,
+    MatConfirmDialogComponent,
+    StartAdminPanelComponent
   ],
     imports: [
         BrowserModule,
@@ -100,7 +105,8 @@ import { FinishComponent } from './user/finish/finish.component';
         MatSelectModule,
         MatDatepickerModule,
         MatRadioModule,
-        MatStepperModule
+        MatStepperModule,
+        MatDialogModule
     ],
   providers: [SnackBarComponent,
     {
@@ -114,7 +120,8 @@ import { FinishComponent } from './user/finish/finish.component';
       multi: true,
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[MatConfirmDialogComponent]
 })
 export class AppModule {
 }

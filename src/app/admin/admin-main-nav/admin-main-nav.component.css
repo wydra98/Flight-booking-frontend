@@ -11,6 +11,11 @@
   background-color: white;
 }
 
+.is-active {
+  color: #283590;
+}
+
+
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
