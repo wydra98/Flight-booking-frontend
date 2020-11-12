@@ -1,3 +1,5 @@
+import {IntermediateConnection} from "../flights/flight-view-data";
+
 export interface TripToView {
   additionalId: number;
   id: number;
@@ -12,19 +14,7 @@ export interface TripToView {
   price: number;
   passengers: number;
   arrivalTimezone: string;
-  flights: Array<FlightToView>;
+  flights: Array<IntermediateConnection>;
 }
 
-export class FlightToView {
-  departureDate: string;
-  departureTime: string;
-  sourceAirport: string;
-  destinationAirport: string;
-  departureTimezone: string;
-  arrivalDate: string;
-  arrivalTime: string;
-  arrivalTimezone: string;
-  srcPlace: string;
-  dstPlace: string;
-  airline: string;
-}
+

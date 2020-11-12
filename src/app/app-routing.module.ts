@@ -19,6 +19,7 @@ import {StartUserPanelComponent} from "./user/start-user-panel/start-user-panel.
 import {FinishComponent} from "./user/finish/finish.component";
 import {StartAdminPanelComponent} from "./admin/start-admin-panel/start-admin-panel.component";
 import {TripTableComponent} from "./user/trip-table/trip-table.component";
+import {TripDetailsComponent} from "./user/trip-table/trip-details/trip-details.component";
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
       {path: 'order', component: OrderComponent},
       {path: 'ticket', component: TripTableComponent},
       {path: 'finish', component: FinishComponent},
+      {path: 'tripDetails', component: TripDetailsComponent},
     ],
     canActivate: [AuthGuardUserService]
   },

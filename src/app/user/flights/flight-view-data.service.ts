@@ -11,8 +11,7 @@ export class TripViewDataService {
   constructor() { }
 
   public toViewData(trip: Trip): FlightViewData {
-    console.log("tutaj")
-    console.log(trip)
+
     return {
       sourcePlace: this.extractPlace(trip.arraysTicket[0].flightDto.srcAirport),
       destinationPlace: this.extractPlace(trip.arraysTicket[trip.arraysTicket.length - 1].flightDto.dstAirport),

@@ -2,17 +2,37 @@ import {Injectable} from '@angular/core';
 import {Trip} from "../../models/trip";
 import {URL} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {Airport} from "../../models/airport";
 import {Ticket} from "../../models/ticket";
-import {FlightToView, TripToView} from "./trip-to-view";
+import {TripToView} from "./trip-to-view";
+import {Router} from "@angular/router";
+import {IntermediateConnection} from "../flights/flight-view-data";
+import {Passenger} from "../../models/passenger";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TripService {
 
-  constructor(private httpClient: HttpClient) {
+  chosenTrip = new BehaviorSubject<TripToView>(null);
+  passengers = new BehaviorSubject<Passenger[]>([]);
+
+  constructor(private httpClient: HttpClient,
+              private router: Router) {
+  }
+
+  getChosenTrip(): Observable<TripToView> {
+    return this.chosenTrip.asObservable()
+  }
+
+  getPassenger(): Observable<Passenger[]> {
+    return this.passengers.asObservable()
+  }
+
+  navigateToDetails(row) {
+    this.chosenTrip.next(row);
+    this.router.navigate(['/tripDetails']);
   }
 
   public fetchTrips(id: number): Observable<any> {
@@ -31,13 +51,23 @@ export class TripService {
     })
   }
 
+  public getPassengers(row): void {
+    this.httpClient.get<Passenger[]>(URL + '/passengers/trip', {
+      params: {
+        id: row.id.toString()
+      }
+    }).subscribe(
+      (passenger) => {
+        this.passengers.next(passenger);
+        this.navigateToDetails(row);
+      }
+    )
+  }
 
 
   public toViewData(trips: Trip[]): TripToView[] {
     let i = 1;
     return trips.map((trip) => {
-      console.log("tutaj")
-      console.log(trip)
         return {
           additionalId: i++,
           id: trip.id,
@@ -75,9 +105,12 @@ export class TripService {
     return airport.name;
   }
 
-  private extractIntermediateFlights(trip: Trip): FlightToView[] {
+  private extractIntermediateFlights(trip: Trip): IntermediateConnection[] {
+    let i = 1;
     return trip.arraysTicket.map((ticket: Ticket) => {
+
       return {
+        additionalId: i++,
         srcPlace: this.extractPlace(ticket.flightDto.srcAirport),
         dstPlace: this.extractPlace(ticket.flightDto.dstAirport),
         sourceAirport: this.extractAirport(ticket.flightDto.srcAirport),
@@ -88,8 +121,9 @@ export class TripService {
         arrivalTimezone: this.extractTimezone(ticket.flightDto.dstAirport.timezone),
         departureDate: ticket.departureDate,
         departureTime: ticket.departureTime,
-        departureTimezone: this.extractTimezone(ticket.flightDto.srcAirport.timezone)
-      } as FlightToView;
+        departureTimezone: this.extractTimezone(ticket.flightDto.srcAirport.timezone),
+        price: ticket.totalPrice
+      } as IntermediateConnection;
     })
   }
 }

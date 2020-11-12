@@ -1,0 +1,61 @@
+<mat-toolbar>
+  Szczegóły podróży
+</mat-toolbar>
+
+
+<mat-card>
+  <mat-card-content class="outCard">
+    <mat-card-header>
+      <div class="title"><span style="margin-right: 1vw">{{tripToView?.departurePlace}}</span> <i style="margin: 0 0.2vw"
+                                                                                                 class="fa fa-circle-o"></i><i
+        class="fa fa-minus"></i><i class="fa fa-minus"></i><i class="fa fa-minus"></i>
+        <i class="fa fa-minus"></i> <i style="margin: 0 0.2vw; font-size: large" class="fa fa-play"></i> <span
+          style="margin-left: 1vw">{{tripToView.arrivalPlace}}</span></div>
+    </mat-card-header>
+
+    <div class="subtitle">
+
+      <div class="date" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-calendar"></i>Data i
+        czas:     {{tripToView.departureDate}}, {{tripToView.departureTime}}
+        <sup>{{tripToView.departureTimezone}}</sup><i
+          style="margin-right: 0.7vw; margin-left: 0.9vw" class="fa fa-arrow-right"></i>
+        {{tripToView.arrivalDate}} {{tripToView.arrivalTime}}<sup>{{tripToView.arrivalTimezone}}</sup></div>
+
+      <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-list-ol"></i>Ilość zarezerwowanych biletów
+        :
+        <b>{{tripToView.numberOfTransfers}}</b></div>
+
+      <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-user-circle"></i>Ilość pasażerów:
+        <b>{{tripToView.passengers}}</b></div>
+
+      <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-share"></i>Liczba przesiadek:
+        <b>{{(tripToView.numberOfTransfers/tripToView.passengers)-1}}</b></div>
+
+      <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-money"></i>Cena za całą
+        podróż: <b>{{tripToView.price}} PLN</b></div>
+
+    </div>
+    <mat-card-content>
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>Szczegóły lotów</mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-flight-table [changes]="tripToView.flights"></app-flight-table>
+              </mat-expansion-panel>
+            </mat-accordion>
+    </mat-card-content>
+
+    <mat-card-content>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Pasażerowie</mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-passengers-details-table [passengers]="passengers"></app-passengers-details-table>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+
+  </mat-card-content>
+</mat-card>

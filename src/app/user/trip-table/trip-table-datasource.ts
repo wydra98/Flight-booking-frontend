@@ -25,8 +25,7 @@ export class TripTableDatasource extends DataSource<TripToView> {
               public dialogService: DialogService,
               public snackbar: SnackBarComponent,
               public tripService: TripService,
-              public authorizationService: AuthorizationService,
-              public cd: ChangeDetectorRef) {
+              public authorizationService: AuthorizationService) {
     super();
     this.dataSource = new MatTableDataSource(trips)
   }

@@ -10,6 +10,7 @@ import {TripToView} from "./trip-to-view";
 import {DialogService} from "../../services/dialog.service";
 import {BehaviorSubject, Observable} from "rxjs";
 import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-ticket-table',
@@ -24,16 +25,17 @@ export class TripTableComponent implements OnInit {
   trips: Trip[];
   tripsToView: TripToView[];
 
+
   constructor(private tripService: TripService,
               private auth: AuthorizationService,
               private dialogService: DialogService,
               private snackbar: SnackBarComponent,
-              private cd: ChangeDetectorRef) {
+  ) {
   }
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'departurePlace', 'departureTime', 'arrivalPlace',
-                      'arrivalTime', 'price', 'passengers','ticketsNumber','changes', 'details', 'delete'];
+    'arrivalTime', 'price', 'passengers', 'ticketsNumber', 'changes', 'details', 'delete'];
 
   ngOnInit() {
     this.fetchTrips();
@@ -45,7 +47,7 @@ export class TripTableComponent implements OnInit {
         this.trips = trips
         this.tripsToView = this.tripService.toViewData(this.trips)
         this.dataSource = new TripTableDatasource(this.tripsToView, this.dialogService, this.snackbar,
-          this.tripService, this.auth, this.cd);
+          this.tripService, this.auth);
 
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
@@ -54,8 +56,9 @@ export class TripTableComponent implements OnInit {
     )
   }
 
-  navigateToDetails(row){
-    console.log(row)
+  navigateToDetails(row) {
+
+    this.tripService.getPassengers(row);
   }
 
   delete(row) {

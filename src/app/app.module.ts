@@ -56,6 +56,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { FlightTableComponent } from './user/flights/flight/flight-table/flight-table.component';
+import { TripDetailsComponent } from './user/trip-table/trip-details/trip-details.component';
+import { PassengersDetailsTableComponent } from './user/trip-table/trip-details/passengers-details-table/passengers-details-table.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +85,8 @@ import { FlightTableComponent } from './user/flights/flight/flight-table/flight-
     StartAdminPanelComponent,
     TripTableComponent,
     FlightTableComponent,
+    TripDetailsComponent,
+    PassengersDetailsTableComponent,
   ],
     imports: [
         BrowserModule,
