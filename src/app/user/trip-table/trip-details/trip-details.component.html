@@ -23,7 +23,7 @@
 
       <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-list-ol"></i>Ilość zarezerwowanych biletów
         :
-        <b>{{tripToView.numberOfTransfers}}</b></div>
+        <b>{{((tripToView.numberOfTransfers/tripToView.passengers)) * tripToView.passengers}}</b></div>
 
       <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-user-circle"></i>Ilość pasażerów:
         <b>{{tripToView.passengers}}</b></div>

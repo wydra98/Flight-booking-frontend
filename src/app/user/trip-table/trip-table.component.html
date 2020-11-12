@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <div class="title">Twoje podróży</div>
+  <div class="title">Twoje podróże</div>
 </mat-toolbar>
 
 <div class="mat-elevation-z8">
@@ -43,7 +43,7 @@
 
     <ng-container matColumnDef="ticketsNumber">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>L. biletów</th>
-      <td mat-cell *matCellDef="let row">{{row.numberOfTransfers}}</td>
+      <td mat-cell *matCellDef="let row">{{((row.numberOfTransfers/row.passengers))*row.passengers}}</td>
     </ng-container>
 
     <ng-container matColumnDef="changes">
