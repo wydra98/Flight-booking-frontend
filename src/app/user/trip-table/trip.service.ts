@@ -23,6 +23,16 @@ export class TripService {
     })
   }
 
+  public deleteTrip(id: number): Observable<any> {
+    return this.httpClient.delete(URL + '/trips', {
+      params: {
+        id: id.toString()
+      }
+    })
+  }
+
+
+
   public toViewData(trips: Trip[]): TripToView[] {
     let i = 1;
     return trips.map((trip) => {

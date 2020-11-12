@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTable} from '@angular/material/table';
@@ -7,6 +7,9 @@ import {TripService} from "./trip.service";
 import {AuthorizationService} from "../../auth/authorization.service";
 import {Trip} from "../../models/trip";
 import {TripToView} from "./trip-to-view";
+import {DialogService} from "../../services/dialog.service";
+import {BehaviorSubject, Observable} from "rxjs";
+import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
 
 @Component({
   selector: 'app-ticket-table',
@@ -20,9 +23,14 @@ export class TripTableComponent implements OnInit {
   dataSource: TripTableDatasource;
   trips: Trip[];
   tripsToView: TripToView[];
+  chosenTrip = new BehaviorSubject<TripToView>(null);
+  start: boolean = true;
 
   constructor(private tripService: TripService,
-              private auth: AuthorizationService) {
+              private auth: AuthorizationService,
+              private dialogService: DialogService,
+              private snackbar: SnackBarComponent,
+              private cd: ChangeDetectorRef ) {
   }
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
@@ -37,14 +45,30 @@ export class TripTableComponent implements OnInit {
   public fetchTrips(): void {
     this.tripService.fetchTrips(parseInt(this.auth.getId())).subscribe(
       (trips: Trip[]) => {
-        console.log(trips)
         this.trips = trips
         this.tripsToView = this.tripService.toViewData(this.trips)
-        this.dataSource = new TripTableDatasource(this.tripsToView);
+        this.dataSource = new TripTableDatasource(this.tripsToView, this.dialogService, this.snackbar,
+          this.tripService, this.auth, this.cd);
+
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.table.dataSource = this.dataSource;
       }
     )
+  }
+
+
+
+  getChosenTrip(): () => Observable<TripToView> {
+    return this.chosenTrip.asObservable;
+  }
+
+  navigateToDetails(row){
+    console.log(row)
+    this.chosenTrip.next(row)
+  }
+
+  delete(row) {
+    this.dataSource.delete(row);
   }
 }

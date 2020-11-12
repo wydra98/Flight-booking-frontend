@@ -4,6 +4,12 @@ import {MatSort} from '@angular/material/sort';
 import {map} from 'rxjs/operators';
 import {Observable, of as observableOf, merge} from 'rxjs';
 import {TripToView} from "./trip-to-view";
+import {DialogService} from "../../services/dialog.service";
+import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
+import {TripService} from "./trip.service";
+import {AuthorizationService} from "../../auth/authorization.service";
+import {ChangeDetectorRef} from "@angular/core";
+import {MatTableDataSource} from "@angular/material/table";
 
 /**
  * Data source for the TicketTable view. This class should
@@ -13,11 +19,16 @@ import {TripToView} from "./trip-to-view";
 export class TripTableDatasource extends DataSource<TripToView> {
   paginator: MatPaginator;
   sort: MatSort;
-  tripsToView: TripToView[];
+  dataSource: MatTableDataSource<TripToView>;
 
-  constructor(public trips: TripToView[]) {
+  constructor(public trips: TripToView[],
+              public dialogService: DialogService,
+              public snackbar: SnackBarComponent,
+              public tripService: TripService,
+              public authorizationService: AuthorizationService,
+              public cd: ChangeDetectorRef) {
     super();
-    this.tripsToView = trips;
+    this.dataSource = new MatTableDataSource(trips)
   }
 
 
@@ -30,13 +41,13 @@ export class TripTableDatasource extends DataSource<TripToView> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
-      observableOf(this.tripsToView),
+      observableOf(this.dataSource.data),
       this.paginator.page,
       this.sort.sortChange
     ];
 
     return merge(...dataMutations).pipe(map(() => {
-      return this.getPagedData(this.getSortedData([...this.tripsToView]));
+      return this.getPagedData(this.getSortedData([...this.dataSource.data]));
     }));
   }
 
@@ -75,6 +86,29 @@ export class TripTableDatasource extends DataSource<TripToView> {
           return 0;
       }
     });
+  }
+
+  delete(row) {
+    this.dialogService.openConfirmDialog('Czy na pewno chcesz anulować rezerwację?')
+      .afterClosed().subscribe(res => {
+      if (res) {
+        //console.log(row.id)
+        this.tripService.deleteTrip(row.id).subscribe(
+          () => {
+            const oneTrip = this.dataSource.data.find(trip => trip.id == row.id)
+            this.dataSource.data.splice(this.dataSource.data.indexOf(oneTrip), 1);
+            this.connect()
+            this.paginator._changePageSize(this.paginator.pageSize);
+
+            this.snackbar.showSnackbar('Pomyślnie anulowano rezerwację', 'success');
+          },
+          () => {
+            this.snackbar.showSnackbar('Wystąpił błąd podczas usuwania', 'fail');
+          }
+        )
+
+      }
+    })
   }
 }
 
