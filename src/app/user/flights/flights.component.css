@@ -30,14 +30,10 @@ mat-list {
 }
 
 .mat-card{
-  margin: 0 5vw;
+  margin: 0 10vw;
   text-align: center;
   position: relative;
-}
-
-.mat-card{
-  margin: 0 5vw;
-  text-align: center;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
 }
 
 mat-spinner ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
@@ -48,3 +44,5 @@ mat-spinner {
   text-align: center;
   margin: 25vh auto;
 }
+
+

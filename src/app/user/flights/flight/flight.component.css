@@ -1,5 +1,19 @@
 .mat-card {
   margin: 1vh auto;
+  background: #f3f3f3;
+}
+
+.mat-card:not([class*=mat-elevation-z]){
+  box-shadow: none;
+  border: none;
+}
+
+.outCard{
+  background: white;
+  padding: 2vh;
+  padding-right: 4vw;
+  padding-left: 4vw;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
 }
 
 i {
@@ -44,7 +58,11 @@ li{
 
 mat-card-content{
   position: relative;
+  text-align: left;
+  padding-right: 5vw;
+  padding-left: 5vw;
 }
+
 
 
 

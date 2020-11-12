@@ -8,6 +8,27 @@ mat-toolbar{
   pointer-events: none !important;
 }
 
+mat-card{
+  background: #f3f3f3;
+}
+
+.mat-focus-indicator{
+  background: white;
+}
+
+.mat-card:not([class*=mat-elevation-z]){
+  box-shadow: none;
+  border: none;
+}
+
+.outCard{
+  background: white;
+  margin: 0 5vw 2vh 5vw;
+  padding-bottom: 4vh;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+
+}
+
 mat-card-header{
   margin-bottom: 30px;
 }

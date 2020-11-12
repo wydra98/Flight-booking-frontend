@@ -10,6 +10,7 @@
 </mat-horizontal-stepper>
 
 <mat-list *ngFor="let passenger of passengerForm.controls; let i = index">
+  <mat-card-content class="outCard">
   <mat-card>
     <mat-card-header>Pasażer nr {{i + 1}}</mat-card-header>
     <mat-card-content>
@@ -79,6 +80,7 @@
       </form>
     </mat-card-content>
   </mat-card>
+  </mat-card-content>
 </mat-list>
 
 <button

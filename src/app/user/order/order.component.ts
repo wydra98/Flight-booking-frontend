@@ -19,7 +19,7 @@ export class OrderComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.passengersNumber = this.orderService.getPassengersNumber();
+    this.passengersNumber = 2/*this.orderService.getPassengersNumber()*/;
     this.initializePassengersForm();
     this.maxDateForBirthDate = this.orderFormBuilder.getMaxDateForBirthDate();
   }

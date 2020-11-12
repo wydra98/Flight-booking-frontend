@@ -1,14 +1,24 @@
 mat-card{
   margin: 2vh 5vw;
   align-items: center;
-  padding: 2vh 5vw;
+  padding: 2vh 2vw;
+}
+.mat-card:not([class*=mat-elevation-z]){
+  box-shadow: none;
+  border: none;
+  background: #f3f3f3;
+
 }
 
 .wrapper{
+  padding: 3vh 4vw;
+  background: white;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+
 }
 
 mat-card-header{
