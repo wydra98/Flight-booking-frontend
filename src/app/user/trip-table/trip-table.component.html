@@ -41,9 +41,14 @@
       <td mat-cell *matCellDef="let row">{{row.passengers}}</td>
     </ng-container>
 
+    <ng-container matColumnDef="ticketsNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>L. biletów</th>
+      <td mat-cell *matCellDef="let row">{{row.numberOfTransfers}}</td>
+    </ng-container>
+
     <ng-container matColumnDef="changes">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>L. przesiadek</th>
-      <td mat-cell *matCellDef="let row">{{row.numberOfTransfers}}</td>
+      <td mat-cell *matCellDef="let row">{{(row.numberOfTransfers/row.passengers)-1}}</td>
     </ng-container>
 
     <ng-container matColumnDef="details">

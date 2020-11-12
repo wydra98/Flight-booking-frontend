@@ -38,6 +38,16 @@ export class OrderFormBuilderService {
     return form;
   }
 
+  public checkIfPeselDuplicateExists(form: FormArray): boolean{
+    const pesel: string[] = []
+    for (let i = 0; i < form.length; i++) {
+      pesel.push(form.at(i).get('pesel').value)
+    }
+
+    return (new Set(pesel)).size !== pesel.length;
+
+  }
+
   public mapFormArrayToPassengers(form: FormArray): Passenger[] {
     const passengers: Passenger[] = [];
     for (let i = 0; i < form.length; i++) {

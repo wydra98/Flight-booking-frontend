@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {OrderFormBuilderService} from "./order-form-builder.service";
 import {OrderingService} from "../../services/ordering.service";
 import {FormArray} from "@angular/forms";
+import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
 
 @Component({
   selector: 'app-order',
@@ -15,11 +16,12 @@ export class OrderComponent implements OnInit {
 
   constructor(
     private orderFormBuilder: OrderFormBuilderService,
-    private orderService: OrderingService) {
+    private orderService: OrderingService,
+    private snackBar: SnackBarComponent) {
   }
 
   public ngOnInit(): void {
-    this.passengersNumber = 2/*this.orderService.getPassengersNumber()*/;
+    this.passengersNumber = this.orderService.getPassengersNumber();
     this.initializePassengersForm();
     this.maxDateForBirthDate = this.orderFormBuilder.getMaxDateForBirthDate();
   }
@@ -29,8 +31,14 @@ export class OrderComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    this.orderService.onPassengerFormFilled(
-      this.orderFormBuilder.mapFormArrayToPassengers(this.passengerForm)
-    );
+    let response = this.orderFormBuilder.checkIfPeselDuplicateExists(this.passengerForm);
+    if(!response){
+      this.orderService.onPassengerFormFilled(
+        this.orderFormBuilder.mapFormArrayToPassengers(this.passengerForm)
+      );
+    }
+    else{
+      this.snackBar.showSnackbar("Numery PESEL muszą się różnić", 'fail')
+    }
   }
 }

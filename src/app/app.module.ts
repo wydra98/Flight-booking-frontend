@@ -55,6 +55,7 @@ import { TripTableComponent } from './user/trip-table/trip-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { FlightTableComponent } from './user/flights/flight/flight-table/flight-table.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatConfirmDialogComponent,
     StartAdminPanelComponent,
     TripTableComponent,
+    FlightTableComponent,
   ],
     imports: [
         BrowserModule,

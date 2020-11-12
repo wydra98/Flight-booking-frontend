@@ -36,11 +36,13 @@ export class TripService {
   public toViewData(trips: Trip[]): TripToView[] {
     let i = 1;
     return trips.map((trip) => {
+      console.log("tutaj")
+      console.log(trip)
         return {
           additionalId: i++,
           id: trip.id,
           departurePlace: this.extractPlace(trip.arraysTicket[0].flightDto.srcAirport),
-          numberOfTransfers: trip.arraysTicket.length - 1,
+          numberOfTransfers: trip.arraysTicket.length,
           departureDate: trip.departureDate,
           departureTime: trip.departureTime,
           arrivalTime: trip.arrivalTime,

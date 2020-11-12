@@ -11,6 +11,8 @@ export class TripViewDataService {
   constructor() { }
 
   public toViewData(trip: Trip): FlightViewData {
+    console.log("tutaj")
+    console.log(trip)
     return {
       sourcePlace: this.extractPlace(trip.arraysTicket[0].flightDto.srcAirport),
       destinationPlace: this.extractPlace(trip.arraysTicket[trip.arraysTicket.length - 1].flightDto.dstAirport),
@@ -42,8 +44,11 @@ export class TripViewDataService {
   }
 
   private extractIntermediateFlights(trip: Trip): IntermediateConnection[] {
+    let i = 1;
     return trip.arraysTicket.map((ticket: Ticket) => {
+
       return {
+        additionalId: i++,
         srcPlace: this.extractPlace(ticket.flightDto.srcAirport),
         dstPlace: this.extractPlace(ticket.flightDto.dstAirport),
         sourceAirport: this.extractAirport(ticket.flightDto.srcAirport),
@@ -54,7 +59,8 @@ export class TripViewDataService {
         arrivalTimezone: this.extractTimezone(ticket.flightDto.dstAirport.timezone),
         departureDate: ticket.departureDate,
         departureTime: ticket.departureTime,
-        departureTimezone: this.extractTimezone(ticket.flightDto.srcAirport.timezone)
+        departureTimezone: this.extractTimezone(ticket.flightDto.srcAirport.timezone),
+        price: ticket.totalPrice
       } as IntermediateConnection;
     })
   }

@@ -14,6 +14,7 @@ export interface FlightViewData {
 }
 
 export class IntermediateConnection {
+  additionalId: number;
   departureDate: string;
   departureTime: string;
   sourceAirport: string;
@@ -25,4 +26,5 @@ export class IntermediateConnection {
   srcPlace: string;
   dstPlace: string;
   airline: string;
+  price: number;
 }

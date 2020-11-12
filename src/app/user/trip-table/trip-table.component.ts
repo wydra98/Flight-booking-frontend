@@ -23,20 +23,17 @@ export class TripTableComponent implements OnInit {
   dataSource: TripTableDatasource;
   trips: Trip[];
   tripsToView: TripToView[];
-  chosenTrip = new BehaviorSubject<TripToView>(null);
-  start: boolean = true;
 
   constructor(private tripService: TripService,
               private auth: AuthorizationService,
               private dialogService: DialogService,
               private snackbar: SnackBarComponent,
-              private cd: ChangeDetectorRef ) {
+              private cd: ChangeDetectorRef) {
   }
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'departurePlace', 'departureTime', 'arrivalPlace',
-                      'arrivalTime', 'price', 'passengers','changes', 'details', 'delete'];
-
+                      'arrivalTime', 'price', 'passengers','ticketsNumber','changes', 'details', 'delete'];
 
   ngOnInit() {
     this.fetchTrips();
@@ -57,15 +54,8 @@ export class TripTableComponent implements OnInit {
     )
   }
 
-
-
-  getChosenTrip(): () => Observable<TripToView> {
-    return this.chosenTrip.asObservable;
-  }
-
   navigateToDetails(row){
     console.log(row)
-    this.chosenTrip.next(row)
   }
 
   delete(row) {
