@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
-import {User} from "../../models/user";
 import {URL} from "../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -17,25 +16,11 @@ export class UserDataService {
     return new FormGroup({
       firstname: new FormControl('', UserDataService.getValidatorsForName()),
       surname: new FormControl('', UserDataService.getValidatorsForName()),
-      email: new FormControl('', UserDataService.getValidatorsForEmail())
+      email: new FormControl('', UserDataService.getValidatorsForEmail()),
+      password: new FormControl('', UserDataService.getValidatorsForPassword()),
     });
   }
 
-  public createPasswordForm(): FormGroup {
-    return new FormGroup({
-      oldPassword: new FormControl('', UserDataService.getValidatorsForPassword()),
-      newPassword: new FormControl('', UserDataService.getValidatorsForPassword()),
-    });
-  }
-
-  public mapFormBuilderToUser(form: FormGroup): User {
-
-    return {
-      name: form.get('firstname').value,
-      surname: form.get('surname').value,
-      email: form.get('email').value
-    };
-  }
 
   private static getValidatorsForEmail() {
     return [Validators.required, Validators.email];
@@ -50,19 +35,14 @@ export class UserDataService {
   }
 
 
-  public sendUserToModify(passenger) {
-    // tu musisz wyslac do zmodyfikowania i obsluzyc
-  }
-
-  public changePassword(oldPassword: string, newPassword: string, id: string){
-    return this.httpClient.put(URL + '/users/modifyPassword', {
-        params: {
-          id: id,
-          newPassword: newPassword,
-          oldPassword: oldPassword
-        }
-      }
-    )
+  public modifyUser(name: string, surname: string, email: string, password: string, id: string): Observable<any>{
+    const params = new HttpParams()
+      .set('id', id)
+      .set('name', name)
+      .set('surname', surname)
+      .set('email', email)
+      .set('newPassword', password)
+    return this.httpClient.put(URL + '/users/modifyUser', params)
   }
 
   public deleteAccount(id: string): Observable<any> {

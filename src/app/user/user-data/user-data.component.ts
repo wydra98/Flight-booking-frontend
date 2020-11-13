@@ -6,6 +6,7 @@ import {DialogService} from "../../services/dialog.service";
 import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
 import {Router} from "@angular/router";
 import {AuthorizationService} from "../../auth/authorization.service";
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-user-data',
@@ -15,8 +16,10 @@ import {AuthorizationService} from "../../auth/authorization.service";
 export class UserDataComponent implements OnInit {
 
   public passengerForm: FormGroup;
-  public passwordForm: FormGroup;
   public maxDateForBirthDate: Date;
+  name: string;
+  surname: string;
+  email: string;
 
   constructor(private userService: UserDataService,
               private dialogService: DialogService,
@@ -27,26 +30,30 @@ export class UserDataComponent implements OnInit {
 
   ngOnInit(): void {
     this.passengerForm = this.userService.createUserForm();
-    this.passwordForm = this.userService.createPasswordForm();
+    this.name =this.auth.getName()
+    this.surname =this.auth.getSurname()
+    this.email =this.auth.getEmail()
   }
 
-  public onSubmit(): void {
-    this.userService.sendUserToModify(
-      this.userService.mapFormBuilderToUser(this.passengerForm)
-    );
-  }
-
-  public onSubmitPassword() {
-    this.dialogService.openConfirmDialog('Czy na pewno chcesz zmienić hasło?')
+  public onSubmitUser() {
+    this.dialogService.openConfirmDialog('Czy na pewno chcesz zmodyfikować dane?')
       .afterClosed().subscribe(res => {
       if (res) {
-        this.userService.changePassword(this.passwordForm.get('oldPassword').value,
-          this.passwordForm.get('newPassword').value, this.auth.getId()).subscribe(
-          () => {
-            this.snackbar.showSnackbar("Pomyślnie zmieniono hasło", 'success')
+        this.userService.modifyUser(this.passengerForm.get('firstname').value,
+                                    this.passengerForm.get('surname').value,
+                                    this.passengerForm.get('email').value,
+                                    this.passengerForm.get('password').value,
+                                    this.auth.getId()).subscribe(
+          (user: User) => {
+            this.name = user.name;
+            this.surname = user.surname;
+            this.email = user.email;
+            this.auth.saveName(user.name)
+            this.snackbar.showSnackbar("Pomyślnie zmieniono dane", 'success')
+
           },
-          () => {
-            this.snackbar.showSnackbar('Wystąpił błąd podczas zmiany hasła', 'fail');
+          (err) => {
+            this.snackbar.showSnackbar(err.error, 'fail');
           }
         )
       }

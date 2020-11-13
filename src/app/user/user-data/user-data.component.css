@@ -49,11 +49,6 @@ mat-card{
 /*Edycja użytkownika*/
 .mat-form-field {
   margin: 1vh 5%;
-  width: 22%;
-}
-
-.password {
-  margin: 1vh 5%;
   width: 40%;
 }
 

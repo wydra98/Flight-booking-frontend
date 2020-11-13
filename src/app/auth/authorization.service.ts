@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import { URL } from '../../environments/environment';
+import {URL} from '../../environments/environment';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {tap, map} from 'rxjs/operators';
 import {Observable, BehaviorSubject} from 'rxjs';
@@ -43,6 +43,16 @@ export class AuthorizationService {
     localStorage.setItem('name', name);
   }
 
+  saveEmail(email: string) {
+    localStorage.removeItem('email');
+    localStorage.setItem('email', email);
+  }
+
+  saveSurname(surname: string) {
+    localStorage.removeItem('surname');
+    localStorage.setItem('surname', surname);
+  }
+
   getToken() {
     return localStorage.getItem('token');
   }
@@ -59,26 +69,12 @@ export class AuthorizationService {
     return localStorage.getItem('name');
   }
 
-  signIn(email: string, password: string): Observable<any> {
-    const params = new HttpParams()
-      .set('email', email)
-      .set('password', password);
-    return this.http.post(URL + '/login', params)
-      .pipe(tap((response: any) => {
-        this.saveToken(response.token);
-        this.saveRole(response.userDto.role);
-        this.saveId(response.userDto.id);
-        this.saveName(response.userDto.name);
-      }));
+  getEmail() {
+    return localStorage.getItem('email');
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userRole');
-    localStorage.removeItem('id');
-    localStorage.removeItem('name');
-    this.isLoggedInSubject.next(false);
-    this.isAdminSubject.next(false);
+  getSurname() {
+    return localStorage.getItem('surname');
   }
 
   isAuthenticated(): boolean {
@@ -92,6 +88,21 @@ export class AuthorizationService {
     return this.isAuthenticated() && this.getUserRole() === 'ROLE_ADMIN';
   }
 
+  signIn(email: string, password: string): Observable<any> {
+    const params = new HttpParams()
+      .set('email', email)
+      .set('password', password);
+    return this.http.post(URL + '/login', params)
+      .pipe(tap((response: any) => {
+        this.saveToken(response.token);
+        this.saveRole(response.userDto.role);
+        this.saveId(response.userDto.id);
+        this.saveName(response.userDto.name);
+        this.saveSurname(response.userDto.surname);
+        this.saveEmail(response.userDto.email);
+      }));
+  }
+
   signUp(name: string, surname: string, email: string, password: string): Observable<any> {
     const params = new HttpParams()
       .set('email', email)
@@ -99,6 +110,17 @@ export class AuthorizationService {
       .set('surname', surname)
       .set('password', password);
     return this.http.post(URL + '/register', params);
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('id');
+    localStorage.removeItem('name');
+    localStorage.removeItem('surname');
+    localStorage.removeItem('email');
+    this.isLoggedInSubject.next(false);
+    this.isAdminSubject.next(false);
   }
 
 }

@@ -7,22 +7,22 @@
     <mat-card-title>Twoje dane:</mat-card-title>
     <div class="userField">
       <div class="title">Imię:</div>
-      <div class="content">Adrian</div>
+      <div class="content">{{name}}</div>
     </div>
     <div class="userField">
       <div class="title">Nazwisko:</div>
-      <div class="content">Wydra</div>
+      <div class="content">{{surname}}</div>
     </div>
     <div class="userField">
       <div class="title">Email:</div>
-      <div class="content">adek868@intria.eu</div>
+      <div class="content">{{email}}</div>
     </div>
 
     <mat-card-content>
       <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
-            <mat-panel-title>Edytuj personalne dane</mat-panel-title>
+            <mat-panel-title>Edytuj dane</mat-panel-title>
           </mat-expansion-panel-header>
           <mat-card-content>
             <form [formGroup]="passengerForm">
@@ -59,43 +59,13 @@
                 />
                 <mat-error>Nie poprawny adres e-mail</mat-error>
               </mat-form-field>
-            </form>
-          </mat-card-content>
-          <button
-            mat-button
-            color="primary"
-            [disabled]="passengerForm.invalid"
-            (click)="onSubmit()">Edytuj
-          </button>
 
-        </mat-expansion-panel>
-      </mat-accordion>
-    </mat-card-content>
-
-    <mat-card-content>
-      <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>Zmień hasło</mat-panel-title>
-          </mat-expansion-panel-header>
-          <mat-card-content>
-            <form [formGroup]="passwordForm">
-              <mat-form-field class="password">
-                <mat-label>Stare hasło:</mat-label>
+              <mat-form-field>
+                <mat-label>Hasło:</mat-label>
                 <input
                   matInput
-                  type="text"
-                  formControlName="oldPassword"
-                  required
-                />
-                <mat-error>Hasło musi składać się z co najmniej dwóch liter</mat-error>
-              </mat-form-field>
-              <mat-form-field class="password">
-                <mat-label>Nowe hasło:</mat-label>
-                <input
-                  matInput
-                  type="tel"
-                  formControlName="newPassword"
+                  type="password"
+                  formControlName="password"
                   required
                 />
                 <mat-error>Hasło musi składać się z co najmniej dwóch liter</mat-error>
@@ -106,8 +76,9 @@
             mat-button
             color="primary"
             [disabled]="passengerForm.invalid"
-            (click)="onSubmitPassword()">Zmień hasło
+            (click)="onSubmitUser()">Edytuj
           </button>
+
         </mat-expansion-panel>
       </mat-accordion>
     </mat-card-content>
