@@ -58,6 +58,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { FlightTableComponent } from './user/flights/flight/flight-table/flight-table.component';
 import { TripDetailsComponent } from './user/trip-table/trip-details/trip-details.component';
 import { PassengersDetailsTableComponent } from './user/trip-table/trip-details/passengers-details-table/passengers-details-table.component';
+import { UserDataComponent } from './user/user-data/user-data.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { PassengersDetailsTableComponent } from './user/trip-table/trip-details/
     FlightTableComponent,
     TripDetailsComponent,
     PassengersDetailsTableComponent,
+    UserDataComponent,
   ],
     imports: [
         BrowserModule,

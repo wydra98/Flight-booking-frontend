@@ -1,0 +1,133 @@
+<mat-toolbar>
+  Twoje dane
+</mat-toolbar>
+
+<mat-card>
+  <mat-card-content class="outCard">
+    <mat-card-title>Twoje dane:</mat-card-title>
+    <div class="userField">
+      <div class="title">Imię:</div>
+      <div class="content">Adrian</div>
+    </div>
+    <div class="userField">
+      <div class="title">Nazwisko:</div>
+      <div class="content">Wydra</div>
+    </div>
+    <div class="userField">
+      <div class="title">Email:</div>
+      <div class="content">adek868@intria.eu</div>
+    </div>
+
+    <mat-card-content>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Edytuj personalne dane</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-card-content>
+            <form [formGroup]="passengerForm">
+
+              <mat-form-field>
+                <mat-label>Imię</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  formControlName="firstname"
+                  required
+                />
+                <mat-error>Imię musi składać się z co najmniej dwóch liter i nie może zawierać cyfr</mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Nazwisko</mat-label>
+                <input
+                  matInput
+                  type="tel"
+                  formControlName="surname"
+                  required
+                />
+                <mat-error>Nazwisko musi składać się z co najmniej dwóch liter i nie może zawierać cyfr</mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Email:</mat-label>
+                <input
+                  matInput
+                  type="email"
+                  formControlName="email"
+                  required
+                />
+                <mat-error>Nie poprawny adres e-mail</mat-error>
+              </mat-form-field>
+            </form>
+          </mat-card-content>
+          <button
+            mat-button
+            color="primary"
+            [disabled]="passengerForm.invalid"
+            (click)="onSubmit()">Edytuj
+          </button>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+
+    <mat-card-content>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Zmień hasło</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-card-content>
+            <form [formGroup]="passwordForm">
+              <mat-form-field class="password">
+                <mat-label>Stare hasło:</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  formControlName="oldPassword"
+                  required
+                />
+                <mat-error>Hasło musi składać się z co najmniej dwóch liter</mat-error>
+              </mat-form-field>
+              <mat-form-field class="password">
+                <mat-label>Nowe hasło:</mat-label>
+                <input
+                  matInput
+                  type="tel"
+                  formControlName="newPassword"
+                  required
+                />
+                <mat-error>Hasło musi składać się z co najmniej dwóch liter</mat-error>
+              </mat-form-field>
+            </form>
+          </mat-card-content>
+          <button
+            mat-button
+            color="primary"
+            [disabled]="passengerForm.invalid"
+            (click)="onSubmitPassword()">Zmień hasło
+          </button>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+
+    <mat-card-content>
+      <mat-accordion>
+        <mat-expansion-panel class="expansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>Usuń konto</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="expansion"><b>Usunięcie danych spowoduje utracenie wszystkich danych i zarezerwowanych podróży.</b></div>
+          <button
+            mat-button
+            color="red"
+            (click)="onSubmitDelete()">Usuń konto
+          </button>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+
+  </mat-card-content>
+</mat-card>
+

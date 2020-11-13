@@ -112,12 +112,10 @@ export class TripTableDatasource extends DataSource<TripToView> {
     confirmDialog
       .afterClosed().subscribe(res => {
       if (res) {
-        //console.log(row.id)
         this.tripService.deleteTrip(row.id).subscribe(
           () => {
             const oneTrip = this.dataSource.data.find(trip => trip.id == row.id)
             this.dataSource.data.splice(this.dataSource.data.indexOf(oneTrip), 1);
-            this.connect()
             this.paginator._changePageSize(this.paginator.pageSize);
 
             this.snackbar.showSnackbar('Pomyślnie anulowano rezerwację', 'success');

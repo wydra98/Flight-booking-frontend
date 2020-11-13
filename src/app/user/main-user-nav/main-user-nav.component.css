@@ -57,6 +57,11 @@
   margin-right: 12px;
 }
 
+.fa-user-circle {
+  margin-left: 11px;
+  margin-right: 12px;
+}
+
 .menuToolbar{
   background: url('src/assets/logo.png') no-repeat center;
   background-size: contain;

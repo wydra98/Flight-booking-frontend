@@ -10,77 +10,77 @@
 </mat-horizontal-stepper>
 
 <mat-list *ngFor="let passenger of passengerForm.controls; let i = index">
-  <mat-card-content class="outCard">
   <mat-card>
-    <mat-card-header>Pasażer nr {{i + 1}}</mat-card-header>
-    <mat-card-content>
-      <form [formGroup]="passenger">
-        <mat-form-field>
-          <mat-label>Imię</mat-label>
-          <input
-            matInput
-            type="text"
-            formControlName="firstname"
-            required
-          />
-          <mat-error>Imię musi składać się z co najmniej dwóch liter i nie może zawierać cyfr</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Nazwisko</mat-label>
-          <input
-            matInput
-            type="tel"
-            formControlName="surname"
-            required
-          />
-          <mat-error>Nazwisko musi składać się z co najmniej dwóch liter i nie może zawierać cyfr</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Data urodzenia:</mat-label>
-          <input
-            matInput
-            [matDatepicker]="dateOfBirth"
-            formControlName="dateOfBirth"
-            [max]="maxDateForBirthDate"
-            required/>
-          <mat-datepicker-toggle matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
-          <mat-datepicker #dateOfBirth></mat-datepicker>
-          <mat-error>Nie można zarezerwować bilety dla osoby mającej mniej niż 2 lata</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Numer telefonu:</mat-label>
-          <input
-            matInput
-            type="text"
-            formControlName="phoneNumber"
-            required
-          />
-          <mat-error>Numer telefonu musi składać się z 9 cyfr</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Pesel:</mat-label>
-          <input
-            matInput
-            type="tel"
-            formControlName="pesel"
-            required
-          />
-          <mat-error>Niepoprawny pesel</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Email:</mat-label>
-          <input
-            matInput
-            type="email"
-            formControlName="email"
-            required
-          />
-          <mat-error>Nie poprawny adres e-mail</mat-error>
-        </mat-form-field>
-      </form>
+    <mat-card-content class="outCard">
+      <mat-card-title>Pasażer nr {{i + 1}}</mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="passenger">
+          <mat-form-field>
+            <mat-label>Imię</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="firstname"
+              required
+            />
+            <mat-error>Imię musi składać się z co najmniej dwóch liter i nie może zawierać cyfr</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Nazwisko</mat-label>
+            <input
+              matInput
+              type="tel"
+              formControlName="surname"
+              required
+            />
+            <mat-error>Nazwisko musi składać się z co najmniej dwóch liter i nie może zawierać cyfr</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Data urodzenia:</mat-label>
+            <input
+              matInput
+              [matDatepicker]="dateOfBirth"
+              formControlName="dateOfBirth"
+              [max]="maxDateForBirthDate"
+              required/>
+            <mat-datepicker-toggle matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
+            <mat-datepicker #dateOfBirth></mat-datepicker>
+            <mat-error>Nie można zarezerwować bilety dla osoby mającej mniej niż 2 lata</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Numer telefonu:</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="phoneNumber"
+              required
+            />
+            <mat-error>Numer telefonu musi składać się z 9 cyfr</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Pesel:</mat-label>
+            <input
+              matInput
+              type="tel"
+              formControlName="pesel"
+              required
+            />
+            <mat-error>Niepoprawny pesel</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Email:</mat-label>
+            <input
+              matInput
+              type="email"
+              formControlName="email"
+              required
+            />
+            <mat-error>Nie poprawny adres e-mail</mat-error>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
     </mat-card-content>
   </mat-card>
-  </mat-card-content>
 </mat-list>
 
 <button
