@@ -25,7 +25,6 @@ export class TripDetailsComponent implements OnInit {
     this.tripService.getPassenger().subscribe(
       (passengers) => {
         this.passengers = passengers;
-        console.log(this.passengers)
       },
       (err) => {
         console.log("error") + err

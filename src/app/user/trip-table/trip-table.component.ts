@@ -24,6 +24,7 @@ export class TripTableComponent implements OnInit {
   dataSource: TripTableDatasource;
   trips: Trip[];
   tripsToView: TripToView[];
+  todayDate = new Date();
 
 
   constructor(private tripService: TripService,
@@ -45,7 +46,6 @@ export class TripTableComponent implements OnInit {
     this.tripService.fetchTrips(parseInt(this.auth.getId())).subscribe(
       (trips: Trip[]) => {
         this.trips = trips
-        console.log(trips)
         this.tripsToView = this.tripService.toViewData(this.trips)
         this.dataSource = new TripTableDatasource(this.tripsToView, this.dialogService, this.snackbar,
           this.tripService, this.auth);

@@ -16,23 +16,30 @@
         {{viewData.arrivalDate}} {{viewData.arrivalTime}}<sup>{{viewData.arrivalTimezone}}</sup></div>
 
       <ng-container *ngIf="this.passengerNumber == 1; else morePassengers2">
-        <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-list-ol"></i>Ilość biletów do zarezerwowania dla jednej osoby:
-        <b>{{viewData.numberOfTransfers+1}}</b></div>
+        <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-list-ol"></i>Ilość biletów
+          do zarezerwowania dla jednej osoby:
+          <b>{{viewData.numberOfTransfers + 1}}</b></div>
 
-        <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-money"></i>Cena za podróż dla dla jednej osoby:
+        <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-money"></i>Cena za podróż
+          dla dla jednej osoby:
           <b>{{viewData.price}} PLN </b></div>
       </ng-container>
 
       <ng-template #morePassengers2>
-        <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-list-ol"></i>Ilość biletów do zarezerwowania dla {{passengerNumber}} osób:
-          <b>{{this.passengerNumber*(viewData.numberOfTransfers+1)}}</b>   (ilość biletów na jedną osobę: <b>{{viewData.numberOfTransfers+1}}</b> )</div>
+        <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-list-ol"></i>Ilość biletów
+          do zarezerwowania dla {{passengerNumber}} osób:
+          <b>{{this.passengerNumber * (viewData.numberOfTransfers + 1)}}</b> (ilość biletów na jedną osobę:
+          <b>{{viewData.numberOfTransfers + 1}}</b> )
+        </div>
 
-        <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-money"></i>Cena za podróż dla {{passengerNumber}} osób:
-          <b>{{viewData.price*passengerNumber}} PLN</b>   (cena za jedną osobę: <b>{{viewData.price}} PLN</b>)</div>
+        <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-money"></i>Cena za podróż
+          dla {{passengerNumber}} osób:
+          <b>{{viewData.price * passengerNumber}} PLN</b> (cena za jedną osobę: <b>{{viewData.price}} PLN</b>)
+        </div>
       </ng-template>
 
       <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-share"></i>Liczba przesiadek:
-      <b>{{viewData.numberOfTransfers}}</b></div>
+        <b>{{viewData.numberOfTransfers}}</b></div>
 
       <ng-container *ngIf="!viewData.normalOffer">
         <div style="color: green; margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-check-square"></i>Podróż z
@@ -41,7 +48,6 @@
       </ng-container>
     </div>
     <mat-card-content>
-
 
       <mat-accordion>
         <mat-expansion-panel>

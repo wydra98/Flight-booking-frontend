@@ -66,11 +66,13 @@ export class TripService {
 
 
   public toViewData(trips: Trip[]): TripToView[] {
-    let i = 1;
     return trips.map((trip) => {
         return {
-          additionalId: i++,
           id: trip.id,
+          purchaseDate: trip.purchaseDate,
+          purchaseTime: trip.purchaseTime,
+          arrivalDateParsed: this.parsedDate(trip.arrivalDate),
+          departureDateParsed: this.parsedDate(trip.departureDate),
           departurePlace: this.extractPlace(trip.arraysTicket[0].flightDto.srcAirport),
           numberOfTransfers: trip.arraysTicket.length,
           departureDate: trip.departureDate,
@@ -87,6 +89,11 @@ export class TripService {
       }
     )
   }
+
+  private parsedDate(date: string){
+    let [year, month, day] = date.toString().split('-');
+    return new Date(parseInt(year), parseInt(month), parseInt(day));
+}
 
   private extractTimezone(timezone: number): string {
     if (timezone >= 0) {
@@ -106,11 +113,9 @@ export class TripService {
   }
 
   private extractIntermediateFlights(trip: Trip): IntermediateConnection[] {
-    let i = 1;
     return trip.arraysTicket.map((ticket: Ticket) => {
 
       return {
-        additionalId: i++,
         srcPlace: this.extractPlace(ticket.flightDto.srcAirport),
         dstPlace: this.extractPlace(ticket.flightDto.dstAirport),
         sourceAirport: this.extractAirport(ticket.flightDto.srcAirport),

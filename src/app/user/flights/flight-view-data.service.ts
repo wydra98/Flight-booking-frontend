@@ -43,11 +43,8 @@ export class TripViewDataService {
   }
 
   private extractIntermediateFlights(trip: Trip): IntermediateConnection[] {
-    let i = 1;
     return trip.arraysTicket.map((ticket: Ticket) => {
-
       return {
-        additionalId: i++,
         srcPlace: this.extractPlace(ticket.flightDto.srcAirport),
         dstPlace: this.extractPlace(ticket.flightDto.dstAirport),
         sourceAirport: this.extractAirport(ticket.flightDto.srcAirport),
