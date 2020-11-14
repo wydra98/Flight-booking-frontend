@@ -99,9 +99,8 @@ export class AirportTableDataSource extends DataSource<Airport> {
           () => {
             const oneAirport = this.dataSource.data.find(airport => airport.id == row.id)
             this.dataSource.data.splice(this.dataSource.data.indexOf(oneAirport), 1);
-            this.airportService.isLoading.next(true);
-            this.snackbar.showSnackbar('Pomyślnie usunięto lotnisko', 'success');
-            this.router.navigate(['/airport']);
+            this.airportService.isLoading.next(2);
+            this.snackbar.showSnackbar('Pomyślnie usunięto lotnisko', 'success')
           },
           () => {
             this.snackbar.showSnackbar('Wystąpił błąd podczas usuwania lotniska', 'fail');

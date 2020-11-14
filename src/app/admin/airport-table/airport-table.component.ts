@@ -35,12 +35,23 @@ export class AirportTableComponent implements OnInit {
   displayedColumns = ['id', 'name', 'city', 'country', 'timezone' ,'longitude', 'latitude','edit','delete'];
 
   ngOnInit() {
+    this.airportService.isLoading.next(0);
     this.fetchAirports();
-    // this.airportService.getLoading().subscribe(
-    //   (isDataFetched) => {
-    //     this.isDataFetched = isDataFetched;
-    //   }
-    // )
+    this.airportService.getLoading().subscribe(
+      (number) => {
+        switch  (number){
+          case 0:
+            this.isDataFetched = true;
+            break;
+          case 1:
+            this.isDataFetched = false;
+            break;
+          case 2:
+            this.ngOnInit()
+            break;
+        }
+      }
+    )
   }
 
   public fetchAirports(): void {

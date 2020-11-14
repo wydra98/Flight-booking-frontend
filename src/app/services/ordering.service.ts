@@ -10,6 +10,7 @@ import {map} from "rxjs/operators";
 import {BookingRequest} from "../models/booking-request";
 import {SnackBarComponent} from "../snack-bar/snack-bar.component";
 import {AuthorizationService} from "../auth/authorization.service";
+import {Airport} from "../models/airport";
 
 @Injectable({
   providedIn: 'root'
@@ -129,6 +130,10 @@ export class OrderingService {
       tripsDto: [this.chosenFlightToDestination,this.chosenFlightFromDestination],
       passengersDto: [...this.passengers]
     };
+  }
+
+  public  fetchAirports(): Observable<Airport[]> {
+    return this.httpClient.get<Airport[]>(URL + '/airports/get')
   }
 
   private orderFlight(): void {

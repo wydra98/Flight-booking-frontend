@@ -11,13 +11,13 @@ import {Airport} from "../../models/airport";
 export class AirportService {
 
   chosenAirport = new BehaviorSubject<Airport>(null);
-  isLoading = new BehaviorSubject<boolean>(true);
+  isLoading = new BehaviorSubject<number>(0);
 
   constructor(private httpClient: HttpClient,
               private router: Router) {
   }
 
-  getLoading(): Observable<boolean> {
+  getLoading(): Observable<number> {
     return this.isLoading.asObservable()
   }
 
@@ -31,7 +31,7 @@ export class AirportService {
   }
 
   public deleteAirport(id: number): Observable<any> {
-    this.isLoading.next(false)
+    this.isLoading.next(1)
     return this.httpClient.delete(URL + '/airports/delete', {
       params: {
         id: id.toString()

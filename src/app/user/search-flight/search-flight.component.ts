@@ -1,4 +1,3 @@
-import {AirportService} from '../../services/airport.service';
 import {Component, OnInit} from '@angular/core';
 import {SearchFlightFormBuilderService} from "./search-flight-form-builder.service";
 import {FormGroup} from "@angular/forms";
@@ -8,10 +7,7 @@ import {OrderingService} from "../../services/ordering.service";
 import {Router} from "@angular/router";
 import {Type} from "./Type";
 
-let typeColumn = ['Nowy Jork, USA', 'Chicago, USA', 'Warszawa, Polska', 'Pekin, Chiny', 'Berlin, Niemcy', 'Szanghaj, Chiny',
-  'Toronto, Kanada', 'Sydney, Australia', 'Tokio, Japonia', 'Rio de Janeiro, Brazylia', 'Oslo, Norwegia',
-  'Buenos Aires, Brazylia', 'Paryż, Francja', 'Londyn, Wielka Brytania', 'Los Angeles, Usa', 'Moskwa, Rosja',
-  'Kair, Egipt', 'Kraków, Polska', 'Delhi, Indie', 'Kijów, Ukraina'];
+let typeColumn = [];
 
 @Component({
   selector: 'app-search-flight',
@@ -21,12 +17,12 @@ let typeColumn = ['Nowy Jork, USA', 'Chicago, USA', 'Warszawa, Polska', 'Pekin, 
 export class SearchFlightComponent implements OnInit {
   public readonly title = 'Dokąd lecimy?';
   public readonly subtitle = 'Wypełnij formularz i znajdź idealną podróż';
-  public minDateForDepartureDate: Date;
   public types$ = new BehaviorSubject([]);
   public values: Array<string> = [];
   private subscriptions = new Subscription();
   public form: FormGroup;
   public minDate: Date;
+  public minDateForDepartureDate: Date;
   private readonly MONTHS = {
     'Jan': '01',
     'Feb': '02',
@@ -44,7 +40,6 @@ export class SearchFlightComponent implements OnInit {
 
   constructor(
     private formBuilder: SearchFlightFormBuilderService,
-    private airportService: AirportService,
     private router: Router,
     private searchFlightService: SearchFlightService,
     private orderingService: OrderingService
@@ -52,14 +47,24 @@ export class SearchFlightComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("only once")
     this.orderingService.clearService();
     this.form = this.formBuilder.buildForm();
-    this.airportService.fetchAirports();
+    this.fetchAirports();
     this.subscribeToBothWaysParameter();
     this.formBuilder.removeRequiredValidatorToArrivalDate(this.form);
     this.determineMinDate();
     this.subscribeToMinDateDeparture();
     this.createTypesList();
+  }
+
+  private fetchAirports(){
+    this.orderingService.fetchAirports().subscribe(
+      (airports) => {
+        typeColumn = []
+        airports.forEach((airport) => {typeColumn.push(airport.city+', '+airport.country)})
+      }
+    )
   }
 
   private determineMinDate(): void {
@@ -80,12 +85,6 @@ export class SearchFlightComponent implements OnInit {
     });
 
     this.types$.next(types);
-  }
-
-  private parseDate(date: string): Date {
-    let [weekDay, month, day, year] = date.toString().split(' ');
-    month = this.MONTHS[month];
-    return new Date(parseInt(year), parseInt(month), parseInt(day));
   }
 
   private parseDateDeparture(date: string): Date {

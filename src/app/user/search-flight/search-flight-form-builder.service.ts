@@ -1,14 +1,16 @@
 import {Injectable} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AirportService} from "../../services/airport.service";
 import {Airport} from "../../models/airport";
 import {FlightRequestQueryParams} from "../../models/flight-request-query-params";
+import {OrderingService} from "../../services/ordering.service";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchFlightFormBuilderService {
+
+  private airports: Airport[];
 
   private readonly MONTHS = {
     'Jan': '01',
@@ -27,7 +29,9 @@ export class SearchFlightFormBuilderService {
 
   constructor(
     private formBuilder: FormBuilder,
-    private airportService: AirportService) {
+    private orderingService: OrderingService) {
+
+    this.fetchAirports();
   }
 
   public buildForm(): FormGroup {
@@ -92,8 +96,15 @@ export class SearchFlightFormBuilderService {
     return `${year}-${month}-${day}`;
   }
 
+  private fetchAirports() {
+    this.orderingService.fetchAirports().subscribe(
+      (airports) => {
+        this.airports = airports;
+      })
+  }
+
   private findAirportId(airportDn: string): number {
-    return this.airportService.getAirports().find((airport: Airport) =>
-      airport.city.toUpperCase().includes(airportDn.toUpperCase().split(',')[0])).id;
+
+    return this.airports.find((airport: Airport) => airport.city.toUpperCase().includes(airportDn.toUpperCase().split(',')[0])).id;
   }
 }
