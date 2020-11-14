@@ -68,6 +68,10 @@ export class AirportTableComponent implements OnInit {
     )
   }
 
+  navigateToAddPanel(){
+    this.router.navigate(['/airportAdd']);
+  }
+
   navigateToEdit(row) {
     this.airportService.navigateToEdit(row);
   }

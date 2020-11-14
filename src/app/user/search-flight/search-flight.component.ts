@@ -14,7 +14,7 @@ let typeColumn = [];
   templateUrl: './search-flight.component.html',
   styleUrls: ['./search-flight.component.css']
 })
-export class SearchFlightComponent implements OnInit {
+export class SearchFlightComponent implements OnInit{
   public readonly title = 'Dokąd lecimy?';
   public readonly subtitle = 'Wypełnij formularz i znajdź idealną podróż';
   public types$ = new BehaviorSubject([]);
@@ -47,7 +47,6 @@ export class SearchFlightComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("only once")
     this.orderingService.clearService();
     this.form = this.formBuilder.buildForm();
     this.fetchAirports();
@@ -59,12 +58,15 @@ export class SearchFlightComponent implements OnInit {
   }
 
   private fetchAirports(){
+    console.log("hej")
     this.orderingService.fetchAirports().subscribe(
       (airports) => {
         typeColumn = []
-        airports.forEach((airport) => {typeColumn.push(airport.city+', '+airport.country)})
+        airports.forEach((airport) => { typeColumn.push(airport.city+', '+airport.country)})
       }
     )
+    console.log("tutej bd tablica")
+    console.log(typeColumn)
   }
 
   private determineMinDate(): void {

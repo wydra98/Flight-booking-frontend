@@ -60,6 +60,8 @@ import { UserDataComponent } from './user/user-data/user-data.component';
 import { AirportTableComponent } from './admin/airport-table/airport-table.component';
 import { AirlineTableComponent } from './admin/airline-table/airline-table.component';
 import { AirportEditComponent } from './admin/airport-table/airport-edit/airport-edit.component';
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import { AirportAddComponent } from './admin/airport-table/airport-add/airport-add.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +93,7 @@ import { AirportEditComponent } from './admin/airport-table/airport-edit/airport
     AirportTableComponent,
     AirlineTableComponent,
     AirportEditComponent,
+    AirportAddComponent,
   ],
     imports: [
         BrowserModule,
@@ -121,7 +124,8 @@ import { AirportEditComponent } from './admin/airport-table/airport-edit/airport
         MatDialogModule,
         MatTableModule,
         MatPaginatorModule,
-        MatSortModule
+        MatSortModule,
+        MatButtonToggleModule
     ],
   providers: [SnackBarComponent,
     {

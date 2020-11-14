@@ -22,6 +22,7 @@ import {UserDataComponent} from "./user/user-data/user-data.component";
 import {AirlineTableComponent} from "./admin/airline-table/airline-table.component";
 import {AirportTableComponent} from "./admin/airport-table/airport-table.component";
 import {AirportEditComponent} from "./admin/airport-table/airport-edit/airport-edit.component";
+import {AirportAddComponent} from "./admin/airport-table/airport-add/airport-add.component";
 
 const routes: Routes = [
   {
@@ -47,6 +48,7 @@ const routes: Routes = [
       {path: 'airline', component: AirlineTableComponent},
       {path: 'airport', component: AirportTableComponent},
       {path: 'airportEdit', component: AirportEditComponent},
+      {path: 'airportAdd', component: AirportAddComponent},
       {path: 'flight', component: FlightAdminComponent},
       {path: 'passenger', component: PassengerComponent},
       {path: 'trip', component: TripComponent},
