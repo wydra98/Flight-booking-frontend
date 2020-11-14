@@ -7,11 +7,11 @@
     <mat-card-title>Dane linii lotniczej</mat-card-title>
     <div class="userField">
       <div class="title">Nazwa</div>
-<!--      <div class="content">{{chosenAirline?.name}}</div>-->
+      <div class="content">{{chosenAirline?.name}}</div>
     </div>
     <div class="userField">
       <div class="title">Miasto</div>
-<!--      <div class="content">{{chosenAirline?.country}}</div>-->
+      <div class="content">{{chosenAirline?.country}}</div>
     </div>
 
     <mat-card-content>
@@ -21,7 +21,7 @@
             <mat-panel-title>Edytuj dane</mat-panel-title>
           </mat-expansion-panel-header>
           <mat-card-content>
-<!--            <form [formGroup]="airlineForm">-->
+            <form [formGroup]="airlineForm">
               <mat-form-field>
                 <mat-label>Nazwa</mat-label>
                 <input
@@ -42,15 +42,15 @@
                 />
                 <mat-error>Nazwa kraju musi składać się z co najmniej dwóch liter i nie zawierać liter</mat-error>
               </mat-form-field>
-<!--            </form>-->
+            </form>
           </mat-card-content>
 
-<!--          <button-->
-<!--            mat-button-->
-<!--            color="primary"-->
-<!--            [disabled]="airlineForm.invalid"-->
-<!--            (click)="onSubmit()">Edytuj-->
-<!--          </button>-->
+          <button
+            mat-button
+            color="primary"
+            [disabled]="airlineForm.invalid"
+            (click)="onSubmit()">Edytuj
+          </button>
 
         </mat-expansion-panel>
       </mat-accordion>
