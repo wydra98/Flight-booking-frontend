@@ -4,4 +4,6 @@ export interface Airport {
   city: string;
   country: string;
   timezone: number;
+  latitude: number;
+  longitude: number;
 }

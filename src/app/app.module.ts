@@ -13,8 +13,6 @@ import {FlightsComponent} from "./user/flights/flights.component";
 import {OrderComponent} from "./user/order/order.component";
 import {UserPanelComponent} from "./user/user-panel.component";
 import {AdminPanelComponent} from "./admin/admin-panel.component";
-import {AirlineComponent} from "./admin/airline/airline.component";
-import {AirportComponent} from "./admin/airport/airport.component";
 import {FlightComponent} from "./user/flights/flight/flight.component";
 import {PassengerComponent} from "./admin/passenger/passenger.component";
 import {TripComponent} from "./admin/trip/trip.component";
@@ -59,6 +57,9 @@ import { FlightTableComponent } from './user/flights/flight/flight-table/flight-
 import { TripDetailsComponent } from './user/trip-table/trip-details/trip-details.component';
 import { PassengersDetailsTableComponent } from './user/trip-table/trip-details/passengers-details-table/passengers-details-table.component';
 import { UserDataComponent } from './user/user-data/user-data.component';
+import { AirportTableComponent } from './admin/airport-table/airport-table.component';
+import { AirlineTableComponent } from './admin/airline-table/airline-table.component';
+import { AirportEditComponent } from './admin/airport-table/airport-edit/airport-edit.component';
 
 @NgModule({
   declarations: [
@@ -73,8 +74,6 @@ import { UserDataComponent } from './user/user-data/user-data.component';
     SearchFlightComponent,
     FlightsComponent,
     OrderComponent,
-    AirlineComponent,
-    AirportComponent,
     FlightComponent,
     PassengerComponent,
     TripComponent,
@@ -89,6 +88,9 @@ import { UserDataComponent } from './user/user-data/user-data.component';
     TripDetailsComponent,
     PassengersDetailsTableComponent,
     UserDataComponent,
+    AirportTableComponent,
+    AirlineTableComponent,
+    AirportEditComponent,
   ],
     imports: [
         BrowserModule,

@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTable} from '@angular/material/table';
@@ -8,9 +8,7 @@ import {AuthorizationService} from "../../auth/authorization.service";
 import {Trip} from "../../models/trip";
 import {TripToView} from "./trip-to-view";
 import {DialogService} from "../../services/dialog.service";
-import {BehaviorSubject, Observable} from "rxjs";
 import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-ticket-table',
@@ -58,7 +56,6 @@ export class TripTableComponent implements OnInit {
   }
 
   navigateToDetails(row) {
-
     this.tripService.getPassengers(row);
   }
 

@@ -7,8 +7,6 @@ import {FlightsComponent} from "./user/flights/flights.component";
 import {OrderComponent} from "./user/order/order.component";
 import {UserPanelComponent} from "./user/user-panel.component";
 import {AdminPanelComponent} from "./admin/admin-panel.component";
-import {AirlineComponent} from "./admin/airline/airline.component";
-import {AirportComponent} from "./admin/airport/airport.component";
 import {PassengerComponent} from "./admin/passenger/passenger.component";
 import {TripComponent} from "./admin/trip/trip.component";
 import {UserComponent} from "./admin/user/user.component";
@@ -21,6 +19,9 @@ import {StartAdminPanelComponent} from "./admin/start-admin-panel/start-admin-pa
 import {TripTableComponent} from "./user/trip-table/trip-table.component";
 import {TripDetailsComponent} from "./user/trip-table/trip-details/trip-details.component";
 import {UserDataComponent} from "./user/user-data/user-data.component";
+import {AirlineTableComponent} from "./admin/airline-table/airline-table.component";
+import {AirportTableComponent} from "./admin/airport-table/airport-table.component";
+import {AirportEditComponent} from "./admin/airport-table/airport-edit/airport-edit.component";
 
 const routes: Routes = [
   {
@@ -43,8 +44,9 @@ const routes: Routes = [
     children: [
       {path: '', redirectTo: '/startAdmin', pathMatch: 'full'},
       {path: 'startAdmin', component: StartAdminPanelComponent},
-      {path: 'airline', component: AirlineComponent},
-      {path: 'airport', component: AirportComponent},
+      {path: 'airline', component: AirlineTableComponent},
+      {path: 'airport', component: AirportTableComponent},
+      {path: 'airportEdit', component: AirportEditComponent},
       {path: 'flight', component: FlightAdminComponent},
       {path: 'passenger', component: PassengerComponent},
       {path: 'trip', component: TripComponent},

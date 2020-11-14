@@ -1,0 +1,72 @@
+<mat-toolbar>
+  <div class="title">Lotniska</div>
+</mat-toolbar>
+
+<ng-container *ngIf="!isDataFetched; else flightList">
+  <mat-spinner></mat-spinner>
+</ng-container>
+
+<ng-template #flightList>
+  <div class="mat-elevation-z8">
+    <table mat-table class="full-width-table" matSort aria-label="Elements">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+        <td mat-cell *matCellDef="let row; let i = index">{{i + 1}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa</th>
+        <td mat-cell *matCellDef="let row">{{row.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Miasto</th>
+        <td mat-cell *matCellDef="let row">{{row.city}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="country">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Kraj</th>
+        <td mat-cell *matCellDef="let row">{{row.country}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="timezone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Timezone</th>
+        <td mat-cell *matCellDef="let row">{{row.timezone + 2}} GMT</td>
+      </ng-container>
+
+      <ng-container matColumnDef="longitude">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Longitude</th>
+        <td mat-cell *matCellDef="let row">{{row.longitude}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="latitude">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Latitude</th>
+        <td mat-cell *matCellDef="let row">{{row.latitude}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Edytuj</th>
+        <td mat-cell *matCellDef="let row">
+          <a (click)="navigateToEdit(row)" style="color: #283590"><i class="fa fa-edit fa-lg"></i></a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuń</th>
+        <td mat-cell *matCellDef="let row">
+          <a (click)="delete(row)" style="color: red"><i class="fa fa-trash fa-lg"></i></a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator #paginator
+                   [length]="dataSource?.dataSource.data.length"
+                   [pageIndex]="0"
+                   [pageSize]="50"
+                   [pageSizeOptions]="[25, 50, 100, 250]">
+    </mat-paginator>
+  </div>
+</ng-template>
