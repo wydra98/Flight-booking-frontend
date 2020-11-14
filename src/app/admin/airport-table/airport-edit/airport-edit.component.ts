@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup} from "@angular/forms";
+import {AirportService} from "../airport.service";
+import {DialogService} from "../../../services/dialog.service";
+import {SnackBarComponent} from "../../../snack-bar/snack-bar.component";
+import {Router} from "@angular/router";
+import {Airport} from "../../../models/airport";
 
 @Component({
   selector: 'app-airport-edit',
@@ -7,46 +13,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AirportEditComponent implements OnInit {
 
-  // public airportForm: FormGroup;
-  // name: string;
-  // surname: string;
-  // email: string;
-  //
-  // constructor(private airportService: AirportService,
-  //             private dialogService: DialogService,
-  //             private snackbar: SnackBarComponent,
-  //             private router: Router) { }
-  //
-   ngOnInit(): void {
-  //     this.airportForm = this.airportService.createAirportForm();
-  //     this.airportService.getChosenUser()
-  //     this.name =this.auth.getName()
-  //     this.surname =this.auth.getSurname()
-  //     this.email =this.auth.getEmail()
+  public airportForm: FormGroup;
+  chosenAirport: Airport;
+
+
+  constructor(private airportService: AirportService,
+              private dialogService: DialogService,
+              private snackbar: SnackBarComponent,
+              private router: Router) {
   }
-  //
-  // public onSubmitUser() {
-  //   this.dialogService.openConfirmDialog('Czy na pewno chcesz zmodyfikować dane?')
-  //     .afterClosed().subscribe(res => {
-  //     if (res) {
-  //       this.userService.modifyUser(this.passengerForm.get('firstname').value,
-  //         this.passengerForm.get('surname').value,
-  //         this.passengerForm.get('email').value,
-  //         this.passengerForm.get('password').value,
-  //         this.auth.getId()).subscribe(
-  //         (user: User) => {
-  //           this.name = user.name;
-  //           this.surname = user.surname;
-  //           this.email = user.email;
-  //           this.auth.saveName(user.name)
-  //           this.snackbar.showSnackbar("Pomyślnie zmieniono dane", 'success')
-  //
-  //         },
-  //         (err) => {
-  //           this.snackbar.showSnackbar(err.error, 'fail');
-  //         }
-  //       )
-  //     }
-  //   })
-  // }
+
+  ngOnInit(): void {
+    this.fetchAirport();
+    this.airportForm = this.airportService.createAirportForm();
+  }
+
+  private fetchAirport() {
+    this.airportService.getChosenAirport().subscribe(
+      (airport: Airport) => {
+        this.chosenAirport = airport
+      }
+    )
+    this.airportForm = this.airportService.createAirportForm();
+  }
+
+  public onSubmit() {
+    this.dialogService.openConfirmDialog('Czy na pewno chcesz zmodyfikować lotnisko?')
+      .afterClosed().subscribe(res => {
+      if (res) {
+        this.airportService.editAirport(this.airportService.mapToAirportWithId(this.airportForm,this.chosenAirport.id)).subscribe(
+          () => {
+            this.snackbar.showSnackbar("Pomyślnie zmodyfikowano lotnisko", 'success')
+            this.router.navigate(['airport']);
+          },
+          (err) => {
+            this.snackbar.showSnackbar(err.error, 'fail');
+          }
+        )
+      }
+    })
+  }
 }

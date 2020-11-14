@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {AirportService} from "../airport.service";
-import {User} from "../../../models/user";
 import {DialogService} from "../../../services/dialog.service";
 import {SnackBarComponent} from "../../../snack-bar/snack-bar.component";
 import {Router} from "@angular/router";

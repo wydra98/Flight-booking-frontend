@@ -5,7 +5,6 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {Airport} from "../../models/airport";
 import {FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
-import {FlightRequestQueryParams} from "../../models/flight-request-query-params";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +18,10 @@ export class AirportService {
               private router: Router) {
   }
 
+  getChosenAirport(): Observable<Airport> {
+    return this.chosenAirport.asObservable()
+  }
+
   getLoading(): Observable<number> {
     return this.isLoading.asObservable()
   }
@@ -28,9 +31,6 @@ export class AirportService {
     this.router.navigate(['/airportEdit']);
   }
 
-  public fetchAirports(): Observable<any> {
-    return this.httpClient.get<Airport[]>(URL + '/airports/get')
-  }
 
   public createAirportForm(): FormGroup {
     return new FormGroup({
@@ -54,6 +54,18 @@ export class AirportService {
     };
   }
 
+  public mapToAirportWithId(form: FormGroup, id: number): Airport {
+    return {
+      id: id,
+      name: form.controls['name'].value,
+      city: form.controls['city'].value,
+      country: form.controls['country'].value,
+      timezone: form.controls['timezone'].value,
+      latitude: form.controls['latitude'].value,
+      longitude: form.controls['longitude'].value,
+    };
+  }
+
   private static getValidatorsForWord(): Array<ValidatorFn> {
     return [Validators.required, Validators.minLength(2), Validators.pattern(/[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/)];
   }
@@ -66,8 +78,12 @@ export class AirportService {
     return [Validators.required, Validators.pattern(/^\-?\d+((\.)\d+)?$/)];
   }
 
-  public addAirport(airport: Airport): Observable<any>{
+  public addAirport(airport: Airport): Observable<any> {
     return this.httpClient.post<Airport[]>(URL + '/airports', airport)
+  }
+
+  public fetchAirports(): Observable<any> {
+    return this.httpClient.get<Airport[]>(URL + '/airports/get')
   }
 
   public deleteAirport(id: number): Observable<any> {
@@ -77,5 +93,9 @@ export class AirportService {
         id: id.toString()
       }
     })
+  }
+
+  public editAirport(airport: Airport): Observable<any> {
+    return this.httpClient.put(URL + '/airports', airport);
   }
 }
