@@ -23,6 +23,8 @@ import {AirlineTableComponent} from "./admin/airline-table/airline-table.compone
 import {AirportTableComponent} from "./admin/airport-table/airport-table.component";
 import {AirportEditComponent} from "./admin/airport-table/airport-edit/airport-edit.component";
 import {AirportAddComponent} from "./admin/airport-table/airport-add/airport-add.component";
+import {AirlineEditComponent} from "./admin/airline-table/airline-edit/airline-edit.component";
+import {AirlineAddComponent} from "./admin/airline-table/airline-add/airline-add.component";
 
 const routes: Routes = [
   {
@@ -46,6 +48,8 @@ const routes: Routes = [
       {path: '', redirectTo: '/startAdmin', pathMatch: 'full'},
       {path: 'startAdmin', component: StartAdminPanelComponent},
       {path: 'airline', component: AirlineTableComponent},
+      {path: 'airlineEdit', component: AirlineEditComponent},
+      {path: 'airlineAdd', component: AirlineAddComponent},
       {path: 'airport', component: AirportTableComponent},
       {path: 'airportEdit', component: AirportEditComponent},
       {path: 'airportAdd', component: AirportAddComponent},

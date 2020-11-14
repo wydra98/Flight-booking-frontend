@@ -1,51 +1,34 @@
-import { DataSource } from '@angular/cdk/collections';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
-
-// TODO: Replace this with your own data model type
-export interface AirlineTableItem {
-  name: string;
-  id: number;
-}
-
-// TODO: replace this with real data from your application
-const EXAMPLE_DATA: AirlineTableItem[] = [
-  {id: 1, name: 'Hydrogen'},
-  {id: 2, name: 'Helium'},
-  {id: 3, name: 'Lithium'},
-  {id: 4, name: 'Beryllium'},
-  {id: 5, name: 'Boron'},
-  {id: 6, name: 'Carbon'},
-  {id: 7, name: 'Nitrogen'},
-  {id: 8, name: 'Oxygen'},
-  {id: 9, name: 'Fluorine'},
-  {id: 10, name: 'Neon'},
-  {id: 11, name: 'Sodium'},
-  {id: 12, name: 'Magnesium'},
-  {id: 13, name: 'Aluminum'},
-  {id: 14, name: 'Silicon'},
-  {id: 15, name: 'Phosphorus'},
-  {id: 16, name: 'Sulfur'},
-  {id: 17, name: 'Chlorine'},
-  {id: 18, name: 'Argon'},
-  {id: 19, name: 'Potassium'},
-  {id: 20, name: 'Calcium'},
-];
+import {DataSource} from '@angular/cdk/collections';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {map} from 'rxjs/operators';
+import {Observable, of as observableOf, merge} from 'rxjs';
+import {MatTableDataSource} from "@angular/material/table";
+import {DialogService} from "../../services/dialog.service";
+import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
+import {AuthorizationService} from "../../auth/authorization.service";
+import {Router} from "@angular/router";
+import {Airline} from "../../models/airline";
+import {AirlineService} from "./airline.service";
 
 /**
  * Data source for the AirlineTable view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class AirlineTableDataSource extends DataSource<AirlineTableItem> {
-  data: AirlineTableItem[] = EXAMPLE_DATA;
+export class AirlineTableDataSource extends DataSource<Airline> {
   paginator: MatPaginator;
   sort: MatSort;
+  dataSource: MatTableDataSource<Airline>;
 
-  constructor() {
+  constructor(public airlines: Airline[],
+              public dialogService: DialogService,
+              public snackbar: SnackBarComponent,
+              public airlineService: AirlineService,
+              public authorizationService: AuthorizationService,
+              public router: Router) {
     super();
+    this.dataSource = new MatTableDataSource(airlines)
   }
 
   /**
@@ -53,17 +36,17 @@ export class AirlineTableDataSource extends DataSource<AirlineTableItem> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<AirlineTableItem[]> {
+  connect(): Observable<Airline[]> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
-      observableOf(this.data),
+      observableOf(this.dataSource.data),
       this.paginator.page,
       this.sort.sortChange
     ];
 
     return merge(...dataMutations).pipe(map(() => {
-      return this.getPagedData(this.getSortedData([...this.data]));
+      return this.getPagedData(this.getSortedData([...this.dataSource.data]));
     }));
   }
 
@@ -71,13 +54,14 @@ export class AirlineTableDataSource extends DataSource<AirlineTableItem> {
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect() {}
+  disconnect() {
+  }
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: AirlineTableItem[]) {
+  private getPagedData(data: Airline[]) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
   }
@@ -86,7 +70,7 @@ export class AirlineTableDataSource extends DataSource<AirlineTableItem> {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: AirlineTableItem[]) {
+  private getSortedData(data: Airline[]) {
     if (!this.sort.active || this.sort.direction === '') {
       return data;
     }
@@ -94,11 +78,36 @@ export class AirlineTableDataSource extends DataSource<AirlineTableItem> {
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
-        default: return 0;
+        case 'name':
+          return compare(a.name, b.name, isAsc);
+        case 'country':
+          return compare(a.country, b.country, isAsc);
+        case 'id':
+          return compare(+a.id, +b.id, isAsc);
+        default:
+          return 0;
       }
     });
+  }
+
+  delete(row) {
+    this.dialogService.openConfirmDialog('Czy na pewno chcesz usunąć linię lotniczą? Spowoduje to usunięcie wszystkich elementów z nim związanych' +
+      ' i może potrwać chwilę czasu.')
+      .afterClosed().subscribe(res => {
+      if (res) {
+        this.airlineService.deleteAirline(row.id).subscribe(
+          () => {
+            const oneAirline = this.dataSource.data.find(airline => airline.id == row.id)
+            this.dataSource.data.splice(this.dataSource.data.indexOf(oneAirline), 1);
+            this.airlineService.isLoading.next(2);
+            this.snackbar.showSnackbar('Pomyślnie usunięto linię lotniczą', 'success')
+          },
+          () => {
+            this.snackbar.showSnackbar('Wystąpił błąd podczas usuwania linii lotniczej', 'fail');
+          }
+        )
+      }
+    })
   }
 }
 

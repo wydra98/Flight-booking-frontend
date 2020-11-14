@@ -62,6 +62,8 @@ import { AirlineTableComponent } from './admin/airline-table/airline-table.compo
 import { AirportEditComponent } from './admin/airport-table/airport-edit/airport-edit.component';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { AirportAddComponent } from './admin/airport-table/airport-add/airport-add.component';
+import { AirlineAddComponent } from './admin/airline-table/airline-add/airline-add.component';
+import { AirlineEditComponent } from './admin/airline-table/airline-edit/airline-edit.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +96,8 @@ import { AirportAddComponent } from './admin/airport-table/airport-add/airport-a
     AirlineTableComponent,
     AirportEditComponent,
     AirportAddComponent,
+    AirlineAddComponent,
+    AirlineEditComponent,
   ],
     imports: [
         BrowserModule,

@@ -23,6 +23,7 @@ export class OrderingService {
   private signal = new BehaviorSubject<boolean>(false);
   private bothWayTrip: boolean;
   private passengers: Passenger[];
+  private airports: Airport[];
   private rebuildComponentWasTriggered = false;
   private readonly FLIGHTS_COMPONENT_FIRST_STEP_TITLE = 'Wybierz podróż do miejsca docelowego';
   private readonly FLIGHTS_COMPONENT_SECOND_STEP_TITLE = 'Wybierz podróż z miejsca docelowego';
@@ -134,6 +135,16 @@ export class OrderingService {
 
   public  fetchAirports(): Observable<Airport[]> {
     return this.httpClient.get<Airport[]>(URL + '/airports/get')
+  }
+
+  public  fetchAirports2(): void {
+    this.httpClient.get<Airport[]>(URL + '/airports/get').subscribe(
+      (airports) => {this.airports = airports}
+    )
+  }
+
+  public getAirports(): Airport[]{
+    return this.airports;
   }
 
   private orderFlight(): void {

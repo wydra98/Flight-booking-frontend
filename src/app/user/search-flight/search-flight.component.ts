@@ -6,6 +6,7 @@ import {SearchFlightService} from "../../services/search-flight.service";
 import {OrderingService} from "../../services/ordering.service";
 import {Router} from "@angular/router";
 import {Type} from "./Type";
+import {Airport} from "../../models/airport";
 
 let typeColumn = [];
 
@@ -23,6 +24,7 @@ export class SearchFlightComponent implements OnInit{
   public form: FormGroup;
   public minDate: Date;
   public minDateForDepartureDate: Date;
+  public airports: Airport[];
   private readonly MONTHS = {
     'Jan': '01',
     'Feb': '02',
@@ -48,25 +50,14 @@ export class SearchFlightComponent implements OnInit{
 
   ngOnInit() {
     this.orderingService.clearService();
+    this.airports = this.orderingService.getAirports();
+    this.airports.forEach((airport) => { typeColumn.push(airport.city+', '+airport.country)})
     this.form = this.formBuilder.buildForm();
-    this.fetchAirports();
     this.subscribeToBothWaysParameter();
     this.formBuilder.removeRequiredValidatorToArrivalDate(this.form);
     this.determineMinDate();
     this.subscribeToMinDateDeparture();
     this.createTypesList();
-  }
-
-  private fetchAirports(){
-    console.log("hej")
-    this.orderingService.fetchAirports().subscribe(
-      (airports) => {
-        typeColumn = []
-        airports.forEach((airport) => { typeColumn.push(airport.city+', '+airport.country)})
-      }
-    )
-    console.log("tutej bd tablica")
-    console.log(typeColumn)
   }
 
   private determineMinDate(): void {
