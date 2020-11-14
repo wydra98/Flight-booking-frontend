@@ -1,1 +1,40 @@
-<p>airline-add works!</p>
+<mat-toolbar>
+  <div class="title">Dodaj linię lotniczą</div>
+</mat-toolbar>
+
+<mat-card>
+  <mat-card-content class="outCard">
+    <mat-card-content>
+      <mat-card-title>Dane linii lotniczej</mat-card-title>
+      <form [formGroup]="airlineForm">
+        <mat-form-field>
+          <mat-label>Nazwa</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="name"
+            required
+          />
+          <mat-error>Nazwa musi składać się z co najmniej dwóch liter i nie zawierać liter</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Kraj</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="country"
+            required
+          />
+          <mat-error>Nazwa kraju musi składać się z co najmniej dwóch liter i nie zawierać liter</mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+
+    <button
+      mat-button
+      color="primary"
+      [disabled]="airlineForm.invalid"
+      (click)="onSubmit()">Dodaj
+    </button>
+  </mat-card-content>
+</mat-card>
