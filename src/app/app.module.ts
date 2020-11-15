@@ -42,28 +42,30 @@ import {ResponseInterceptor} from "./auth/response.interceptor";
 import {MatSelectModule} from "@angular/material/select";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatRadioModule} from "@angular/material/radio";
-import { FlightAdminComponent } from './admin/flight-admin/flight-admin.component';
 import {MatStepperModule} from "@angular/material/stepper";
-import { StartUserPanelComponent } from './user/start-user-panel/start-user-panel.component';
-import { FinishComponent } from './user/finish/finish.component';
-import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
+import {StartUserPanelComponent} from './user/start-user-panel/start-user-panel.component';
+import {FinishComponent} from './user/finish/finish.component';
+import {MatConfirmDialogComponent} from './mat-confirm-dialog/mat-confirm-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
-import { StartAdminPanelComponent } from './admin/start-admin-panel/start-admin-panel.component';
-import { TripTableComponent } from './user/trip-table/trip-table.component';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { FlightTableComponent } from './user/flights/flight/flight-table/flight-table.component';
-import { TripDetailsComponent } from './user/trip-table/trip-details/trip-details.component';
-import { PassengersDetailsTableComponent } from './user/trip-table/trip-details/passengers-details-table/passengers-details-table.component';
-import { UserDataComponent } from './user/user-data/user-data.component';
-import { AirportTableComponent } from './admin/airport-table/airport-table.component';
-import { AirlineTableComponent } from './admin/airline-table/airline-table.component';
-import { AirportEditComponent } from './admin/airport-table/airport-edit/airport-edit.component';
+import {StartAdminPanelComponent} from './admin/start-admin-panel/start-admin-panel.component';
+import {TripTableComponent} from './user/trip-table/trip-table.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {FlightTableComponent} from './user/flights/flight/flight-table/flight-table.component';
+import {TripDetailsComponent} from './user/trip-table/trip-details/trip-details.component';
+import {PassengersDetailsTableComponent} from './user/trip-table/trip-details/passengers-details-table/passengers-details-table.component';
+import {UserDataComponent} from './user/user-data/user-data.component';
+import {AirportTableComponent} from './admin/airport-table/airport-table.component';
+import {AirlineTableComponent} from './admin/airline-table/airline-table.component';
+import {AirportEditComponent} from './admin/airport-table/airport-edit/airport-edit.component';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import { AirportAddComponent } from './admin/airport-table/airport-add/airport-add.component';
-import { AirlineAddComponent } from './admin/airline-table/airline-add/airline-add.component';
-import { AirlineEditComponent } from './admin/airline-table/airline-edit/airline-edit.component';
+import {AirportAddComponent} from './admin/airport-table/airport-add/airport-add.component';
+import {AirlineAddComponent} from './admin/airline-table/airline-add/airline-add.component';
+import {AirlineEditComponent} from './admin/airline-table/airline-edit/airline-edit.component';
+import {FlightEditComponent} from './admin/flight-table/flight-edit/flight-edit.component';
+import {FlightAddComponent} from './admin/flight-table/flight-add/flight-add.component';
+import {FlightTableAdminComponent} from "./admin/flight-table/flight-table.component";
 
 @NgModule({
   declarations: [
@@ -82,7 +84,6 @@ import { AirlineEditComponent } from './admin/airline-table/airline-edit/airline
     PassengerComponent,
     TripComponent,
     UserComponent,
-    FlightAdminComponent,
     StartUserPanelComponent,
     FinishComponent,
     MatConfirmDialogComponent,
@@ -98,39 +99,42 @@ import { AirlineEditComponent } from './admin/airline-table/airline-edit/airline
     AirportAddComponent,
     AirlineAddComponent,
     AirlineEditComponent,
+    FlightEditComponent,
+    FlightAddComponent,
+    FlightTableAdminComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MatSnackBarModule,
-        MatSidenavModule,
-        MatToolbarModule,
-        ReactiveFormsModule,
-        MatListModule,
-        MatIconModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        MatProgressSpinnerModule,
-        MatExpansionModule,
-        MatCheckboxModule,
-        LayoutModule,
-        MatButtonModule,
-        FormsModule,
-        MatNativeDateModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatAutocompleteModule,
-        MatSelectModule,
-        MatDatepickerModule,
-        MatRadioModule,
-        MatStepperModule,
-        MatDialogModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatButtonToggleModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MatSnackBarModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    ReactiveFormsModule,
+    MatListModule,
+    MatIconModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatCheckboxModule,
+    LayoutModule,
+    MatButtonModule,
+    FormsModule,
+    MatNativeDateModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    MatStepperModule,
+    MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatButtonToggleModule
+  ],
   providers: [SnackBarComponent,
     {
       provide: HTTP_INTERCEPTORS,
@@ -144,7 +148,7 @@ import { AirlineEditComponent } from './admin/airline-table/airline-edit/airline
     },
   ],
   bootstrap: [AppComponent],
-  entryComponents:[MatConfirmDialogComponent]
+  entryComponents: [MatConfirmDialogComponent]
 })
 export class AppModule {
 }

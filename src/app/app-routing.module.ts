@@ -12,7 +12,6 @@ import {TripComponent} from "./admin/trip/trip.component";
 import {UserComponent} from "./admin/user/user.component";
 import {AuthGuardUserService} from "./auth/auth-guard-user.service";
 import {AuthGuardAdminService} from "./auth/auth-guard-admin.service";
-import {FlightAdminComponent} from "./admin/flight-admin/flight-admin.component";
 import {StartUserPanelComponent} from "./user/start-user-panel/start-user-panel.component";
 import {FinishComponent} from "./user/finish/finish.component";
 import {StartAdminPanelComponent} from "./admin/start-admin-panel/start-admin-panel.component";
@@ -25,6 +24,9 @@ import {AirportEditComponent} from "./admin/airport-table/airport-edit/airport-e
 import {AirportAddComponent} from "./admin/airport-table/airport-add/airport-add.component";
 import {AirlineEditComponent} from "./admin/airline-table/airline-edit/airline-edit.component";
 import {AirlineAddComponent} from "./admin/airline-table/airline-add/airline-add.component";
+import {FlightTableAdminComponent} from "./admin/flight-table/flight-table.component";
+import {FlightEditComponent} from "./admin/flight-table/flight-edit/flight-edit.component";
+import {FlightAddComponent} from "./admin/flight-table/flight-add/flight-add.component";
 
 const routes: Routes = [
   {
@@ -53,7 +55,9 @@ const routes: Routes = [
       {path: 'airport', component: AirportTableComponent},
       {path: 'airportEdit', component: AirportEditComponent},
       {path: 'airportAdd', component: AirportAddComponent},
-      {path: 'flight', component: FlightAdminComponent},
+      {path: 'flight', component: FlightTableAdminComponent},
+      {path: 'flightEdit', component: FlightEditComponent},
+      {path: 'flightAdd', component: FlightAddComponent},
       {path: 'passenger', component: PassengerComponent},
       {path: 'trip', component: TripComponent},
       {path: 'user', component: UserComponent}

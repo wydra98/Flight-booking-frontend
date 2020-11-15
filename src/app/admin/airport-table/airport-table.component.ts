@@ -32,7 +32,7 @@ export class AirportTableComponent implements OnInit {
   }
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name', 'country', 'country', 'timezone' ,'longitude', 'latitude','edit','delete'];
+  displayedColumns = ['id', 'name', 'country', 'timezone' ,'longitude', 'latitude','edit','delete'];
 
   ngOnInit() {
     this.airportService.isLoading.next(0);
