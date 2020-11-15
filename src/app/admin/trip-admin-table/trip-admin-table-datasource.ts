@@ -1,21 +1,21 @@
-import {DataSource} from '@angular/cdk/collections';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {map} from 'rxjs/operators';
-import {Observable, of as observableOf, merge} from 'rxjs';
-import {TripToView} from "./trip-to-view";
+import { DataSource } from '@angular/cdk/collections';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { map } from 'rxjs/operators';
+import { Observable, of as observableOf, merge } from 'rxjs';
+import {TripToView} from "../../user/trip-table/trip-to-view";
+import {MatTableDataSource} from "@angular/material/table";
 import {DialogService} from "../../services/dialog.service";
 import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
-import {TripService} from "./trip.service";
+import {TripService} from "../../user/trip-table/trip.service";
 import {AuthorizationService} from "../../auth/authorization.service";
-import {MatTableDataSource} from "@angular/material/table";
 
 /**
- * Data source for the TicketTable view. This class should
+ * Data source for the TripAdminTable view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class TripTableDatasource extends DataSource<TripToView> {
+export class TripAdminTableDataSource extends DataSource<TripToView> {
   paginator: MatPaginator;
   sort: MatSort;
   dataSource: MatTableDataSource<TripToView>;
@@ -29,7 +29,6 @@ export class TripTableDatasource extends DataSource<TripToView> {
     super();
     this.dataSource = new MatTableDataSource(trips)
   }
-
   /**
    * Connect this data source to the table. The table will only update when
    * the returned stream emits new items.
@@ -48,13 +47,11 @@ export class TripTableDatasource extends DataSource<TripToView> {
       return this.getPagedData(this.getSortedData([...this.dataSource.data]));
     }));
   }
-
   /**
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect() {
-  }
+  disconnect() {}
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,
@@ -129,7 +126,6 @@ export class TripTableDatasource extends DataSource<TripToView> {
 }
 
 /** Simple sort comparator for example ID/Name columns (for client-side sorting). */
-function compare(a: string | number | Date, b: string | number | Date, isAsc: boolean) {
+function compare(a: string | number | Date, b: string | number| Date, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
-

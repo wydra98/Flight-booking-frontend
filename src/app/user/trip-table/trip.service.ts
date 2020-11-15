@@ -9,6 +9,7 @@ import {TripToView} from "./trip-to-view";
 import {Router} from "@angular/router";
 import {IntermediateConnection} from "../flights/flight-view-data";
 import {Passenger} from "../../models/passenger";
+import {User} from "../../models/user";
 
 @Injectable({
   providedIn: 'root'
@@ -32,11 +33,23 @@ export class TripService {
 
   navigateToDetails(row) {
     this.chosenTrip.next(row);
-    this.router.navigate(['/tripDetails']);
+    this.router.navigate(['/tripAdminDetails']);
   }
 
   public fetchTrips(id: number): Observable<any> {
-    return this.httpClient.get<Trip[]>(URL + '/trips', {
+    return this.httpClient.get<Trip[]>(URL + '/trips/user', {
+      params: {
+        id: id.toString()
+      }
+    })
+  }
+
+  public fetchTripsAll(): Observable<any> {
+    return this.httpClient.get<Trip[]>(URL + '/trips/all')
+  }
+
+  public getUser(id: number): Observable<any> {
+    return this.httpClient.get<User[]>(URL + '/users/trip' , {
       params: {
         id: id.toString()
       }
@@ -44,7 +57,7 @@ export class TripService {
   }
 
   public deleteTrip(id: number): Observable<any> {
-    return this.httpClient.delete(URL + '/trips', {
+    return this.httpClient.delete(URL + '/trips/delete', {
       params: {
         id: id.toString()
       }

@@ -1,0 +1,64 @@
+mat-toolbar{
+  background: white;
+  margin-bottom: 20px;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+  text-align: left;
+}
+
+.mat-card {
+  margin: 1vh auto;
+  background: #f3f3f3;
+}
+
+.mat-card:not([class*=mat-elevation-z]){
+  box-shadow: none;
+  border: none;
+}
+
+.outCard{
+  background: white;
+  padding: 2vh;
+  padding-right: 4vw;
+  padding-left: 4vw;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+}
+
+i {
+  font-size: medium
+}
+
+.title {
+  margin: 2vh 0;
+  margin-right: 3vw;
+  width: 100%;
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+.mat-card-subtitle {
+  margin: 2vh 4vw;
+  font-size: 1.0rem;
+  color: black;
+}
+
+.mat-card{
+  padding: 2vh 5vw;
+}
+
+.mat-card-actions {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+mat-card-content{
+  position: relative;
+  text-align: left;
+}
+
+.red {
+  color: red;
+}
+
+.black {
+  color: black;
+}
