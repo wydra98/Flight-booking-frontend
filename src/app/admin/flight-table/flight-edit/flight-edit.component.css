@@ -1,0 +1,71 @@
+/*Nagłówek*/
+mat-toolbar{
+  background: white;
+  margin-bottom: 20px;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+}
+
+/*Zamaskowanie zewnętrznej karty*/
+mat-card{
+  background: #f3f3f3;
+}
+
+.mat-card:not([class*=mat-elevation-z]){
+  box-shadow: none;
+  border: none;
+}
+
+/*Widoczna biała karta*/
+.outCard{
+  background: white;
+  margin: 0 5vw 0 5vw;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+}
+
+/*Poszczególne elementy listy*/
+mat-list {
+  margin: 1vh 5vw;
+}
+
+/*Tytuł*/
+.mat-card-title{
+  font-size: 1.2rem;
+  padding: 3vh 0 2vh 3vw;
+}
+
+/*Poszczególne inputy*/
+.mat-form-field {
+  margin: 1vh 5%;
+  width: 40%;
+}
+
+.userField{
+  text-align: center;
+  display: inline-block;
+  margin: 3vh auto 5vh auto;
+  width: 30%;
+}
+
+.title{
+  color: #777777;
+  font-size: 1.0rem;
+  margin-bottom: 1.5vh;
+}
+
+.content{
+  font-size: 1.2rem;
+}
+
+/*Przycisk*/
+button {
+  display: block;
+  width: 25%;
+  margin: 3vh auto;
+  background: white;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+}
+
+button:valid {
+  background: #283590;
+  color: white;
+}

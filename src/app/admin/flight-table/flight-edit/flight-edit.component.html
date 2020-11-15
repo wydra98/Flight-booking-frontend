@@ -1,1 +1,128 @@
-<p>flight-edit works!</p>
+<mat-toolbar>
+  Edycja lotu
+</mat-toolbar>
+
+<mat-card>
+  <mat-card-content class="outCard">
+    <mat-card-title>Dane lotu</mat-card-title>
+    <div class="userField">
+      <div class="title">Miejsce wylotu</div>
+      <div class="content">{{chosenFlight?.srcAirportName}}</div>
+    </div>
+    <div class="userField">
+      <div class="title">Miejsce przylotu</div>
+      <div class="content">{{chosenFlight?.dstAirportName}}</div>
+    </div>
+    <div class="userField">
+      <div class="title">Data wylotu</div>
+      <div class="content">{{chosenFlight?.departureDate}}</div>
+    </div>
+    <div class="userField">
+      <div class="title">Godzina wylotu</div>
+      <div class="content">{{chosenFlight?.departureTime}}</div>
+    </div>
+    <div class="userField">
+      <div class="title">Czas trwania lotu</div>
+      <div class="content">{{chosenFlight?.flightTime}}</div>
+    </div>
+    <div class="userField">
+      <div class="title">Linia lotnicza</div>
+      <div class="content">{{chosenFlight?.airlineName}}</div>
+    </div>
+    <div class="userField">
+      <div class="title">Cena</div>
+      <div class="content">{{chosenFlight?.price}} PLN</div>
+    </div>
+    <div class="userField">
+      <div class="title">Liczba miejsc</div>
+      <div class="content">{{chosenFlight?.numberSeats}}</div>
+    </div>
+
+    <mat-card-content>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Edytuj dane</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-card-content>
+            <form [formGroup]="flightForm">
+
+              <mat-form-field>
+                <mat-label>Miejsce wylotu</mat-label>
+                <mat-select formControlName="srcAirportId" (selectionChange)="changed($event.value, 0)">
+                  <mat-option *ngFor="let type of types$ | async" [value]="type.text" [disabled]="!type.allowed">
+                    {{type.text}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Miejsce przylotu</mat-label>
+                <mat-select formControlName="dstAirportId" (selectionChange)="changed($event.value, 1)">
+                  <mat-option *ngFor="let type of types$ | async" [value]="type.text" [disabled]="!type.allowed">
+                    {{type.text}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Data wylotu</mat-label>
+                <input matInput [matDatepicker]="departureDp"
+                       formControlName="departureDate" [min]="minDate"/>
+                <mat-datepicker-toggle matSuffix [for]="departureDp"></mat-datepicker-toggle>
+                <mat-datepicker #departureDp></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Godzina wylotu</mat-label>
+                <input matInput type="time" formControlName="departureTime"/>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Czas trwania lotu</mat-label>
+                <input matInput type="number" formControlName="flightTime"/>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Linia lotnicza</mat-label>
+                <mat-select formControlName="airlineId">
+                  <mat-option *ngFor="let type of airlines" [value]="type.name" >
+                    {{type.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Cena</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  formControlName="price"
+                  required
+                />
+                <mat-error>Cena musi być w przedziale liczbowym 1 do 2000</mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Liczba miejsc</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  formControlName="numberSeats"
+                  required
+                />
+                <mat-error>Liczba miejsc musi być w przedziale liczbowym 1 d0 350</mat-error>
+              </mat-form-field>
+            </form>
+          </mat-card-content>
+
+          <button
+            mat-button
+            color="primary"
+            [disabled]="flightForm.invalid"
+            (click)="onSubmit()">Edytuj
+          </button>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card-content>
+</mat-card>
+
