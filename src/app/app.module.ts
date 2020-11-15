@@ -14,8 +14,6 @@ import {OrderComponent} from "./user/order/order.component";
 import {UserPanelComponent} from "./user/user-panel.component";
 import {AdminPanelComponent} from "./admin/admin-panel.component";
 import {FlightComponent} from "./user/flights/flight/flight.component";
-import {PassengerComponent} from "./admin/passenger/passenger.component";
-import {UserComponent} from "./admin/user/user.component";
 
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {ReactiveFormsModule} from "@angular/forms";
@@ -67,6 +65,8 @@ import {FlightAddComponent} from './admin/flight-table/flight-add/flight-add.com
 import {FlightTableAdminComponent} from "./admin/flight-table/flight-table.component";
 import { TripAdminTableComponent } from './admin/trip-admin-table/trip-admin-table.component';
 import { TripAdminDetailsComponent } from './admin/trip-admin-table/trip-admin-details/trip-admin-details.component';
+import { UserTableComponent } from './admin/user-table/user-table.component';
+import { PassengerTableComponent } from './admin/passenger-table/passenger-table.component';
 
 @NgModule({
   declarations: [
@@ -82,8 +82,6 @@ import { TripAdminDetailsComponent } from './admin/trip-admin-table/trip-admin-d
     FlightsComponent,
     OrderComponent,
     FlightComponent,
-    PassengerComponent,
-    UserComponent,
     StartUserPanelComponent,
     FinishComponent,
     MatConfirmDialogComponent,
@@ -104,6 +102,8 @@ import { TripAdminDetailsComponent } from './admin/trip-admin-table/trip-admin-d
     FlightTableAdminComponent,
     TripAdminTableComponent,
     TripAdminDetailsComponent,
+    UserTableComponent,
+    PassengerTableComponent,
   ],
   imports: [
     BrowserModule,

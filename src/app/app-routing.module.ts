@@ -7,8 +7,6 @@ import {FlightsComponent} from "./user/flights/flights.component";
 import {OrderComponent} from "./user/order/order.component";
 import {UserPanelComponent} from "./user/user-panel.component";
 import {AdminPanelComponent} from "./admin/admin-panel.component";
-import {PassengerComponent} from "./admin/passenger/passenger.component";
-import {UserComponent} from "./admin/user/user.component";
 import {AuthGuardUserService} from "./auth/auth-guard-user.service";
 import {AuthGuardAdminService} from "./auth/auth-guard-admin.service";
 import {StartUserPanelComponent} from "./user/start-user-panel/start-user-panel.component";
@@ -28,6 +26,8 @@ import {FlightEditComponent} from "./admin/flight-table/flight-edit/flight-edit.
 import {FlightAddComponent} from "./admin/flight-table/flight-add/flight-add.component";
 import {TripAdminTableComponent} from "./admin/trip-admin-table/trip-admin-table.component";
 import {TripAdminDetailsComponent} from "./admin/trip-admin-table/trip-admin-details/trip-admin-details.component";
+import {PassengerTableComponent} from "./admin/passenger-table/passenger-table.component";
+import {UserTableComponent} from "./admin/user-table/user-table.component";
 
 const routes: Routes = [
   {
@@ -59,10 +59,10 @@ const routes: Routes = [
       {path: 'flight', component: FlightTableAdminComponent},
       {path: 'flightEdit', component: FlightEditComponent},
       {path: 'flightAdd', component: FlightAddComponent},
-      {path: 'passenger', component: PassengerComponent},
+      {path: 'passenger', component: PassengerTableComponent},
       {path: 'trip', component: TripAdminTableComponent},
       {path: 'tripAdminDetails', component: TripAdminDetailsComponent},
-      {path: 'user', component: UserComponent}
+      {path: 'user', component: UserTableComponent}
     ],
     canActivate: [AuthGuardAdminService]
   },

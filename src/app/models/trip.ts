@@ -1,7 +1,7 @@
 import {Ticket} from './ticket';
 
 export interface Trip {
-  id: number;
+  id?: number;
   arraysTicket: Ticket[];
   departureDate: string;
   departureTime: string;

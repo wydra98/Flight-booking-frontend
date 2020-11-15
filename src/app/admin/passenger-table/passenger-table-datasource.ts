@@ -3,32 +3,33 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
-import {Airport} from "../../models/airport";
+import {Passenger} from "../../models/passenger";
 import {MatTableDataSource} from "@angular/material/table";
 import {DialogService} from "../../services/dialog.service";
 import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
 import {AuthorizationService} from "../../auth/authorization.service";
-import {AirportService} from "./airport.service";
 import {Router} from "@angular/router";
+import {PassengerService} from "./passenger.service";
+
 
 /**
- * Data source for the AirportTable view. This class should
+ * Data source for the PassengerTable view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class AirportTableDataSource extends DataSource<Airport> {
+export class PassengerTableDataSource extends DataSource<Passenger> {
   paginator: MatPaginator;
   sort: MatSort;
-  dataSource: MatTableDataSource<Airport>;
+  dataSource: MatTableDataSource<Passenger>;
 
-  constructor(public airports: Airport[],
+  constructor(public passengers: Passenger[],
               public dialogService: DialogService,
               public snackbar: SnackBarComponent,
-              public airportService: AirportService,
+              public passengerService: PassengerService,
               public authorizationService: AuthorizationService,
               public router: Router) {
     super();
-    this.dataSource = new MatTableDataSource(airports)
+    this.dataSource = new MatTableDataSource(passengers)
   }
 
   /**
@@ -36,7 +37,7 @@ export class AirportTableDataSource extends DataSource<Airport> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<Airport[]> {
+  connect(): Observable<Passenger[]> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
@@ -60,7 +61,7 @@ export class AirportTableDataSource extends DataSource<Airport> {
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: Airport[]) {
+  private getPagedData(data: Passenger[]) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
   }
@@ -69,7 +70,7 @@ export class AirportTableDataSource extends DataSource<Airport> {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: Airport[]) {
+  private getSortedData(data: Passenger[]) {
     if (!this.sort.active || this.sort.direction === '') {
       return data;
     }
@@ -77,33 +78,31 @@ export class AirportTableDataSource extends DataSource<Airport> {
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'city': return compare(a.city, b.city, isAsc);
-        case 'country': return compare(a.country, b.country, isAsc);
-        case 'timezone': return compare(a.timezone, b.timezone, isAsc);
-        case 'longitude': return compare(a.longitude, b.longitude, isAsc);
-        case 'latitude': return compare(a.latitude, b.latitude, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
+        case 'firstName': return compare(a.firstName, b.firstName, isAsc);
+        case 'surname': return compare(a.surname, b.surname, isAsc);
+        case 'dateOfBirth': return compare(a.dateOfBirth, b.dateOfBirth, isAsc);
+        case 'phoneNumber': return compare(a.phoneNumber, b.phoneNumber, isAsc);
+        case 'email': return compare(a.email, b.email, isAsc);
+        case 'pesel': return compare(a.pesel, b.pesel, isAsc);
         default: return 0;
       }
     });
   }
 
-
   delete(row) {
-    this.dialogService.openConfirmDialog('Czy na pewno chcesz usunąć lotnisko? Spowoduje to usunięcie wszystkich elementów z nim związanych' +
-                                              ' i może potrwać chwilę czasu.')
+    this.dialogService.openConfirmDialog('Czy na pewno chcesz usunąć pasażera? Spowoduje to usunięcie wszystkich elementów z nim związanych' +
+      ' i może potrwać chwilę czasu.')
       .afterClosed().subscribe(res => {
       if (res) {
-        this.airportService.deleteAirport(row.id).subscribe(
+        this.passengerService.deletePassenger(row.id).subscribe(
           () => {
-            const oneAirport = this.dataSource.data.find(airport => airport.id == row.id)
-            this.dataSource.data.splice(this.dataSource.data.indexOf(oneAirport), 1);
-            this.airportService.isLoading.next(2);
-            this.snackbar.showSnackbar('Pomyślnie usunięto lotnisko', 'success')
+            const onePassenger = this.dataSource.data.find(passenger => passenger.id == row.id)
+            this.dataSource.data.splice(this.dataSource.data.indexOf(onePassenger), 1);
+            this.passengerService.isLoading.next(2);
+            this.snackbar.showSnackbar('Pomyślnie usunięto pasażera', 'success')
           },
           () => {
-            this.snackbar.showSnackbar('Wystąpił błąd podczas usuwania lotniska', 'fail');
+            this.snackbar.showSnackbar('Wystąpił błąd podczas usuwania pasażera', 'fail');
           }
         )
       }

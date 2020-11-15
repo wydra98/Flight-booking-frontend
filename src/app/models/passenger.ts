@@ -1,4 +1,5 @@
 export class Passenger {
+  id?: number;
   firstName: string
   surname: string;
   dateOfBirth: string;
