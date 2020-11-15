@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 import {FlightService} from "./flight.service";
 
 @Component({
-  selector: 'app-flight-table',
+  selector: 'app-flight-admin-table',
   templateUrl: './flight-table.component.html',
   styleUrls: ['./flight-table.component.css']
 })

@@ -1,4 +1,3 @@
-
 export interface FlightRequest {
   id?: number;
   airlineId: number;
