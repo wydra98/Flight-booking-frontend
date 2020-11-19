@@ -38,16 +38,20 @@ export class SearchFlightFormBuilderService {
     return this.formBuilder.group({
       sourceLocation: ['', Validators.required],
       destinationLocation: ['', Validators.required],
-      departureDate: ['', Validators.required],
+      fromDeparture: ['', Validators.required],
+      toDeparture: ['', Validators.required],
+      toArrival: ['', Validators.required],
+      fromArrival: ['', Validators.required],
       arrivalDate: [''],
       passengersNumber: [1, [Validators.required, Validators.max(10), Validators.min(1)]],
-      maxChanges: [0, [Validators.required, Validators.max(4), Validators.min(0)]],
-      maxTimeBetweenChanges: [6, [Validators.required, Validators.max(12), Validators.min(0)]],
+      maxChanges: [1, [Validators.required, Validators.max(4), Validators.min(1)]],
+      maxTimeBetweenChanges: [6, [Validators.required, Validators.max(12), Validators.min(1)]],
       changeLocation1: [''],
       changeLocation2: [''],
       changeLocation3: [''],
       changeLocation4: [''],
       checkBox: ['', Validators.required],
+      checkBoxChange: ['', Validators.required],
     });
   }
 
@@ -79,15 +83,65 @@ export class SearchFlightFormBuilderService {
   }
 
   public addRequiredValidatorToArrivalDate(form: FormGroup): void {
-    form.controls.arrivalDate.enable();
-    form.controls.arrivalDate.setValidators(Validators.required);
-    form.controls.arrivalDate.updateValueAndValidity();
+    form.controls.toArrival.enable();
+    form.controls.toArrival.setValidators(Validators.required);
+    form.controls.toArrival.updateValueAndValidity();
+    form.controls.toArrival.enable();
+    form.controls.toArrival.setValidators(Validators.required);
+    form.controls.toArrival.updateValueAndValidity();
+    form.controls.fromArrival.enable();
+    form.controls.fromArrival.setValidators(Validators.required);
+    form.controls.fromArrival.updateValueAndValidity();
+    form.controls.fromArrival.enable();
+    form.controls.fromArrival.setValidators(Validators.required);
+    form.controls.fromArrival.updateValueAndValidity();
   }
 
   public removeRequiredValidatorToArrivalDate(form: FormGroup): void {
-    form.controls.arrivalDate.disable();
-    form.controls.arrivalDate.setValidators(null);
-    form.controls.arrivalDate.updateValueAndValidity();
+    form.controls.toArrival.disable();
+    form.controls.toArrival.setValidators(null);
+    form.controls.toArrival.updateValueAndValidity();
+    form.controls.toArrival.enable();
+    form.controls.toArrival.setValidators(null);
+    form.controls.toArrival.updateValueAndValidity();
+    form.controls.fromArrival.disable();
+    form.controls.fromArrival.setValidators(null);
+    form.controls.fromArrival.updateValueAndValidity();
+    form.controls.fromArrival.enable();
+    form.controls.fromArrival.setValidators(null);
+    form.controls.fromArrival.updateValueAndValidity();
+  }
+
+  public addRequiredValidatorToMaxChanges(form: FormGroup): void {
+    form.controls.maxChanges.enable();
+    form.controls.maxChanges.setValue(1);
+    form.controls.maxChanges.setValidators(Validators.required);
+    form.controls.maxChanges.setValidators(Validators.max(4));
+    form.controls.maxChanges.setValidators(Validators.min(1));
+    form.controls.maxChanges.updateValueAndValidity();
+  }
+
+  public addRequiredValidatorToTimeBetweenChanges(form: FormGroup): void {
+    form.controls.maxTimeBetweenChanges.enable();
+    form.controls.maxTimeBetweenChanges.setValue(6);
+    form.controls.maxTimeBetweenChanges.setValidators(Validators.required);
+    form.controls.maxTimeBetweenChanges.setValidators(Validators.max(12));
+    form.controls.maxTimeBetweenChanges.setValidators(Validators.min(1));
+    form.controls.maxTimeBetweenChanges.updateValueAndValidity();
+  }
+
+  public removeRequiredValidatorToMaxChanges(form: FormGroup): void {
+    form.controls.maxChanges.disable();
+    form.controls.maxChanges.reset();
+    form.controls.maxChanges.setValidators(null);
+    form.controls.maxChanges.updateValueAndValidity();
+  }
+
+  public removeRequiredValidatorToTimeBetweenChanges(form: FormGroup): void {
+    form.controls.maxTimeBetweenChanges.disable();
+    form.controls.maxTimeBetweenChanges.reset();
+    form.controls.maxTimeBetweenChanges.setValidators(null);
+    form.controls.maxTimeBetweenChanges.updateValueAndValidity();
   }
 
   private parseDate(date: string): string {

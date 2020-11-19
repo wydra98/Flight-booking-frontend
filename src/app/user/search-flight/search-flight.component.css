@@ -37,10 +37,13 @@ mat-toolbar{
 
 }
 
+.mat-datepicker-toggle{
+  text-align: right;
+}
 
 .mat-radio-button  {
   width: 15%;
-  margin: 0 2vw;
+  margin: 3vh 2vw;
 }
 
 .change1{
@@ -72,6 +75,10 @@ button:valid {
 
 button:hover {
   background: #4285f4;
+}
+
+.mat-radio-group{
+  margin: 5vh 2vw;
 }
 
 @media (max-width: 1150px) {

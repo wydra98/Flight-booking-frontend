@@ -20,10 +20,12 @@ export class SearchFlightComponent implements OnInit{
   public readonly subtitle = 'Wypełnij formularz i znajdź idealną podróż';
   public types$ = new BehaviorSubject([]);
   public values: Array<string> = [];
-  private subscriptions = new Subscription();
+  private subscriptionsWaysParameter = new Subscription();
+  private subscriptionsChangesFlights = new Subscription();
   public form: FormGroup;
   public minDate: Date;
-  public minDateForDepartureDate: Date;
+  public disableArrivalDate = false;
+  public disableParameterChanges = false;
   public airports: Airport[];
   private readonly MONTHS = {
     'Jan': '01',
@@ -54,9 +56,9 @@ export class SearchFlightComponent implements OnInit{
     this.airports.forEach((airport) => { typeColumn.push(airport.city+', '+airport.country)})
     this.form = this.formBuilder.buildForm();
     this.subscribeToBothWaysParameter();
+    this.subscribeToChangesFlights();
     this.formBuilder.removeRequiredValidatorToArrivalDate(this.form);
     this.determineMinDate();
-    this.subscribeToMinDateDeparture();
     this.createTypesList();
   }
 
@@ -87,33 +89,37 @@ export class SearchFlightComponent implements OnInit{
   }
 
   private subscribeToBothWaysParameter(): void {
-    this.subscriptions.add(this.form.controls['checkBox'].valueChanges.subscribe(
+    this.subscriptionsWaysParameter.add(this.form.controls['checkBox'].valueChanges.subscribe(
       (response: string) => {
         if (response == "bothWay") {
           this.formBuilder.addRequiredValidatorToArrivalDate(this.form);
+          this.disableArrivalDate = false;
         } else {
           this.formBuilder.removeRequiredValidatorToArrivalDate(this.form);
-          this.form.controls['arrivalDate'].setValue('')
+          this.form.controls['toArrival'].setValue('');
+          this.form.controls['fromArrival'].setValue('');
+          this.disableArrivalDate = true;
         }
-
       }
     ));
   }
 
-  private subscribeToMinDateDeparture(): void {
-    this.subscriptions.add(this.form.controls.departureDate.valueChanges.subscribe(
-      () => {
-        console.log(this.form.controls['checkBox'].value)
-        if (this.form.controls.departureDate.value > this.form.controls.arrivalDate.value) {
-          this.form.controls['arrivalDate'].setValue(this.parseDateDeparture(this.form.controls.departureDate.value))
+  private subscribeToChangesFlights(): void {
+    this.subscriptionsChangesFlights.add(this.form.controls['checkBoxChange'].valueChanges.subscribe(
+      (response: string) => {
+        if (response == "change") {
+          this.formBuilder.addRequiredValidatorToMaxChanges(this.form);
+          this.formBuilder.addRequiredValidatorToTimeBetweenChanges(this.form);
+          this.disableParameterChanges = true;
+        } else {
+          this.formBuilder.removeRequiredValidatorToMaxChanges(this.form);
+          this.formBuilder.removeRequiredValidatorToTimeBetweenChanges(this.form);
+          this.disableParameterChanges = false;
         }
-        if(this.form.controls['checkBox'].value != "bothWay"){
-          this.form.controls['arrivalDate'].setValue('')
-        }
-        this.minDateForDepartureDate = this.parseDateDeparture(this.form.controls.departureDate.value);
       }
     ));
   }
+
 
   public onSubmit(): void {
     this.router.navigate(['/flights']);
