@@ -28,6 +28,7 @@ export class SearchFlightService {
     this.httpClient.get<[Trip[], Trip[]]>(URL + '/trips/findTrips', this.createHttpOptions(params))
       .subscribe(
         (trips: [Trip[], Trip[]]) => {
+          console.log(trips);
           this.tripsToDestination.next(trips[0]);
           this.tripsFromDestination.next(trips[1]);
           this.signal.next(true);

@@ -44,7 +44,7 @@ export class SearchFlightFormBuilderService {
       fromArrival: ['', Validators.required],
       arrivalDate: [''],
       passengersNumber: [1, [Validators.required, Validators.max(10), Validators.min(1)]],
-      maxChanges: [1, [Validators.required, Validators.max(4), Validators.min(1)]],
+      maxChanges: [1, [Validators.required, Validators.max(3), Validators.min(1)]],
       maxTimeBetweenChanges: [6, [Validators.required, Validators.max(12), Validators.min(1)]],
       changeLocation1: [''],
       changeLocation2: [''],

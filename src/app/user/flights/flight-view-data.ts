@@ -2,7 +2,7 @@ export interface FlightViewData {
   sourcePlace: string;
   destinationPlace: string;
   numberOfTransfers: number;
-  normalOffer:boolean;
+  normalOffer: boolean;
   price: number;
   departureDate: string;
   departureTime: string;

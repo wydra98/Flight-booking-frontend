@@ -22,6 +22,7 @@ export class OrderingService {
   private chosenFlightFromDestination: Trip;
   private signal = new BehaviorSubject<boolean>(false);
   private bothWayTrip: boolean;
+  private chosenFlightStart: string;
   private passengers: Passenger[];
   private airports: Airport[];
   private rebuildComponentWasTriggered = false;
@@ -106,6 +107,7 @@ export class OrderingService {
   private shouldNavigateToOrderPage(flight: Trip): boolean {
     if (!this.chosenFlightToDestination) {
       this.chosenFlightToDestination = flight;
+      this.chosenFlightStart = flight.arrivalDate;
       return this.determineAndHandleIfOneWayTrip();
     }
     this.chosenFlightFromDestination = flight;
@@ -122,8 +124,23 @@ export class OrderingService {
 
   private rebuildFlightsComponent(): void {
     this.rebuildComponentWasTriggered = true;
+    const parseStartDate = this.parseDateDeparture(this.chosenFlightStart);
+    this.flightsFromDestination = this.flightsFromDestination.filter( (flight) => {
+      let parseDate = this.parseDateDeparture(flight.departureDate)
+      if(parseDate >= parseStartDate){
+        return true;
+      }
+      else
+        return false;
+    });
     this.flightsToRender.next(this.flightsFromDestination);
   }
+
+  private parseDateDeparture(date: string): Date {
+    let [year, month, day] = date.split('-');
+    return new Date(parseInt(year), parseInt(month), parseInt(day));
+  }
+
 
   private composeBookingRequest(): BookingRequest {
     return {

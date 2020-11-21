@@ -120,10 +120,9 @@ export class SearchFlightComponent implements OnInit{
     ));
   }
 
-
   public onSubmit(): void {
     this.router.navigate(['/flights']);
-    this.searchFlightService.fetchAvailableFlights(this.formBuilder.mapFormGroupToParams(this.form))
+    this.searchFlightService.fetchAvailableFlights(this.formBuilder.mapFormGroupToParams(this.form));
   }
 }
 
