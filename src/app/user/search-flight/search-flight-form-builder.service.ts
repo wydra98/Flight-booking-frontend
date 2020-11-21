@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Airport} from "../../models/airport";
-import {FlightRequestQueryParams} from "../../models/flight-request-query-params";
-import {OrderingService} from "../../services/ordering.service";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Airport} from '../../models/airport';
+import {FlightRequestQueryParams} from '../../models/flight-request-query-params';
+import {OrderingService} from '../../services/ordering.service';
 
 
 @Injectable({
@@ -71,13 +71,13 @@ export class SearchFlightFormBuilderService {
         this.findAirportId(form.controls['changeLocation3'].value) : null,
       fourthChangeId: form.controls['changeLocation4'].value ?
         this.findAirportId(form.controls['changeLocation4'].value) : null,
-      departureDate: this.parseDate(form.controls['departureDate'].value),
-      arrivalDate: form.controls['arrivalDate'].value ?
-        this.parseDate(form.controls['arrivalDate'].value)
-        : null,
+      fromDeparture: this.parseDate(form.controls['fromDeparture'].value),
+      toDeparture: this.parseDate(form.controls['toDeparture'].value),
+      toArrival: form.controls['fromArrival'].value ? this.parseDate(form.controls['fromArrival'].value) : null,
+      fromArrival: form.controls['toArrival'].value ? this.parseDate(form.controls['toArrival'].value) : null,
       passengerNumber: form.controls['passengersNumber'].value,
-      maxChanges: form.controls['maxChanges'].value,
-      maxTimeBetweenChanges: form.controls['maxTimeBetweenChanges'].value,
+      maxChanges: form.controls['maxChanges'].value ? form.controls['maxChanges'].value : null,
+      maxTimeBetweenChanges: form.controls['maxTimeBetweenChanges'].value ? form.controls['maxTimeBetweenChanges'].value : null,
       twoTrip: checkBoxValue
     };
   }
@@ -154,7 +154,7 @@ export class SearchFlightFormBuilderService {
     this.orderingService.fetchAirports().subscribe(
       (airports) => {
         this.airports = airports;
-      })
+      });
   }
 
   private findAirportId(airportDn: string): number {

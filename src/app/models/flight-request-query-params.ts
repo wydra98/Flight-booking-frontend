@@ -1,14 +1,17 @@
 export class FlightRequestQueryParams {
-  arrivalDate: string;
+
+  fromDeparture: string;
+  toDeparture: string;
+  toArrival: string;
+  fromArrival: string;
   firstChangeId: number;
-  departureDate: string;
   secondChangeId: number;
   thirdChangeId: number;
   fourthChangeId: number;
   dstAirportId: number;
   passengerNumber: number;
-  maxChanges: number;
-  maxTimeBetweenChanges: number;
+  maxChanges: string;
+  maxTimeBetweenChanges: string;
   srcAirportId: number;
   twoTrip: boolean;
 }
