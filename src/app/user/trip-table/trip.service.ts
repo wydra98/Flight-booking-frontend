@@ -31,10 +31,7 @@ export class TripService {
     return this.passengers.asObservable()
   }
 
-  navigateToDetails(row) {
-    this.chosenTrip.next(row);
-    this.router.navigate(['/tripAdminDetails']);
-  }
+
 
   public fetchTrips(id: number): Observable<any> {
     return this.httpClient.get<Trip[]>(URL + '/trips/user', {
@@ -77,6 +74,28 @@ export class TripService {
     )
   }
 
+  public getPassengers2(row): void {
+    this.httpClient.get<Passenger[]>(URL + '/passengers/trip', {
+      params: {
+        id: row.id.toString()
+      }
+    }).subscribe(
+      (passenger) => {
+        this.passengers.next(passenger);
+        this.navigateToDetails2(row);
+      }
+    )
+  }
+
+  navigateToDetails(row) {
+    this.chosenTrip.next(row);
+    this.router.navigate(['/tripAdminDetails']);
+  }
+
+  navigateToDetails2(row) {
+    this.chosenTrip.next(row);
+    this.router.navigate(['/tripDetails']);
+  }
 
   public toViewData(trips: Trip[]): TripToView[] {
     return trips.map((trip) => {
@@ -140,7 +159,8 @@ export class TripService {
         departureDate: ticket.departureDate,
         departureTime: ticket.departureTime,
         departureTimezone: this.extractTimezone(ticket.flightDto.srcAirport.timezone),
-        price: ticket.totalPrice
+        price: ticket.totalPrice,
+        seatNumber: ticket.seatNumber,
       } as IntermediateConnection;
     })
   }

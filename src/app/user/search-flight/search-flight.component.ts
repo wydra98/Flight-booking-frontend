@@ -51,6 +51,7 @@ export class SearchFlightComponent implements OnInit{
   }
 
   ngOnInit() {
+    typeColumn = [];
     this.orderingService.clearService();
     this.airports = this.orderingService.getAirports();
     this.airports.forEach((airport) => { typeColumn.push(airport.city+', '+airport.country)})

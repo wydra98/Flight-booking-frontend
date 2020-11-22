@@ -1,8 +1,8 @@
 export class Passenger {
   id?: number;
-  firstName: string
+  firstName: string;
   surname: string;
-  dateOfBirth: string;
+  documentId: string;
   phoneNumber: string;
   email: string;
   pesel: string;

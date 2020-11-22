@@ -4,8 +4,8 @@ export interface Ticket {
   flightDto: Flight;
   departureDate: string;
   arrivalDate: string;
-  arrivalTime:  string;
-  departureTime:  string;
+  arrivalTime: string;
+  departureTime: string;
   seatNumber?: number;
   totalPrice: number;
 }

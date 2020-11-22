@@ -21,7 +21,7 @@ export class OrderComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.passengersNumber = this.orderService.getPassengersNumber();
+    this.passengersNumber = 1/*this.orderService.getPassengersNumber()*/;
     this.initializePassengersForm();
     this.maxDateForBirthDate = this.orderFormBuilder.getMaxDateForBirthDate();
   }
@@ -31,14 +31,14 @@ export class OrderComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    let response = this.orderFormBuilder.checkIfPeselDuplicateExists(this.passengerForm);
-    if(!response){
+    const response = this.orderFormBuilder.checkIfPeselDuplicateExists(this.passengerForm);
+    if (!response){
       this.orderService.onPassengerFormFilled(
         this.orderFormBuilder.mapFormArrayToPassengers(this.passengerForm)
       );
     }
     else{
-      this.snackBar.showSnackbar("Numery PESEL muszą się różnić", 'fail')
+      this.snackBar.showSnackbar('Numery PESEL muszą się różnić', 'fail')
     }
   }
 }

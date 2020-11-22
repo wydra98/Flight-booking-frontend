@@ -3,7 +3,7 @@
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-      <td mat-cell *matCellDef="let row let i = index">{{i+1}}</td>
+      <td mat-cell *matCellDef="let row let i = index">{{i + 1}}</td>
     </ng-container>
 
     <ng-container matColumnDef="departurePlace">
@@ -13,7 +13,8 @@
 
     <ng-container matColumnDef="departureTime">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Data wylotu</th>
-      <td mat-cell *matCellDef="let row">{{row.departureDate}}, {{row.departureTime}}<sup>{{row.departureTimezone}}</sup></td>
+      <td mat-cell *matCellDef="let row">{{row.departureDate}}, {{row.departureTime}}
+        <sup>{{row.departureTimezone}}</sup></td>
     </ng-container>
 
     <ng-container matColumnDef="arrivalPlace">
@@ -26,6 +27,13 @@
       <td mat-cell *matCellDef="let row">{{row.arrivalDate}}, {{row.arrivalTime}}<sup>{{row.arrivalTimezone}}</sup></td>
     </ng-container>
 
+    <ng-container *ngIf="seatNumber">
+      <ng-container matColumnDef="seatNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Numer miejsca</th>
+        <td mat-cell *matCellDef="let row">{{row.seatNumber}}</td>
+      </ng-container>
+    </ng-container>
+
     <ng-container matColumnDef="airline">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Linia</th>
       <td mat-cell *matCellDef="let row">{{row.airline}}</td>
@@ -33,7 +41,7 @@
 
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Cena za 1os.</th>
-      <td mat-cell *matCellDef="let row">{{row.price}} PLN </td>
+      <td mat-cell *matCellDef="let row">{{row.price}} PLN</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

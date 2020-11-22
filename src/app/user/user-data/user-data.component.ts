@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {UserDataService} from "./user-data.service";
-import {OrderingService} from "../../services/ordering.service";
 import {DialogService} from "../../services/dialog.service";
 import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
 import {Router} from "@angular/router";
@@ -30,9 +29,9 @@ export class UserDataComponent implements OnInit {
 
   ngOnInit(): void {
     this.passengerForm = this.userService.createUserForm();
-    this.name =this.auth.getName()
-    this.surname =this.auth.getSurname()
-    this.email =this.auth.getEmail()
+    this.name =this.auth.getName();
+    this.surname =this.auth.getSurname();
+    this.email =this.auth.getEmail();
   }
 
   public onSubmitUser() {

@@ -11,6 +11,7 @@ import {IntermediateConnection} from "../../flight-view-data";
 export class FlightTableComponent implements AfterViewInit, OnInit {
   @ViewChild(MatTable) table: MatTable<IntermediateConnection>;
   @Input() changes: IntermediateConnection[];
+  @Input() seatNumber: boolean;
   dataSource: FlightTableDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
@@ -18,6 +19,9 @@ export class FlightTableComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.dataSource = new FlightTableDataSource(this.changes);
+    if(this.seatNumber){
+      this.displayedColumns.push("seatNumber");
+    }
   }
 
   ngAfterViewInit() {

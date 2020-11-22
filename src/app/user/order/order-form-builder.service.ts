@@ -28,7 +28,7 @@ export class OrderFormBuilderService {
       form.push(new FormGroup({
           firstname: new FormControl('', OrderFormBuilderService.getValidatorsForName()),
           surname: new FormControl('', OrderFormBuilderService.getValidatorsForName()),
-          dateOfBirth: new FormControl('', Validators.required),
+          documentId: new FormControl('', OrderFormBuilderService.getValidatorsForId()),
           phoneNumber: new FormControl('', OrderFormBuilderService.getValidatorsForPhoneNumber()),
           pesel: new FormControl('', OrderFormBuilderService.getValidatorsForPesel()),
           email: new FormControl('', OrderFormBuilderService.getValidatorsForEmail())
@@ -54,7 +54,7 @@ export class OrderFormBuilderService {
       passengers.push({
           firstName: form.at(i).get('firstname').value,
           surname: form.at(i).get('surname').value,
-          dateOfBirth: this.parseDate(form.at(i).get('dateOfBirth').value),
+          documentId: form.at(i).get('documentId').value,
           pesel: form.at(i).get('pesel').value,
           phoneNumber: form.at(i).get('phoneNumber').value,
           email: form.at(i).get('email').value ? form.at(i).get('email').value : null
@@ -78,6 +78,11 @@ export class OrderFormBuilderService {
 
   private static getValidatorsForName(): Array<ValidatorFn> {
     return [Validators.required, Validators.minLength(2), Validators.pattern(/[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/)];
+  }
+
+  private static getValidatorsForId(): Array<ValidatorFn> {
+    return [Validators.required, Validators.maxLength(6),
+      Validators.minLength(6), Validators.pattern(/[0-9A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/)];
   }
 
   private static getValidatorsForPhoneNumber(): Array<ValidatorFn> {

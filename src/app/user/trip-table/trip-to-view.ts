@@ -14,6 +14,7 @@ export interface TripToView {
   departureTimezone: string;
   price: number;
   passengers: number;
+  seatNumber: number;
   purchaseDate: string;
   purchaseTime: string;
   arrivalTimezone: string;

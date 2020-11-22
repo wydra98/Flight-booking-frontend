@@ -80,7 +80,7 @@ export class PassengerTableDataSource extends DataSource<Passenger> {
       switch (this.sort.active) {
         case 'firstName': return compare(a.firstName, b.firstName, isAsc);
         case 'surname': return compare(a.surname, b.surname, isAsc);
-        case 'dateOfBirth': return compare(a.dateOfBirth, b.dateOfBirth, isAsc);
+        case 'dateOfBirth': return compare(a.documentId, b.documentId, isAsc);
         case 'phoneNumber': return compare(a.phoneNumber, b.phoneNumber, isAsc);
         case 'email': return compare(a.email, b.email, isAsc);
         case 'pesel': return compare(a.pesel, b.pesel, isAsc);

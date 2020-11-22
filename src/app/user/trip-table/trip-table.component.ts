@@ -43,8 +43,8 @@ export class TripTableComponent implements OnInit {
   public fetchTrips(): void {
     this.tripService.fetchTrips(parseInt(this.auth.getId())).subscribe(
       (trips: Trip[]) => {
-        this.trips = trips
-        this.tripsToView = this.tripService.toViewData(this.trips)
+        this.trips = trips;
+        this.tripsToView = this.tripService.toViewData(this.trips);
         this.dataSource = new TripTableDatasource(this.tripsToView, this.dialogService, this.snackbar,
           this.tripService, this.auth);
 
@@ -56,7 +56,7 @@ export class TripTableComponent implements OnInit {
   }
 
   navigateToDetails(row) {
-    this.tripService.getPassengers(row);
+    this.tripService.getPassengers2(row);
   }
 
   delete(row) {
