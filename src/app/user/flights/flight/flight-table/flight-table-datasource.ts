@@ -1,15 +1,15 @@
-import { DataSource } from '@angular/cdk/collections';
-import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
-import {MatTableDataSource} from "@angular/material/table";
-import {IntermediateConnection} from "../../flight-view-data";
+import {DataSource} from '@angular/cdk/collections';
+import {map} from 'rxjs/operators';
+import {Observable, of as observableOf, merge} from 'rxjs';
+import {MatTableDataSource} from '@angular/material/table';
+import {IntermediateConnection} from '../../flight-view-data';
 
 export class FlightTableDataSource extends DataSource<IntermediateConnection> {
   dataSource: MatTableDataSource<IntermediateConnection>;
 
   constructor(public tickets: IntermediateConnection[]) {
     super();
-    this.dataSource = new MatTableDataSource(tickets)
+    this.dataSource = new MatTableDataSource(tickets);
   }
 
   /**
@@ -32,7 +32,8 @@ export class FlightTableDataSource extends DataSource<IntermediateConnection> {
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect() {}
+  disconnect() {
+  }
 }
 
 

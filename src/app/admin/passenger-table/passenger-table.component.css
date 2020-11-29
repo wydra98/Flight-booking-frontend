@@ -2,34 +2,34 @@
   width: 100%;
 }
 
-mat-toolbar{
+mat-toolbar {
   background: white;
   margin-bottom: 20px;
-  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
 }
 
-.wrapper{
+.wrapper {
   margin: 2vh auto 0 auto;
   width: 90%;
   text-align: right;
 }
 
-.mat-elevation-z8{
-  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+.mat-elevation-z8 {
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
   background: white;
   text-align: left;
 }
 
-button{
+button {
   margin-right: 1vh;
   margin-bottom: 1vh;
 }
 
-.mat-paginator{
+.mat-paginator {
   margin-bottom: 5vh;
 }
 
-a:hover{
+a:hover {
   cursor: pointer;
 }
 

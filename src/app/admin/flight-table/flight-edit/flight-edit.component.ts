@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import {FormGroup} from "@angular/forms";
-import {Airport} from "../../../models/airport";
-import {DialogService} from "../../../services/dialog.service";
-import {SnackBarComponent} from "../../../snack-bar/snack-bar.component";
-import {Router} from "@angular/router";
-import {BehaviorSubject} from "rxjs";
-import {Airline} from "../../../models/airline";
-import {FlightService} from "../flight.service";
-import {Type} from "../../../user/search-flight/Type";
-import {FlightResponse} from "../flight-to-view";
+import {Component, OnInit} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import {Airport} from '../../../models/airport';
+import {DialogService} from '../../../services/dialog.service';
+import {SnackBarComponent} from '../../../snack-bar/snack-bar.component';
+import {Router} from '@angular/router';
+import {BehaviorSubject} from 'rxjs';
+import {Airline} from '../../../models/airline';
+import {FlightService} from '../flight.service';
+import {Type} from '../../../user/search-flight/Type';
+import {FlightResponse} from '../flight-to-view';
 
 let typeColumn = [];
 
@@ -35,12 +35,14 @@ export class FlightEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.airlines = []
-    this.airports = []
-    this.fetchFlight()
+    this.airlines = [];
+    this.airports = [];
+    this.fetchFlight();
     this.airports = this.flightService.getAirports();
     this.airlines = this.flightService.getAirlines();
-    this.airports.forEach((airport) => { typeColumn.push(airport.city+', '+airport.country)});
+    this.airports.forEach((airport) => {
+      typeColumn.push(airport.city + ', ' + airport.country);
+    });
     this.determineMinDate();
     this.createTypesList();
   }
@@ -48,9 +50,9 @@ export class FlightEditComponent implements OnInit {
   private fetchFlight() {
     this.flightService.getChosenFlight().subscribe(
       (flight: FlightResponse) => {
-        this.chosenFlight = flight
+        this.chosenFlight = flight;
       }
-    )
+    );
     this.flightForm = this.flightService.createFlightRequestForm();
   }
 
@@ -75,21 +77,19 @@ export class FlightEditComponent implements OnInit {
   }
 
   public onSubmit() {
-    console.log("Tu bedzie id lotu")
-    console.log(this.chosenFlight.id)
     this.dialogService.openConfirmDialog('Czy na pewno chcesz zmodyfikować lot?')
       .afterClosed().subscribe(res => {
       if (res) {
-        this.flightService.editFlight(this.flightService.mapToFlightRequestWithId(this.flightForm,this.chosenFlight.id)).subscribe(
+        this.flightService.editFlight(this.flightService.mapToFlightRequestWithId(this.flightForm, this.chosenFlight.id)).subscribe(
           () => {
-            this.snackbar.showSnackbar("Pomyślnie zmodyfikowano lot", 'success')
+            this.snackbar.showSnackbar('Pomyślnie zmodyfikowano lot', 'success');
             this.router.navigate(['flight']);
           },
           (err) => {
             this.snackbar.showSnackbar(err.error, 'fail');
           }
-        )
+        );
       }
-    })
+    });
   }
 }

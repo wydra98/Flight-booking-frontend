@@ -1,16 +1,15 @@
-import { DataSource } from '@angular/cdk/collections';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
-import {Passenger} from "../../models/passenger";
-import {MatTableDataSource} from "@angular/material/table";
-import {DialogService} from "../../services/dialog.service";
-import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
-import {AuthorizationService} from "../../auth/authorization.service";
-import {Router} from "@angular/router";
-import {PassengerService} from "./passenger.service";
-
+import {DataSource} from '@angular/cdk/collections';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {map} from 'rxjs/operators';
+import {Observable, of as observableOf, merge} from 'rxjs';
+import {Passenger} from '../../models/passenger';
+import {MatTableDataSource} from '@angular/material/table';
+import {DialogService} from '../../services/dialog.service';
+import {SnackBarComponent} from '../../snack-bar/snack-bar.component';
+import {AuthorizationService} from '../../auth/authorization.service';
+import {Router} from '@angular/router';
+import {PassengerService} from './passenger.service';
 
 /**
  * Data source for the PassengerTable view. This class should
@@ -29,7 +28,7 @@ export class PassengerTableDataSource extends DataSource<Passenger> {
               public authorizationService: AuthorizationService,
               public router: Router) {
     super();
-    this.dataSource = new MatTableDataSource(passengers)
+    this.dataSource = new MatTableDataSource(passengers);
   }
 
   /**
@@ -55,7 +54,8 @@ export class PassengerTableDataSource extends DataSource<Passenger> {
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect() {}
+  disconnect() {
+  }
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,
@@ -78,13 +78,20 @@ export class PassengerTableDataSource extends DataSource<Passenger> {
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
-        case 'firstName': return compare(a.firstName, b.firstName, isAsc);
-        case 'surname': return compare(a.surname, b.surname, isAsc);
-        case 'dateOfBirth': return compare(a.documentId, b.documentId, isAsc);
-        case 'phoneNumber': return compare(a.phoneNumber, b.phoneNumber, isAsc);
-        case 'email': return compare(a.email, b.email, isAsc);
-        case 'pesel': return compare(a.pesel, b.pesel, isAsc);
-        default: return 0;
+        case 'firstName':
+          return compare(a.firstName, b.firstName, isAsc);
+        case 'surname':
+          return compare(a.surname, b.surname, isAsc);
+        case 'documentId':
+          return compare(a.documentId, b.documentId, isAsc);
+        case 'phoneNumber':
+          return compare(a.phoneNumber, b.phoneNumber, isAsc);
+        case 'email':
+          return compare(a.email, b.email, isAsc);
+        case 'pesel':
+          return compare(a.pesel, b.pesel, isAsc);
+        default:
+          return 0;
       }
     });
   }
@@ -96,17 +103,17 @@ export class PassengerTableDataSource extends DataSource<Passenger> {
       if (res) {
         this.passengerService.deletePassenger(row.id).subscribe(
           () => {
-            const onePassenger = this.dataSource.data.find(passenger => passenger.id == row.id)
+            const onePassenger = this.dataSource.data.find(passenger => passenger.id == row.id);
             this.dataSource.data.splice(this.dataSource.data.indexOf(onePassenger), 1);
             this.passengerService.isLoading.next(2);
-            this.snackbar.showSnackbar('Pomyślnie usunięto pasażera', 'success')
+            this.snackbar.showSnackbar('Pomyślnie usunięto pasażera', 'success');
           },
           () => {
             this.snackbar.showSnackbar('Wystąpił błąd podczas usuwania pasażera', 'fail');
           }
-        )
+        );
       }
-    })
+    });
   }
 }
 

@@ -1,6 +1,6 @@
-import { Passenger } from '../../models/passenger';
-import { Injectable } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, Validators, FormGroup, ValidatorFn } from '@angular/forms';
+import {Passenger} from '../../models/passenger';
+import {Injectable} from '@angular/core';
+import {FormArray, FormControl, Validators, FormGroup, ValidatorFn} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -20,28 +20,30 @@ export class OrderFormBuilderService {
     'Nov': '11',
     'Dec': '12'
   };
-  constructor(private fb: FormBuilder) { }
+
+  constructor() {
+  }
 
   public createPassengerForm(passengerNumber: number): FormArray {
     const form = new FormArray([]);
     for (let i = 0; i < passengerNumber; i++) {
       form.push(new FormGroup({
-          firstname: new FormControl('', OrderFormBuilderService.getValidatorsForName()),
-          surname: new FormControl('', OrderFormBuilderService.getValidatorsForName()),
-          documentId: new FormControl('', OrderFormBuilderService.getValidatorsForId()),
-          phoneNumber: new FormControl('', OrderFormBuilderService.getValidatorsForPhoneNumber()),
-          pesel: new FormControl('', OrderFormBuilderService.getValidatorsForPesel()),
-          email: new FormControl('', OrderFormBuilderService.getValidatorsForEmail())
-        }));
+        firstname: new FormControl('', OrderFormBuilderService.getValidatorsForName()),
+        surname: new FormControl('', OrderFormBuilderService.getValidatorsForName()),
+        documentId: new FormControl('', OrderFormBuilderService.getValidatorsForId()),
+        phoneNumber: new FormControl('', OrderFormBuilderService.getValidatorsForPhoneNumber()),
+        pesel: new FormControl('', OrderFormBuilderService.getValidatorsForPesel()),
+        email: new FormControl('', OrderFormBuilderService.getValidatorsForEmail())
+      }));
     }
 
     return form;
   }
 
-  public checkIfPeselDuplicateExists(form: FormArray): boolean{
-    const pesel: string[] = []
+  public checkIfPeselDuplicateExists(form: FormArray): boolean {
+    const pesel: string[] = [];
     for (let i = 0; i < form.length; i++) {
-      pesel.push(form.at(i).get('pesel').value)
+      pesel.push(form.at(i).get('pesel').value);
     }
 
     return (new Set(pesel)).size !== pesel.length;
@@ -52,12 +54,12 @@ export class OrderFormBuilderService {
     const passengers: Passenger[] = [];
     for (let i = 0; i < form.length; i++) {
       passengers.push({
-          firstName: form.at(i).get('firstname').value,
-          surname: form.at(i).get('surname').value,
-          documentId: form.at(i).get('documentId').value,
-          pesel: form.at(i).get('pesel').value,
-          phoneNumber: form.at(i).get('phoneNumber').value,
-          email: form.at(i).get('email').value ? form.at(i).get('email').value : null
+        firstName: form.at(i).get('firstname').value,
+        surname: form.at(i).get('surname').value,
+        documentId: form.at(i).get('documentId').value,
+        pesel: form.at(i).get('pesel').value,
+        phoneNumber: form.at(i).get('phoneNumber').value,
+        email: form.at(i).get('email').value ? form.at(i).get('email').value : null
       });
     }
     return passengers;
@@ -87,11 +89,5 @@ export class OrderFormBuilderService {
 
   private static getValidatorsForPhoneNumber(): Array<ValidatorFn> {
     return [Validators.required, Validators.maxLength(9), Validators.minLength(9)];
-  }
-
-  private parseDate(date: string): string {
-    let [ weekDay, month, day, year ] = date.toString().split(' ');
-    month = this.MONTHS[month];
-    return `${year}-${month}-${day}`;
   }
 }

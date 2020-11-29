@@ -1,48 +1,48 @@
 /*Nagłówek*/
-mat-toolbar{
+mat-toolbar {
   background: white;
   margin-bottom: 20px;
-  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
 }
 
 /*Zamaskowanie zewnętrznej karty*/
-mat-card{
+mat-card {
   background: #f3f3f3;
 }
 
-.mat-card:not([class*=mat-elevation-z]){
+.mat-card:not([class*=mat-elevation-z]) {
   box-shadow: none;
   border: none;
 }
 
 /*Widoczna biała karta*/
-.outCard{
+.outCard {
   background: white;
   margin: 0 8vw 0 8vw;
-  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
 }
 
 /*Tytuł*/
-.mat-card-title{
+.mat-card-title {
   font-size: 1.3rem;
   padding: 2vh 0 2vh 3vw;
 }
 
 /*Poszczególne pola*/
-.userField{
+.userField {
   text-align: center;
   display: inline-block;
   margin: 3vh auto 5vh auto;
   width: 30%;
 }
 
-.title{
+.title {
   color: #777777;
   font-size: 1.0rem;
   margin-bottom: 1.5vh;
 }
 
-.content{
+.content {
   font-size: 1.2rem;
 }
 
@@ -52,11 +52,11 @@ mat-card{
   width: 40%;
 }
 
-.ng-tns-c165-10{
+.ng-tns-c165-10 {
   text-align: center;
 }
 
-.expansion{
+.expansion {
   text-align: center;
   margin: auto;
 }
@@ -67,7 +67,7 @@ button {
   width: 25%;
   margin: 3vh auto;
   background: white;
-  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
 }
 
 button:valid {

@@ -1,26 +1,26 @@
 /*Nagłówek*/
-mat-toolbar{
+mat-toolbar {
   background: white;
   margin-bottom: 20px;
-  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
 }
 
 /*Zamaskowanie zewnętrznej karty*/
-mat-card{
+mat-card {
   background: #f3f3f3;
 }
 
-.mat-card:not([class*=mat-elevation-z]){
+.mat-card:not([class*=mat-elevation-z]) {
   box-shadow: none;
   border: none;
 }
 
 /*Widoczna biała karta*/
-.outCard{
+.outCard {
   background: white;
   margin: 0 5vw 0 5vw;
   padding-bottom: 4vh;
-  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
 }
 
 /*Poszczególne elementy listy*/
@@ -29,7 +29,7 @@ mat-list {
 }
 
 /*Tytuł*/
-.mat-card-title{
+.mat-card-title {
   font-size: 1.2rem;
   padding: 3vh 0 2vh 3vw;
 }
@@ -46,7 +46,7 @@ button {
   width: 25%;
   margin: 3vh auto;
   background: white;
-  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
 }
 
 button:valid {

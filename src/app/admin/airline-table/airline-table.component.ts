@@ -1,14 +1,14 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTable} from '@angular/material/table';
 import {AirlineTableDataSource} from './airline-table-datasource';
-import {Airline} from "../../models/airline";
-import {AuthorizationService} from "../../auth/authorization.service";
-import {DialogService} from "../../services/dialog.service";
-import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
-import {Router} from "@angular/router";
-import {AirlineService} from "./airline.service";
+import {Airline} from '../../models/airline';
+import {AuthorizationService} from '../../auth/authorization.service';
+import {DialogService} from '../../services/dialog.service';
+import {SnackBarComponent} from '../../snack-bar/snack-bar.component';
+import {Router} from '@angular/router';
+import {AirlineService} from './airline.service';
 
 @Component({
   selector: 'app-airline-table',
@@ -40,7 +40,7 @@ export class AirlineTableComponent implements OnInit {
     this.fetchAirlines();
     this.airlineService.getLoading().subscribe(
       (number) => {
-        switch  (number){
+        switch (number) {
           case 0:
             this.isDataFetched = true;
             break;
@@ -48,17 +48,17 @@ export class AirlineTableComponent implements OnInit {
             this.isDataFetched = false;
             break;
           case 2:
-            this.ngOnInit()
+            this.ngOnInit();
             break;
         }
       }
-    )
+    );
   }
 
   public fetchAirlines(): void {
     this.airlineService.fetchAirlines().subscribe(
       (airlines: Airline[]) => {
-        this.airlines = airlines
+        this.airlines = airlines;
         this.dataSource = new AirlineTableDataSource(this.airlines, this.dialogService, this.snackbar,
           this.airlineService, this.auth, this.router);
 
@@ -66,10 +66,10 @@ export class AirlineTableComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.table.dataSource = this.dataSource;
       }
-    )
+    );
   }
 
-  navigateToAddPanel(){
+  navigateToAddPanel() {
     this.router.navigate(['/airlineAdd']);
   }
 

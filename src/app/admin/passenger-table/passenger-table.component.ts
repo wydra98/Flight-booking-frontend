@@ -1,14 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
-import { PassengerTableDataSource } from './passenger-table-datasource';
-import {Passenger} from "../../models/passenger";
-import {AuthorizationService} from "../../auth/authorization.service";
-import {DialogService} from "../../services/dialog.service";
-import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
-import {Router} from "@angular/router";
-import {PassengerService} from "./passenger.service";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTable} from '@angular/material/table';
+import {PassengerTableDataSource} from './passenger-table-datasource';
+import {Passenger} from '../../models/passenger';
+import {AuthorizationService} from '../../auth/authorization.service';
+import {DialogService} from '../../services/dialog.service';
+import {SnackBarComponent} from '../../snack-bar/snack-bar.component';
+import {Router} from '@angular/router';
+import {PassengerService} from './passenger.service';
 
 @Component({
   selector: 'app-passenger-table',
@@ -33,14 +33,14 @@ export class PassengerTableComponent implements OnInit {
   }
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'firstName', 'surname','dateOfBirth','phoneNumber','email','pesel','delete'];
+  displayedColumns = ['id', 'firstName', 'surname', 'documentId', 'phoneNumber', 'email', 'pesel', 'delete'];
 
   ngOnInit() {
     this.passengerService.isLoading.next(0);
     this.fetchPassengers();
     this.passengerService.getLoading().subscribe(
       (number) => {
-        switch  (number){
+        switch (number) {
           case 0:
             this.isDataFetched = true;
             break;
@@ -48,17 +48,17 @@ export class PassengerTableComponent implements OnInit {
             this.isDataFetched = false;
             break;
           case 2:
-            this.ngOnInit()
+            this.ngOnInit();
             break;
         }
       }
-    )
+    );
   }
 
   public fetchPassengers(): void {
     this.passengerService.fetchPassengers().subscribe(
       (passengers: Passenger[]) => {
-        this.passengers = passengers
+        this.passengers = passengers;
         this.dataSource = new PassengerTableDataSource(this.passengers, this.dialogService, this.snackbar,
           this.passengerService, this.auth, this.router);
 
@@ -66,7 +66,7 @@ export class PassengerTableComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.table.dataSource = this.dataSource;
       }
-    )
+    );
   }
 
   delete(row) {

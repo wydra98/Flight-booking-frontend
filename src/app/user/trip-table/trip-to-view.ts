@@ -1,4 +1,4 @@
-import {IntermediateConnection} from "../flights/flight-view-data";
+import {IntermediateConnection} from '../flights/flight-view-data';
 
 export interface TripToView {
   id: number;
@@ -11,6 +11,10 @@ export interface TripToView {
   arrivalPlace: string;
   arrivalDate: string;
   arrivalTime: string
+  departureDateGMT: string;
+  departureTimeGMT: string;
+  arrivalDateGMT: string;
+  arrivalTimeGMT: string;
   departureTimezone: string;
   price: number;
   passengers: number;

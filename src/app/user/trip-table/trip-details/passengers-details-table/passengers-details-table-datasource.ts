@@ -1,8 +1,8 @@
-import { DataSource } from '@angular/cdk/collections';
-import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
-import {MatTableDataSource} from "@angular/material/table";
-import {Passenger} from "../../../../models/passenger";
+import {DataSource} from '@angular/cdk/collections';
+import {map} from 'rxjs/operators';
+import {Observable, of as observableOf, merge} from 'rxjs';
+import {MatTableDataSource} from '@angular/material/table';
+import {Passenger} from '../../../../models/passenger';
 
 
 export class PassengersDetailsTableDataSource extends DataSource<Passenger> {
@@ -10,7 +10,7 @@ export class PassengersDetailsTableDataSource extends DataSource<Passenger> {
 
   constructor(public passengers: Passenger[]) {
     super();
-    this.dataSource = new MatTableDataSource(passengers)
+    this.dataSource = new MatTableDataSource(passengers);
   }
 
   /**
@@ -33,7 +33,8 @@ export class PassengersDetailsTableDataSource extends DataSource<Passenger> {
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect() {}
+  disconnect() {
+  }
 }
 
 

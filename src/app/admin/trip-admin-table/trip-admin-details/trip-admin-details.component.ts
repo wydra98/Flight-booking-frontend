@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {TripToView} from "../../../user/trip-table/trip-to-view";
-import {Passenger} from "../../../models/passenger";
-import {TripService} from "../../../user/trip-table/trip.service";
-import {User} from "../../../models/user";
+import {Component, OnInit} from '@angular/core';
+import {TripToView} from '../../../user/trip-table/trip-to-view';
+import {Passenger} from '../../../models/passenger';
+import {TripService} from '../../../user/trip-table/trip.service';
+import {User} from '../../../models/user';
 
 @Component({
   selector: 'app-trip-admin-details',
@@ -19,9 +19,9 @@ export class TripAdminDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.chosenTrip()
-    this.takeUser(this.tripToView.id)
-    this.takePassengers(this.tripToView.id)
+    this.chosenTrip();
+    this.takeUser(this.tripToView.id);
+    this.takePassengers(this.tripToView.id);
   }
 
   takeUser(id: number) {
@@ -30,9 +30,9 @@ export class TripAdminDetailsComponent implements OnInit {
         this.user = user;
       },
       (err) => {
-        console.log("error") + err
+        console.log('error') + err;
       }
-    )
+    );
   }
 
   takePassengers(id: number) {
@@ -41,20 +41,20 @@ export class TripAdminDetailsComponent implements OnInit {
         this.passengers = passengers;
       },
       (err) => {
-        console.log("error") + err
+        console.log('error') + err;
       }
-    )
+    );
   }
 
   chosenTrip() {
     this.tripService.getChosenTrip().subscribe(
       (tripToView) => {
-        this.tripToView = tripToView
+        this.tripToView = tripToView;
       },
       (err) => {
-        console.log("error") + err
+        console.log('error') + err;
       }
-    )
+    );
   }
 
 }

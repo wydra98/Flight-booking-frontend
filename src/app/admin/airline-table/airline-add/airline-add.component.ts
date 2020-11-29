@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {FormGroup} from "@angular/forms";
-import {DialogService} from "../../../services/dialog.service";
-import {SnackBarComponent} from "../../../snack-bar/snack-bar.component";
-import {Router} from "@angular/router";
-import {AirlineService} from "../airline.service";
+import {Component, OnInit} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import {DialogService} from '../../../services/dialog.service';
+import {SnackBarComponent} from '../../../snack-bar/snack-bar.component';
+import {Router} from '@angular/router';
+import {AirlineService} from '../airline.service';
 
 @Component({
   selector: 'app-airline-add',
@@ -30,15 +30,15 @@ export class AirlineAddComponent implements OnInit {
       if (res) {
         this.airlineService.addAirline(this.airlineService.mapToAirline(this.airlineForm)).subscribe(
           () => {
-            this.snackbar.showSnackbar("Pomyślnie dodano linię lotniczą", 'success')
+            this.snackbar.showSnackbar('Pomyślnie dodano linię lotniczą', 'success');
             this.router.navigate(['airline']);
           },
           (err) => {
             this.snackbar.showSnackbar(err.error, 'fail');
           }
-        )
+        );
       }
-    })
+    });
   }
 
 }

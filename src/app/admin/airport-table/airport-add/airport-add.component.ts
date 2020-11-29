@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup} from "@angular/forms";
-import {AirportService} from "../airport.service";
-import {DialogService} from "../../../services/dialog.service";
-import {SnackBarComponent} from "../../../snack-bar/snack-bar.component";
-import {Router} from "@angular/router";
+import {FormGroup} from '@angular/forms';
+import {AirportService} from '../airport.service';
+import {DialogService} from '../../../services/dialog.service';
+import {SnackBarComponent} from '../../../snack-bar/snack-bar.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-airport-add',
@@ -30,14 +30,14 @@ export class AirportAddComponent implements OnInit {
       if (res) {
         this.airportService.addAirport(this.airportService.mapToAirport(this.airportForm)).subscribe(
           () => {
-            this.snackbar.showSnackbar("Pomyślnie dodano lotnisko", 'success')
+            this.snackbar.showSnackbar('Pomyślnie dodano lotnisko', 'success');
             this.router.navigate(['airport']);
           },
           (err) => {
             this.snackbar.showSnackbar(err.error, 'fail');
           }
-        )
+        );
       }
-    })
+    });
   }
 }

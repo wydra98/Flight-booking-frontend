@@ -3,12 +3,12 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {map} from 'rxjs/operators';
 import {Observable, of as observableOf, merge} from 'rxjs';
-import {TripToView} from "./trip-to-view";
-import {DialogService} from "../../services/dialog.service";
-import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
-import {TripService} from "./trip.service";
-import {AuthorizationService} from "../../auth/authorization.service";
-import {MatTableDataSource} from "@angular/material/table";
+import {TripToView} from './trip-to-view';
+import {DialogService} from '../../services/dialog.service';
+import {SnackBarComponent} from '../../snack-bar/snack-bar.component';
+import {TripService} from './trip.service';
+import {AuthorizationService} from '../../auth/authorization.service';
+import {MatTableDataSource} from '@angular/material/table';
 
 /**
  * Data source for the TicketTable view. This class should
@@ -27,7 +27,7 @@ export class TripTableDatasource extends DataSource<TripToView> {
               public tripService: TripService,
               public authorizationService: AuthorizationService) {
     super();
-    this.dataSource = new MatTableDataSource(trips)
+    this.dataSource = new MatTableDataSource(trips);
   }
 
   /**
@@ -104,16 +104,16 @@ export class TripTableDatasource extends DataSource<TripToView> {
   delete(row) {
     let confirmDialog;
     if (row.departureDateParsed < this.todayDate) {
-      confirmDialog = this.dialogService.openConfirmDialog('Czy na pewno chcesz usunąć starą rezerwację?')
+      confirmDialog = this.dialogService.openConfirmDialog('Czy na pewno chcesz usunąć starą rezerwację?');
     } else {
-      confirmDialog = this.dialogService.openConfirmDialog('Czy na pewno chcesz anulować rezerwację?')
+      confirmDialog = this.dialogService.openConfirmDialog('Czy na pewno chcesz anulować rezerwację?');
     }
     confirmDialog
       .afterClosed().subscribe(res => {
       if (res) {
         this.tripService.deleteTrip(row.id).subscribe(
           () => {
-            const oneTrip = this.dataSource.data.find(trip => trip.id == row.id)
+            const oneTrip = this.dataSource.data.find(trip => trip.id == row.id);
             this.dataSource.data.splice(this.dataSource.data.indexOf(oneTrip), 1);
             this.paginator._changePageSize(this.paginator.pageSize);
 
@@ -122,9 +122,9 @@ export class TripTableDatasource extends DataSource<TripToView> {
           () => {
             this.snackbar.showSnackbar('Wystąpił błąd podczas usuwania', 'fail');
           }
-        )
+        );
       }
-    })
+    });
   }
 }
 

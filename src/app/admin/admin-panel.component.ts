@@ -1,9 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
-import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
-import {map, shareReplay} from "rxjs/operators";
-import {Router} from "@angular/router";
-import {AuthorizationService} from "../auth/authorization.service";
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-admin-panel',
@@ -12,7 +7,8 @@ import {AuthorizationService} from "../auth/authorization.service";
 })
 export class AdminPanelComponent {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

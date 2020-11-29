@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
 import {URL} from '../../environments/environment';
-import {Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
-import {SearchFlightService} from "./search-flight.service";
-import {Trip} from "../models/trip";
-import {BehaviorSubject, Observable, of} from "rxjs";
-import {Passenger} from "../models/passenger";
-import {map} from "rxjs/operators";
-import {BookingRequest} from "../models/booking-request";
-import {SnackBarComponent} from "../snack-bar/snack-bar.component";
-import {AuthorizationService} from "../auth/authorization.service";
-import {Airport} from "../models/airport";
+import {Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {SearchFlightService} from './search-flight.service';
+import {Trip} from '../models/trip';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {Passenger} from '../models/passenger';
+import {map} from 'rxjs/operators';
+import {BookingRequest} from '../models/booking-request';
+import {SnackBarComponent} from '../snack-bar/snack-bar.component';
+import {AuthorizationService} from '../auth/authorization.service';
+import {Airport} from '../models/airport';
 
 @Injectable({
   providedIn: 'root'
@@ -125,13 +125,13 @@ export class OrderingService {
   private rebuildFlightsComponent(): void {
     this.rebuildComponentWasTriggered = true;
     const parseStartDate = this.parseDateDeparture(this.chosenFlightStart);
-    this.flightsFromDestination = this.flightsFromDestination.filter( (flight) => {
-      let parseDate = this.parseDateDeparture(flight.departureDate)
-      if(parseDate >= parseStartDate){
+    this.flightsFromDestination = this.flightsFromDestination.filter((flight) => {
+      let parseDate = this.parseDateDeparture(flight.departureDate);
+      if (parseDate >= parseStartDate) {
         return true;
-      }
-      else
+      } else {
         return false;
+      }
     });
     this.flightsToRender.next(this.flightsFromDestination);
   }
@@ -145,22 +145,24 @@ export class OrderingService {
   private composeBookingRequest(): BookingRequest {
     return {
       userId: parseInt(this.auth.getId()),
-      tripsDto: [this.chosenFlightToDestination,this.chosenFlightFromDestination],
+      tripsDto: [this.chosenFlightToDestination, this.chosenFlightFromDestination],
       passengersDto: [...this.passengers]
     };
   }
 
-  public  fetchAirports(): Observable<Airport[]> {
-    return this.httpClient.get<Airport[]>(URL + '/airports/get')
+  public fetchAirports(): Observable<Airport[]> {
+    return this.httpClient.get<Airport[]>(URL + '/airports/get');
   }
 
-  public  fetchAirports2(): void {
+  public fetchAirports2(): void {
     this.httpClient.get<Airport[]>(URL + '/airports/get').subscribe(
-      (airports) => {this.airports = airports}
-    )
+      (airports) => {
+        this.airports = airports;
+      }
+    );
   }
 
-  public getAirports(): Airport[]{
+  public getAirports(): Airport[] {
     return this.airports;
   }
 

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {TripService} from "../trip.service";
-import {TripToView} from "../trip-to-view";
-import {Passenger} from "../../../models/passenger";
+import {TripService} from '../trip.service';
+import {TripToView} from '../trip-to-view';
+import {Passenger} from '../../../models/passenger';
 
 @Component({
   selector: 'app-trip-details',
@@ -17,30 +17,30 @@ export class TripDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.chosenTrip()
-    this.takePassengers(this.tripToView.id)
+    this.chosenTrip();
+    this.takePassengers();
   }
 
-  takePassengers(id: number) {
+  takePassengers() {
     this.tripService.getPassenger().subscribe(
       (passengers) => {
         this.passengers = passengers;
       },
       (err) => {
-        console.log("error") + err
+        console.log('error') + err;
       }
-    )
+    );
   }
 
   chosenTrip() {
     this.tripService.getChosenTrip().subscribe(
       (tripToView) => {
-        this.tripToView = tripToView
+        this.tripToView = tripToView;
       },
       (err) => {
-        console.log("error") + err
+        console.log('error') + err;
       }
-    )
+    );
   }
 
 

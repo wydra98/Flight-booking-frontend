@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
-import { Trip } from 'src/app/models/trip';
-import { FlightViewData, IntermediateConnection } from 'src/app/user/flights/flight-view-data';
-import { Ticket } from 'src/app/models/ticket';
-import { Airport } from 'src/app/models/airport';
+import {Injectable} from '@angular/core';
+import {Trip} from 'src/app/models/trip';
+import {FlightViewData, IntermediateConnection} from 'src/app/user/flights/flight-view-data';
+import {Ticket} from 'src/app/models/ticket';
+import {Airport} from 'src/app/models/airport';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TripViewDataService {
-  constructor() { }
+  constructor() {
+  }
 
   public toViewData(trip: Trip): FlightViewData {
 
@@ -20,22 +21,30 @@ export class TripViewDataService {
       price: trip.totalPrice,
       arrivalDate: trip.arrivalDate,
       departureDate: trip.departureDate,
+      departureTimeGMT: trip.departureTimeGMT,
+      arrivalTimeGMT: trip.arrivalTimeGMT,
+      departureDateGMT: trip.departureDateGMT,
+      arrivalDateGMT: trip.arrivalDateGMT,
+      passengersNumber: trip.passengerNumber,
       flights: this.extractIntermediateFlights(trip),
       departureTime: trip.departureTime,
       departureTimezone: this.extractTimezone(trip.arraysTicket[0].flightDto.srcAirport.timezone),
       arrivalTime: trip.arrivalTime,
       arrivalTimezone: this.extractTimezone(trip.arraysTicket[trip.arraysTicket.length - 1].flightDto.dstAirport.timezone)
-    }
+    };
   }
 
   private extractTimezone(timezone: number): string {
-    if (timezone >= 0) { return `+${timezone}`; }
-    else { return `${timezone}`; }
+    if (timezone >= 0) {
+      return `+${timezone}`;
+    } else {
+      return `${timezone}`;
+    }
   }
 
   private extractPlace(airport: Airport): string {
     return airport.city + ', '
-         + airport.country;
+      + airport.country;
   }
 
   private extractAirport(airport: Airport): string {
@@ -52,12 +61,16 @@ export class TripViewDataService {
         airline: ticket.flightDto.airline.name,
         arrivalDate: ticket.arrivalDate,
         arrivalTime: ticket.arrivalTime,
+        departureTimeGMT: ticket.departureTimeGMT,
+        arrivalTimeGMT: ticket.arrivalTimeGMT,
+        departureDateGMT: ticket.departureDateGMT,
+        arrivalDateGMT: ticket.arrivalDateGMT,
         arrivalTimezone: this.extractTimezone(ticket.flightDto.dstAirport.timezone),
         departureDate: ticket.departureDate,
         departureTime: ticket.departureTime,
         departureTimezone: this.extractTimezone(ticket.flightDto.srcAirport.timezone),
         price: ticket.totalPrice
       } as IntermediateConnection;
-    })
+    });
   }
 }

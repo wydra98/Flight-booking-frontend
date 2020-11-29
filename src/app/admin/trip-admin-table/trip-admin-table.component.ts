@@ -1,22 +1,21 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
-import {TripToView} from "../../user/trip-table/trip-to-view";
-import {TripTableDatasource} from "../../user/trip-table/trip-table-datasource";
-import {Trip} from "../../models/trip";
-import {TripService} from "../../user/trip-table/trip.service";
-import {AuthorizationService} from "../../auth/authorization.service";
-import {DialogService} from "../../services/dialog.service";
-import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
-import {TripAdminTableDataSource} from "./trip-admin-table-datasource";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTable} from '@angular/material/table';
+import {TripToView} from '../../user/trip-table/trip-to-view';
+import {Trip} from '../../models/trip';
+import {TripService} from '../../user/trip-table/trip.service';
+import {AuthorizationService} from '../../auth/authorization.service';
+import {DialogService} from '../../services/dialog.service';
+import {SnackBarComponent} from '../../snack-bar/snack-bar.component';
+import {TripAdminTableDataSource} from './trip-admin-table-datasource';
 
 @Component({
   selector: 'app-trip-admin-table',
   templateUrl: './trip-admin-table.component.html',
   styleUrls: ['./trip-admin-table.component.css']
 })
-export class TripAdminTableComponent implements  OnInit {
+export class TripAdminTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<TripToView>;
@@ -35,7 +34,7 @@ export class TripAdminTableComponent implements  OnInit {
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'departurePlace', 'departureTime', 'arrivalPlace',
-    'arrivalTime', 'price', 'passengers', 'ticketsNumber', 'changes', 'details', 'delete'];
+    'arrivalTime' ,'price', 'passengers', 'ticketsNumber', 'changes', 'details', 'delete'];
 
   ngOnInit() {
     this.fetchTrips();
@@ -44,8 +43,8 @@ export class TripAdminTableComponent implements  OnInit {
   public fetchTrips(): void {
     this.tripService.fetchTripsAll().subscribe(
       (trips: Trip[]) => {
-        this.trips = trips
-        this.tripsToView = this.tripService.toViewData(this.trips)
+        this.trips = trips;
+        this.tripsToView = this.tripService.toViewData(this.trips);
         this.dataSource = new TripAdminTableDataSource(this.tripsToView, this.dialogService, this.snackbar,
           this.tripService, this.auth);
 
@@ -53,7 +52,7 @@ export class TripAdminTableComponent implements  OnInit {
         this.dataSource.paginator = this.paginator;
         this.table.dataSource = this.dataSource;
       }
-    )
+    );
   }
 
   navigateToDetails(row) {

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {AuthorizationService} from "../../auth/authorization.service";
+import {Component, OnInit} from '@angular/core';
+import {AuthorizationService} from '../../auth/authorization.service';
 
 @Component({
   selector: 'app-finish',
@@ -14,11 +14,11 @@ export class FinishComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initName()
+    this.initName();
   }
 
-  public initName(){
-    this.name = this.auth.getName()
+  public initName() {
+    this.name = this.auth.getName();
   }
 
 }

@@ -3,12 +3,12 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTable} from '@angular/material/table';
 import {TripTableDatasource} from './trip-table-datasource';
-import {TripService} from "./trip.service";
-import {AuthorizationService} from "../../auth/authorization.service";
-import {Trip} from "../../models/trip";
-import {TripToView} from "./trip-to-view";
-import {DialogService} from "../../services/dialog.service";
-import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
+import {TripService} from './trip.service';
+import {AuthorizationService} from '../../auth/authorization.service';
+import {Trip} from '../../models/trip';
+import {TripToView} from './trip-to-view';
+import {DialogService} from '../../services/dialog.service';
+import {SnackBarComponent} from '../../snack-bar/snack-bar.component';
 
 @Component({
   selector: 'app-ticket-table',
@@ -52,7 +52,7 @@ export class TripTableComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.table.dataSource = this.dataSource;
       }
-    )
+    );
   }
 
   navigateToDetails(row) {

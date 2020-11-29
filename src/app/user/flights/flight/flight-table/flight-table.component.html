@@ -12,9 +12,13 @@
     </ng-container>
 
     <ng-container matColumnDef="departureTime">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Data wylotu</th>
-      <td mat-cell *matCellDef="let row">{{row.departureDate}}, {{row.departureTime}}
-        <sup>{{row.departureTimezone}}</sup></td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Data wylotu(GMT)</th>
+      <td mat-cell *matCellDef="let row">{{row.departureDateGMT}}, {{row.departureTimeGMT}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="departureTimeLocal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Data wylotu(lokalnie)</th>
+      <td mat-cell *matCellDef="let row">{{row.departureDate}}, {{row.departureTime}}</td>
     </ng-container>
 
     <ng-container matColumnDef="arrivalPlace">
@@ -23,8 +27,13 @@
     </ng-container>
 
     <ng-container matColumnDef="arrivalTime">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Data przylotu</th>
-      <td mat-cell *matCellDef="let row">{{row.arrivalDate}}, {{row.arrivalTime}}<sup>{{row.arrivalTimezone}}</sup></td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Data przylotu(GMT)</th>
+      <td mat-cell *matCellDef="let row">{{row.arrivalDateGMT}}, {{row.arrivalTimeGMT}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="arrivalTimeLocal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Data przylotu(lokalnie)</th>
+      <td mat-cell *matCellDef="let row">{{row.arrivalDate}}, {{row.arrivalTime}}</td>
     </ng-container>
 
     <ng-container *ngIf="seatNumber">

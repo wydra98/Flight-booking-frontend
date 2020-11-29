@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {FormGroup, Validators, FormBuilder} from "@angular/forms";
-import {AuthorizationService} from "../auth/authorization.service";
-import {SnackBarComponent} from "../snack-bar/snack-bar.component";
+import {Router} from '@angular/router';
+import {FormGroup, Validators, FormBuilder} from '@angular/forms';
+import {AuthorizationService} from '../auth/authorization.service';
+import {SnackBarComponent} from '../snack-bar/snack-bar.component';
 
 @Component({
   selector: 'app-log-in',

@@ -1,11 +1,11 @@
 import {URL} from '../../environments/environment';
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
-import {Trip} from "../models/trip";
-import {HttpClient} from "@angular/common/http";
-import {FlightRequestQueryParams} from "../models/flight-request-query-params";
-import {Router} from "@angular/router";
-import {SnackBarComponent} from "../snack-bar/snack-bar.component";
+import {BehaviorSubject, Observable} from 'rxjs';
+import {Trip} from '../models/trip';
+import {HttpClient} from '@angular/common/http';
+import {FlightRequestQueryParams} from '../models/flight-request-query-params';
+import {Router} from '@angular/router';
+import {SnackBarComponent} from '../snack-bar/snack-bar.component';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +28,6 @@ export class SearchFlightService {
     this.httpClient.get<[Trip[], Trip[]]>(URL + '/trips/findTrips', this.createHttpOptions(params))
       .subscribe(
         (trips: [Trip[], Trip[]]) => {
-          console.log(trips);
           this.tripsToDestination.next(trips[0]);
           this.tripsFromDestination.next(trips[1]);
           this.signal.next(true);

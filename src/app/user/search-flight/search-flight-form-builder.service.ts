@@ -115,18 +115,14 @@ export class SearchFlightFormBuilderService {
   public addRequiredValidatorToMaxChanges(form: FormGroup): void {
     form.controls.maxChanges.enable();
     form.controls.maxChanges.setValue(1);
-    form.controls.maxChanges.setValidators(Validators.required);
-    form.controls.maxChanges.setValidators(Validators.max(4));
-    form.controls.maxChanges.setValidators(Validators.min(1));
+    form.controls.maxChanges.setValidators([Validators.required, Validators.max(3), Validators.min(1)]);
     form.controls.maxChanges.updateValueAndValidity();
   }
 
   public addRequiredValidatorToTimeBetweenChanges(form: FormGroup): void {
     form.controls.maxTimeBetweenChanges.enable();
     form.controls.maxTimeBetweenChanges.setValue(6);
-    form.controls.maxTimeBetweenChanges.setValidators(Validators.required);
-    form.controls.maxTimeBetweenChanges.setValidators(Validators.max(12));
-    form.controls.maxTimeBetweenChanges.setValidators(Validators.min(1));
+    form.controls.maxTimeBetweenChanges.setValidators([Validators.required, Validators.max(12), Validators.min(1)]);
     form.controls.maxTimeBetweenChanges.updateValueAndValidity();
   }
 

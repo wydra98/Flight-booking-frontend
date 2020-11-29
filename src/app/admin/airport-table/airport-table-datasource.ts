@@ -1,15 +1,15 @@
-import { DataSource } from '@angular/cdk/collections';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
-import {Airport} from "../../models/airport";
-import {MatTableDataSource} from "@angular/material/table";
-import {DialogService} from "../../services/dialog.service";
-import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
-import {AuthorizationService} from "../../auth/authorization.service";
-import {AirportService} from "./airport.service";
-import {Router} from "@angular/router";
+import {DataSource} from '@angular/cdk/collections';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {map} from 'rxjs/operators';
+import {Observable, of as observableOf, merge} from 'rxjs';
+import {Airport} from '../../models/airport';
+import {MatTableDataSource} from '@angular/material/table';
+import {DialogService} from '../../services/dialog.service';
+import {SnackBarComponent} from '../../snack-bar/snack-bar.component';
+import {AuthorizationService} from '../../auth/authorization.service';
+import {AirportService} from './airport.service';
+import {Router} from '@angular/router';
 
 /**
  * Data source for the AirportTable view. This class should
@@ -28,7 +28,7 @@ export class AirportTableDataSource extends DataSource<Airport> {
               public authorizationService: AuthorizationService,
               public router: Router) {
     super();
-    this.dataSource = new MatTableDataSource(airports)
+    this.dataSource = new MatTableDataSource(airports);
   }
 
   /**
@@ -54,7 +54,8 @@ export class AirportTableDataSource extends DataSource<Airport> {
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect() {}
+  disconnect() {
+  }
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,
@@ -77,14 +78,22 @@ export class AirportTableDataSource extends DataSource<Airport> {
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'city': return compare(a.city, b.city, isAsc);
-        case 'country': return compare(a.country, b.country, isAsc);
-        case 'timezone': return compare(a.timezone, b.timezone, isAsc);
-        case 'longitude': return compare(a.longitude, b.longitude, isAsc);
-        case 'latitude': return compare(a.latitude, b.latitude, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
-        default: return 0;
+        case 'name':
+          return compare(a.name, b.name, isAsc);
+        case 'city':
+          return compare(a.city, b.city, isAsc);
+        case 'country':
+          return compare(a.country, b.country, isAsc);
+        case 'timezone':
+          return compare(a.timezone, b.timezone, isAsc);
+        case 'longitude':
+          return compare(a.longitude, b.longitude, isAsc);
+        case 'latitude':
+          return compare(a.latitude, b.latitude, isAsc);
+        case 'id':
+          return compare(+a.id, +b.id, isAsc);
+        default:
+          return 0;
       }
     });
   }
@@ -92,22 +101,22 @@ export class AirportTableDataSource extends DataSource<Airport> {
 
   delete(row) {
     this.dialogService.openConfirmDialog('Czy na pewno chcesz usunąć lotnisko? Spowoduje to usunięcie wszystkich elementów z nim związanych' +
-                                              ' i może potrwać chwilę czasu.')
+      ' i może potrwać chwilę czasu.')
       .afterClosed().subscribe(res => {
       if (res) {
         this.airportService.deleteAirport(row.id).subscribe(
           () => {
-            const oneAirport = this.dataSource.data.find(airport => airport.id == row.id)
+            const oneAirport = this.dataSource.data.find(airport => airport.id == row.id);
             this.dataSource.data.splice(this.dataSource.data.indexOf(oneAirport), 1);
             this.airportService.isLoading.next(2);
-            this.snackbar.showSnackbar('Pomyślnie usunięto lotnisko', 'success')
+            this.snackbar.showSnackbar('Pomyślnie usunięto lotnisko', 'success');
           },
           () => {
             this.snackbar.showSnackbar('Wystąpił błąd podczas usuwania lotniska', 'fail');
           }
-        )
+        );
       }
-    })
+    });
   }
 }
 

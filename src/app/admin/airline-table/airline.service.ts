@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {URL} from "../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, Observable} from "rxjs";
-import {Router} from "@angular/router";
-import {FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
-import {Airline} from "../../models/airline";
+import {URL} from '../../../environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {Router} from '@angular/router';
+import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
+import {Airline} from '../../models/airline';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +19,11 @@ export class AirlineService {
   }
 
   getChosenAirline(): Observable<Airline> {
-    return this.chosenAirline.asObservable()
+    return this.chosenAirline.asObservable();
   }
 
   getLoading(): Observable<number> {
-    return this.isLoading.asObservable()
+    return this.isLoading.asObservable();
   }
 
   navigateToEdit(row) {
@@ -59,20 +59,20 @@ export class AirlineService {
   }
 
   public addAirline(airline: Airline): Observable<any> {
-    return this.httpClient.post<Airline[]>(URL + '/airlines', airline)
+    return this.httpClient.post<Airline[]>(URL + '/airlines', airline);
   }
 
   public fetchAirlines(): Observable<any> {
-    return this.httpClient.get<Airline[]>(URL + '/airlines/get')
+    return this.httpClient.get<Airline[]>(URL + '/airlines/get');
   }
 
   public deleteAirline(id: number): Observable<any> {
-    this.isLoading.next(1)
+    this.isLoading.next(1);
     return this.httpClient.delete(URL + '/airlines/delete', {
       params: {
         id: id.toString()
       }
-    })
+    });
   }
 
   public editAirline(airline: Airline): Observable<any> {

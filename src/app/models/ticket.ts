@@ -6,6 +6,10 @@ export interface Ticket {
   arrivalDate: string;
   arrivalTime: string;
   departureTime: string;
+  departureDateGMT: string;
+  departureTimeGMT: string;
+  arrivalDateGMT: string;
+  arrivalTimeGMT: string;
   seatNumber?: number;
   totalPrice: number;
 }

@@ -1,14 +1,14 @@
-import { DataSource } from '@angular/cdk/collections';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
-import {TripToView} from "../../user/trip-table/trip-to-view";
-import {MatTableDataSource} from "@angular/material/table";
-import {DialogService} from "../../services/dialog.service";
-import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
-import {TripService} from "../../user/trip-table/trip.service";
-import {AuthorizationService} from "../../auth/authorization.service";
+import {DataSource} from '@angular/cdk/collections';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {map} from 'rxjs/operators';
+import {Observable, of as observableOf, merge} from 'rxjs';
+import {TripToView} from '../../user/trip-table/trip-to-view';
+import {MatTableDataSource} from '@angular/material/table';
+import {DialogService} from '../../services/dialog.service';
+import {SnackBarComponent} from '../../snack-bar/snack-bar.component';
+import {TripService} from '../../user/trip-table/trip.service';
+import {AuthorizationService} from '../../auth/authorization.service';
 
 /**
  * Data source for the TripAdminTable view. This class should
@@ -27,8 +27,9 @@ export class TripAdminTableDataSource extends DataSource<TripToView> {
               public tripService: TripService,
               public authorizationService: AuthorizationService) {
     super();
-    this.dataSource = new MatTableDataSource(trips)
+    this.dataSource = new MatTableDataSource(trips);
   }
+
   /**
    * Connect this data source to the table. The table will only update when
    * the returned stream emits new items.
@@ -47,11 +48,13 @@ export class TripAdminTableDataSource extends DataSource<TripToView> {
       return this.getPagedData(this.getSortedData([...this.dataSource.data]));
     }));
   }
+
   /**
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect() {}
+  disconnect() {
+  }
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,
@@ -101,16 +104,16 @@ export class TripAdminTableDataSource extends DataSource<TripToView> {
   delete(row) {
     let confirmDialog;
     if (row.departureDateParsed < this.todayDate) {
-      confirmDialog = this.dialogService.openConfirmDialog('Czy na pewno chcesz usunąć starą rezerwację?')
+      confirmDialog = this.dialogService.openConfirmDialog('Czy na pewno chcesz usunąć starą rezerwację?');
     } else {
-      confirmDialog = this.dialogService.openConfirmDialog('Czy na pewno chcesz anulować rezerwację?')
+      confirmDialog = this.dialogService.openConfirmDialog('Czy na pewno chcesz anulować rezerwację?');
     }
     confirmDialog
       .afterClosed().subscribe(res => {
       if (res) {
         this.tripService.deleteTrip(row.id).subscribe(
           () => {
-            const oneTrip = this.dataSource.data.find(trip => trip.id == row.id)
+            const oneTrip = this.dataSource.data.find(trip => trip.id == row.id);
             this.dataSource.data.splice(this.dataSource.data.indexOf(oneTrip), 1);
             this.paginator._changePageSize(this.paginator.pageSize);
 
@@ -119,13 +122,13 @@ export class TripAdminTableDataSource extends DataSource<TripToView> {
           () => {
             this.snackbar.showSnackbar('Wystąpił błąd podczas usuwania', 'fail');
           }
-        )
+        );
       }
-    })
+    });
   }
 }
 
 /** Simple sort comparator for example ID/Name columns (for client-side sorting). */
-function compare(a: string | number | Date, b: string | number| Date, isAsc: boolean) {
+function compare(a: string | number | Date, b: string | number | Date, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

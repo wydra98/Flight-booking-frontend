@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {SearchFlightFormBuilderService} from "./search-flight-form-builder.service";
-import {FormGroup} from "@angular/forms";
-import {BehaviorSubject, Subscription} from "rxjs";
-import {SearchFlightService} from "../../services/search-flight.service";
-import {OrderingService} from "../../services/ordering.service";
-import {Router} from "@angular/router";
-import {Type} from "./Type";
-import {Airport} from "../../models/airport";
+import {SearchFlightFormBuilderService} from './search-flight-form-builder.service';
+import {FormGroup} from '@angular/forms';
+import {BehaviorSubject, Subscription} from 'rxjs';
+import {SearchFlightService} from '../../services/search-flight.service';
+import {OrderingService} from '../../services/ordering.service';
+import {Router} from '@angular/router';
+import {Type} from './Type';
+import {Airport} from '../../models/airport';
 
 let typeColumn = [];
 
@@ -15,7 +15,7 @@ let typeColumn = [];
   templateUrl: './search-flight.component.html',
   styleUrls: ['./search-flight.component.css']
 })
-export class SearchFlightComponent implements OnInit{
+export class SearchFlightComponent implements OnInit {
   public readonly title = 'Dokąd lecimy?';
   public readonly subtitle = 'Wypełnij formularz i znajdź idealną podróż';
   public types$ = new BehaviorSubject([]);
@@ -27,20 +27,6 @@ export class SearchFlightComponent implements OnInit{
   public disableArrivalDate = false;
   public disableParameterChanges = false;
   public airports: Airport[];
-  private readonly MONTHS = {
-    'Jan': '01',
-    'Feb': '02',
-    'Mar': '03',
-    'Apr': '04',
-    'May': '05',
-    'Jun': '06',
-    'Jul': '07',
-    'Aug': '08',
-    'Sep': '09',
-    'Oct': '10',
-    'Nov': '11',
-    'Dec': '12'
-  };
 
   constructor(
     private formBuilder: SearchFlightFormBuilderService,
@@ -54,7 +40,9 @@ export class SearchFlightComponent implements OnInit{
     typeColumn = [];
     this.orderingService.clearService();
     this.airports = this.orderingService.getAirports();
-    this.airports.forEach((airport) => { typeColumn.push(airport.city+', '+airport.country)})
+    this.airports.forEach((airport) => {
+      typeColumn.push(airport.city + ', ' + airport.country);
+    });
     this.form = this.formBuilder.buildForm();
     this.subscribeToBothWaysParameter();
     this.subscribeToChangesFlights();
@@ -83,16 +71,10 @@ export class SearchFlightComponent implements OnInit{
     this.types$.next(types);
   }
 
-  private parseDateDeparture(date: string): Date {
-    let [weekDay, month, day, year] = date.toString().split(' ');
-    month = this.MONTHS[month];
-    return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-  }
-
   private subscribeToBothWaysParameter(): void {
     this.subscriptionsWaysParameter.add(this.form.controls['checkBox'].valueChanges.subscribe(
       (response: string) => {
-        if (response == "bothWay") {
+        if (response == 'bothWay') {
           this.formBuilder.addRequiredValidatorToArrivalDate(this.form);
           this.disableArrivalDate = false;
         } else {
@@ -108,7 +90,7 @@ export class SearchFlightComponent implements OnInit{
   private subscribeToChangesFlights(): void {
     this.subscriptionsChangesFlights.add(this.form.controls['checkBoxChange'].valueChanges.subscribe(
       (response: string) => {
-        if (response == "change") {
+        if (response == 'change') {
           this.formBuilder.addRequiredValidatorToMaxChanges(this.form);
           this.formBuilder.addRequiredValidatorToTimeBetweenChanges(this.form);
           this.disableParameterChanges = true;

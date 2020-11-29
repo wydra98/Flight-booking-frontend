@@ -4,7 +4,7 @@
 
 .sidenav {
   width: 300px;
-  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
 }
 
 .sidenav .mat-toolbar {
@@ -34,43 +34,41 @@
   background-color: #283590;
 }
 
-.mat-icon{
+.mat-icon {
   color: white;
 }
 
-
-
-.fa-home{
+.fa-home {
   margin-left: 13px;
   margin-right: 13px;
 }
 
-.fa-fighter-jet{
+.fa-fighter-jet {
   margin-left: 13px;
   margin-right: 9px;
 }
 
-.fa-plane{
+.fa-plane {
   margin-left: 13px;
   margin-right: 15px;
 }
 
-.fa-globe{
+.fa-globe {
   margin-left: 12px;
   margin-right: 15px;
 }
 
-.fa-ravelry{
+.fa-ravelry {
   margin-left: 6px;
   margin-right: 12px;
 }
 
-.fa-user{
+.fa-user {
   margin-left: 13px;
   margin-right: 15px;
 }
 
-.fa-suitcase{
+.fa-suitcase {
   margin-left: 10px;
   margin-right: 12px;
 }
@@ -80,7 +78,7 @@
   margin-right: 11px;
 }
 
-.menuToolbar{
+.menuToolbar {
   background: url('src/assets/logo.png') no-repeat center;
   background-size: contain;
 }

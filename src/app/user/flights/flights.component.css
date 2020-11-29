@@ -1,21 +1,20 @@
-mat-toolbar{
+mat-toolbar {
   background: white;
   margin-bottom: 20px;
-  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
 }
 
-::ng-deep .mat-horizontal-stepper-header{
+::ng-deep .mat-horizontal-stepper-header {
   pointer-events: none !important;
 }
 
 
-mat-horizontal-stepper{
+mat-horizontal-stepper {
   margin: 0 5vw;
   background: #f3f3f3;
 }
 
-
-mat-list{
+mat-list {
   margin-left: 2vw;
   margin-right: 2vw;
 }
@@ -24,16 +23,16 @@ mat-list {
   margin: 0 5vw;
 }
 
-.ng-container{
+.ng-container {
   margin: 0 2vw;
   text-align: center;
 }
 
-.mat-card{
+.mat-card {
   margin: 0 10vw;
   text-align: center;
   position: relative;
-  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
 }
 
 mat-spinner ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {

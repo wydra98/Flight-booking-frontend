@@ -11,9 +11,14 @@
     <div class="subtitle">
 
       <div class="date" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-calendar"></i>Data i
-        czas:     {{viewData.departureDate}}, {{viewData.departureTime}}<sup>{{viewData.departureTimezone}}</sup><i
+        czas lokalnie:     {{viewData?.departureDate}}, {{viewData?.departureTime}}<i
           style="margin-right: 0.7vw; margin-left: 0.9vw" class="fa fa-arrow-right"></i>
-        {{viewData.arrivalDate}} {{viewData.arrivalTime}}<sup>{{viewData.arrivalTimezone}}</sup></div>
+        {{viewData?.arrivalDate}}, {{viewData?.arrivalTime}}</div>
+
+      <div class="date" style="margin: 1vw 0"><i style="margin-right: 1.1vw" class="fa fa-calendar-o"></i>Data i
+        czas GMT:     {{viewData?.departureDateGMT}}, {{viewData?.departureTimeGMT}}
+        <i style="margin-right: 0.7vw; margin-left: 0.9vw" class="fa fa-arrow-right"></i>
+        {{viewData?.arrivalDateGMT}}, {{viewData?.arrivalTimeGMT}}</div>
 
       <ng-container *ngIf="this.passengerNumber == 1; else morePassengers2">
         <div class="changes" style="margin: 1vw 0"><i style="margin-right: 1vw" class="fa fa-list-ol"></i>Ilość biletów

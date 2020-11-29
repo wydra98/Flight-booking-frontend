@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
-import {URL} from "../../../environments/environment";
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
+import {URL} from '../../../environments/environment';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,14 +35,14 @@ export class UserDataService {
   }
 
 
-  public modifyUser(name: string, surname: string, email: string, password: string, id: string): Observable<any>{
+  public modifyUser(name: string, surname: string, email: string, password: string, id: string): Observable<any> {
     const params = new HttpParams()
       .set('id', id)
       .set('name', name)
       .set('surname', surname)
       .set('email', email)
-      .set('newPassword', password)
-    return this.httpClient.put(URL + '/users/modifyUser', params)
+      .set('newPassword', password);
+    return this.httpClient.put(URL + '/users/modifyUser', params);
   }
 
   public deleteAccount(id: string): Observable<any> {
@@ -51,6 +51,6 @@ export class UserDataService {
           id: id
         }
       }
-    )
+    );
   }
 }

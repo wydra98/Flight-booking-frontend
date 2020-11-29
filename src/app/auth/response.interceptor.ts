@@ -6,11 +6,11 @@ import {
   HttpInterceptor,
   HttpRequest,
   HttpResponse
-} from "@angular/common/http";
-import {Router} from "@angular/router";
-import {Observable} from "rxjs";
-import {tap} from "rxjs/operators";
-import {SnackBarComponent} from "../snack-bar/snack-bar.component";
+} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
+import {SnackBarComponent} from '../snack-bar/snack-bar.component';
 
 @Injectable()
 export class ResponseInterceptor implements HttpInterceptor {
@@ -29,10 +29,8 @@ export class ResponseInterceptor implements HttpInterceptor {
           if (error instanceof HttpErrorResponse) {
             if (error.status === 401) {
               this.router.navigate(['logIn']);
-              this.snackbar.showSnackbar('Nie masz dostępu do tego źródła', 'fail');
             }
           }
-        //  console.log(error);
         }
       )
     );

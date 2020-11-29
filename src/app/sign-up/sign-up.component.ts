@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthorizationService} from "../auth/authorization.service";
-import {FormGroup, Validators, FormBuilder} from "@angular/forms";
-import {Router} from "@angular/router";
-import {SnackBarComponent} from "../snack-bar/snack-bar.component";
+import {AuthorizationService} from '../auth/authorization.service';
+import {FormGroup, Validators, FormBuilder} from '@angular/forms';
+import {Router} from '@angular/router';
+import {SnackBarComponent} from '../snack-bar/snack-bar.component';
 
 @Component({
   selector: 'app-sign-up',
@@ -36,10 +36,9 @@ export class SignUpComponent implements OnInit {
             this.router.navigate(['logIn']);
             this.snackbar.showSnackbar('Pomyślnie zarejestrowano.', 'success');
           }, (err: any) => {
-            console.log(err)
             this.snackbar.showSnackbar(err.error, 'fail');
           }
-        )
+        );
     }
   }
 }

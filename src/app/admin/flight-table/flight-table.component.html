@@ -17,18 +17,13 @@
       </ng-container>
 
       <ng-container matColumnDef="departureDate">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Data wylotu</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Data wylotu(GMT)</th>
         <td mat-cell *matCellDef="let row">{{row.departureDate}}, {{row.departureTime}}</td>
       </ng-container>
 
       <ng-container matColumnDef="dstAirportName">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Miejsce przylotu</th>
         <td mat-cell *matCellDef="let row">{{row.dstAirportName}}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="flightTime">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Czas trwania lotu</th>
-        <td mat-cell *matCellDef="let row">{{row.flightTime}}</td>
       </ng-container>
 
       <ng-container matColumnDef="numberSeats">

@@ -6,7 +6,12 @@ export interface FlightViewData {
   price: number;
   departureDate: string;
   departureTime: string;
+  departureTimeGMT: string;
+  arrivalTimeGMT: string;
+  departureDateGMT: string;
+  arrivalDateGMT: string;
   departureTimezone: string;
+  passengersNumber: number
   arrivalDate: string;
   arrivalTime: string;
   arrivalTimezone: string;
@@ -21,6 +26,10 @@ export class IntermediateConnection {
   departureTimezone: string;
   arrivalDate: string;
   arrivalTime: string;
+  departureTimeGMT: string;
+  arrivalTimeGMT: string;
+  departureDateGMT: string;
+  arrivalDateGMT: string;
   arrivalTimezone: string;
   srcPlace: string;
   dstPlace: string;

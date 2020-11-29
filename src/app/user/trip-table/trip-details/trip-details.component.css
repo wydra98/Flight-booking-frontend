@@ -1,7 +1,7 @@
-mat-toolbar{
+mat-toolbar {
   background: white;
   margin-bottom: 20px;
-  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
   text-align: left;
 }
 
@@ -10,17 +10,17 @@ mat-toolbar{
   background: #f3f3f3;
 }
 
-.mat-card:not([class*=mat-elevation-z]){
+.mat-card:not([class*=mat-elevation-z]) {
   box-shadow: none;
   border: none;
 }
 
-.outCard{
+.outCard {
   background: white;
   padding: 2vh;
   padding-right: 4vw;
   padding-left: 4vw;
-  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
 }
 
 i {
@@ -41,7 +41,7 @@ i {
   color: black;
 }
 
-.mat-card{
+.mat-card {
   padding: 2vh 5vw;
 }
 
@@ -50,7 +50,7 @@ i {
   font-size: 1.2rem;
 }
 
-mat-card-content{
+mat-card-content {
   position: relative;
   text-align: left;
 }

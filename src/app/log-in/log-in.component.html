@@ -17,11 +17,11 @@
           <h1>Zaloguj się</h1>
         </div>
 
-        <form class="px-3"  [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+        <form class="px-3" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
 
           <div class="form-input">
             <span><i class="fa fa-envelope"></i></span>
-            <input type="email"  formControlName="email" name="" placeholder="Adres e-mail" tabindex="10" required>
+            <input type="email" formControlName="email" name="" placeholder="Adres e-mail" tabindex="10" required>
           </div>
 
           <div class="form-input">
@@ -34,7 +34,7 @@
           </div>
 
           <div class="text-center mb-5" style="color: #777;">Nie masz konta?
-            <a class="register-link" [routerLink]="['/signUp']" >Zarejestruj się</a>
+            <a class="register-link" [routerLink]="['/signUp']">Zarejestruj się</a>
           </div>
         </form>
       </div>

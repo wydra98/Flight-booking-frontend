@@ -2,59 +2,60 @@ form {
   text-align: center;
 }
 
-::ng-deep .mat-horizontal-stepper-header{
+::ng-deep .mat-horizontal-stepper-header {
   pointer-events: none !important;
 }
 
-.mat-step{
+.mat-step {
   color: #283590
 }
 
-mat-card{
+mat-card {
   background: #f3f3f3;
 }
 
-.mat-card:not([class*=mat-elevation-z]){
+.mat-card:not([class*=mat-elevation-z]) {
   box-shadow: none;
   border: none;
 }
 
-mat-card-header{
+mat-card-header {
   padding-top: 3vh;
   padding-left: 2vw;
 }
-mat-toolbar{
+
+mat-toolbar {
   background: white;
   margin-bottom: 20px;
-  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
 }
 
-.outCard{
+.outCard {
   background: white;
   margin: 0 5vw 2vh 5vw;
   padding-bottom: 4vh;
-  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
 
 }
 
-.mat-datepicker-toggle{
+.mat-datepicker-toggle {
   text-align: right;
 }
 
-.mat-radio-button  {
+.mat-radio-button {
   width: 15%;
   margin: 3vh 2vw;
 }
 
-.change1{
+.change1 {
   margin-right: 3vw;
 }
 
-.change2{
+.change2 {
   margin-left: 3vw;
 }
 
-mat-horizontal-stepper{
+mat-horizontal-stepper {
   margin: 0 5vw;
   background: #f3f3f3;
 }
@@ -77,24 +78,26 @@ button:hover {
   background: #4285f4;
 }
 
-.mat-radio-group{
+.mat-radio-group {
   margin: 5vh 2vw;
 }
 
 @media (max-width: 1150px) {
-  .passenger{
+  .passenger {
     width: 10%;
   }
-  .firstCheckbox{
+
+  .firstCheckbox {
     width: 20%;
   }
-  .secondCheckbox{
+
+  .secondCheckbox {
     width: 20%;
   }
 }
 
 @media (max-width: 850px) {
-  .secondCheckbox{
+  .secondCheckbox {
     display: block;
     width: 20%;
     margin: 0 20vw;

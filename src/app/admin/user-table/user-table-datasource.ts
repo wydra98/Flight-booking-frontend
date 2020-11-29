@@ -1,17 +1,15 @@
-import { DataSource } from '@angular/cdk/collections';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
-import {User} from "../../models/user";
-import {MatTableDataSource} from "@angular/material/table";
-import {Passenger} from "../../models/passenger";
-import {DialogService} from "../../services/dialog.service";
-import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
-import {PassengerService} from "../passenger-table/passenger.service";
-import {AuthorizationService} from "../../auth/authorization.service";
-import {Router} from "@angular/router";
-import {UserService} from "./user.service";
+import {DataSource} from '@angular/cdk/collections';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {map} from 'rxjs/operators';
+import {Observable, of as observableOf, merge} from 'rxjs';
+import {User} from '../../models/user';
+import {MatTableDataSource} from '@angular/material/table';
+import {DialogService} from '../../services/dialog.service';
+import {SnackBarComponent} from '../../snack-bar/snack-bar.component';
+import {AuthorizationService} from '../../auth/authorization.service';
+import {Router} from '@angular/router';
+import {UserService} from './user.service';
 
 
 /**
@@ -31,7 +29,7 @@ export class UserTableDataSource extends DataSource<User> {
               public authorizationService: AuthorizationService,
               public router: Router) {
     super();
-    this.dataSource = new MatTableDataSource(users)
+    this.dataSource = new MatTableDataSource(users);
   }
 
   /**
@@ -57,7 +55,8 @@ export class UserTableDataSource extends DataSource<User> {
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect() {}
+  disconnect() {
+  }
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,
@@ -80,10 +79,14 @@ export class UserTableDataSource extends DataSource<User> {
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'surname': return compare(a.surname, b.surname, isAsc);
-        case 'email': return compare(a.email, b.email, isAsc);
-        default: return 0;
+        case 'name':
+          return compare(a.name, b.name, isAsc);
+        case 'surname':
+          return compare(a.surname, b.surname, isAsc);
+        case 'email':
+          return compare(a.email, b.email, isAsc);
+        default:
+          return 0;
       }
     });
   }
@@ -95,17 +98,17 @@ export class UserTableDataSource extends DataSource<User> {
       if (res) {
         this.userService.deleteUser(row.id).subscribe(
           () => {
-            const oneUser = this.dataSource.data.find(user => user.id == row.id)
+            const oneUser = this.dataSource.data.find(user => user.id == row.id);
             this.dataSource.data.splice(this.dataSource.data.indexOf(oneUser), 1);
             this.userService.isLoading.next(2);
-            this.snackbar.showSnackbar('Pomyślnie usunięto pasażera', 'success')
+            this.snackbar.showSnackbar('Pomyślnie usunięto pasażera', 'success');
           },
           () => {
             this.snackbar.showSnackbar('Wystąpił błąd podczas usuwania pasażera', 'fail');
           }
-        )
+        );
       }
-    })
+    });
   }
 }
 

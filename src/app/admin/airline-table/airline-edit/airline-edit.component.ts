@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {FormGroup} from "@angular/forms";
-import {Airport} from "../../../models/airport";
-import {DialogService} from "../../../services/dialog.service";
-import {SnackBarComponent} from "../../../snack-bar/snack-bar.component";
-import {Router} from "@angular/router";
-import {AirlineService} from "../airline.service";
-import {Airline} from "../../../models/airline";
+import {Component, OnInit} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import {DialogService} from '../../../services/dialog.service';
+import {SnackBarComponent} from '../../../snack-bar/snack-bar.component';
+import {Router} from '@angular/router';
+import {AirlineService} from '../airline.service';
+import {Airline} from '../../../models/airline';
 
 @Component({
   selector: 'app-airline-edit',
@@ -31,9 +30,9 @@ export class AirlineEditComponent implements OnInit {
   private fetchAirline() {
     this.airlineService.getChosenAirline().subscribe(
       (airline: Airline) => {
-        this.chosenAirline = airline
+        this.chosenAirline = airline;
       }
-    )
+    );
     this.airlineForm = this.airlineService.createAirlineForm();
   }
 
@@ -41,17 +40,17 @@ export class AirlineEditComponent implements OnInit {
     this.dialogService.openConfirmDialog('Czy na pewno chcesz zmodyfikować linię lotniczą?')
       .afterClosed().subscribe(res => {
       if (res) {
-        this.airlineService.editAirline(this.airlineService.mapToAirlineWithId(this.airlineForm,this.chosenAirline.id)).subscribe(
+        this.airlineService.editAirline(this.airlineService.mapToAirlineWithId(this.airlineForm, this.chosenAirline.id)).subscribe(
           () => {
-            this.snackbar.showSnackbar("Pomyślnie zmodyfikowano linię lotniczą", 'success')
+            this.snackbar.showSnackbar('Pomyślnie zmodyfikowano linię lotniczą', 'success');
             this.router.navigate(['airline']);
           },
           (err) => {
             this.snackbar.showSnackbar(err.error, 'fail');
           }
-        )
+        );
       }
-    })
+    });
   }
 
 }

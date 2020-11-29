@@ -85,6 +85,7 @@
             <input matInput type="number" formControlName="maxTimeBetweenChanges"/>
           </mat-form-field>
 
+          <mat-card-subtitle style="font-size: 1rem">Opcjonalnie:</mat-card-subtitle>
           <mat-form-field appearance="outline" class="change1">
             <mat-label>Pierwsza przesiadka:</mat-label>
             <mat-select formControlName="changeLocation1" (selectionChange)="changed($event.value, 2)">

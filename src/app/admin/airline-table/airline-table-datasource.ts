@@ -3,13 +3,13 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {map} from 'rxjs/operators';
 import {Observable, of as observableOf, merge} from 'rxjs';
-import {MatTableDataSource} from "@angular/material/table";
-import {DialogService} from "../../services/dialog.service";
-import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
-import {AuthorizationService} from "../../auth/authorization.service";
-import {Router} from "@angular/router";
-import {Airline} from "../../models/airline";
-import {AirlineService} from "./airline.service";
+import {MatTableDataSource} from '@angular/material/table';
+import {DialogService} from '../../services/dialog.service';
+import {SnackBarComponent} from '../../snack-bar/snack-bar.component';
+import {AuthorizationService} from '../../auth/authorization.service';
+import {Router} from '@angular/router';
+import {Airline} from '../../models/airline';
+import {AirlineService} from './airline.service';
 
 /**
  * Data source for the AirlineTable view. This class should
@@ -28,7 +28,7 @@ export class AirlineTableDataSource extends DataSource<Airline> {
               public authorizationService: AuthorizationService,
               public router: Router) {
     super();
-    this.dataSource = new MatTableDataSource(airlines)
+    this.dataSource = new MatTableDataSource(airlines);
   }
 
   /**
@@ -97,17 +97,17 @@ export class AirlineTableDataSource extends DataSource<Airline> {
       if (res) {
         this.airlineService.deleteAirline(row.id).subscribe(
           () => {
-            const oneAirline = this.dataSource.data.find(airline => airline.id == row.id)
+            const oneAirline = this.dataSource.data.find(airline => airline.id == row.id);
             this.dataSource.data.splice(this.dataSource.data.indexOf(oneAirline), 1);
             this.airlineService.isLoading.next(2);
-            this.snackbar.showSnackbar('Pomyślnie usunięto linię lotniczą', 'success')
+            this.snackbar.showSnackbar('Pomyślnie usunięto linię lotniczą', 'success');
           },
           () => {
             this.snackbar.showSnackbar('Wystąpił błąd podczas usuwania linii lotniczej', 'fail');
           }
-        )
+        );
       }
-    })
+    });
   }
 }
 

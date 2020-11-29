@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatSnackBar,MatSnackBarModule} from "@angular/material/snack-bar";
+import {Component, ViewEncapsulation} from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-snack-bar',
@@ -9,7 +9,8 @@ import {MatSnackBar,MatSnackBarModule} from "@angular/material/snack-bar";
 })
 export class SnackBarComponent {
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar) {
+  }
 
   showSnackbar(message: string, result: string) {
 
@@ -18,15 +19,16 @@ export class SnackBarComponent {
           duration: 4000,
           verticalPosition: 'bottom',
           horizontalPosition: 'right',
-          panelClass:"style-succes"}
-      )
+          panelClass: 'style-succes'
+        }
+      );
     } else {
       this.snackBar.open(message, 'Close', {
         duration: 4000,
         verticalPosition: 'bottom',
         horizontalPosition: 'right',
-        panelClass:"style-error"
-      })
+        panelClass: 'style-error'
+      });
     }
   }
 }

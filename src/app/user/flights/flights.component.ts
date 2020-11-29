@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { OrderingService } from '../../services/ordering.service';
-import { Trip } from 'src/app/models/trip';
+import {OrderingService} from '../../services/ordering.service';
+import {Trip} from 'src/app/models/trip';
 import {Observable} from 'rxjs';
 
 @Component({
@@ -8,20 +8,21 @@ import {Observable} from 'rxjs';
   templateUrl: './flights.component.html',
   styleUrls: ['./flights.component.css']
 })
-export class FlightsComponent implements OnInit, OnDestroy{
+export class FlightsComponent implements OnInit, OnDestroy {
   public flights: Trip[];
   public title$: Observable<string>;
   public isDataFetched = false;
 
   constructor(
-    private orderingService: OrderingService) { }
+    private orderingService: OrderingService) {
+  }
 
   ngOnInit(): void {
     this.getFlights();
     this.getSignal();
     this.isDataFetched = false;
     this.getComponentsTitle();
-    setTimeout( ()  => this.isDataFetched = true,20000)
+    setTimeout(() => this.isDataFetched = true, 20000);
   }
 
   public onFlightSelection(chosenFlight: Trip): void {

@@ -1,15 +1,15 @@
-import { DataSource } from '@angular/cdk/collections';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
-import {FlightResponseWithDate} from "./flight-to-view";
-import {MatTableDataSource} from "@angular/material/table";
-import {DialogService} from "../../services/dialog.service";
-import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
-import {AuthorizationService} from "../../auth/authorization.service";
-import {Router} from "@angular/router";
-import {FlightService} from "./flight.service";
+import {DataSource} from '@angular/cdk/collections';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {map} from 'rxjs/operators';
+import {Observable, of as observableOf, merge} from 'rxjs';
+import {FlightResponseWithDate} from './flight-to-view';
+import {MatTableDataSource} from '@angular/material/table';
+import {DialogService} from '../../services/dialog.service';
+import {SnackBarComponent} from '../../snack-bar/snack-bar.component';
+import {AuthorizationService} from '../../auth/authorization.service';
+import {Router} from '@angular/router';
+import {FlightService} from './flight.service';
 
 /**
  * Data source for the FlightTable view. This class should
@@ -28,7 +28,7 @@ export class FlightTableDataSource extends DataSource<FlightResponseWithDate> {
               public authorizationService: AuthorizationService,
               public router: Router) {
     super();
-    this.dataSource = new MatTableDataSource(flightResponse)
+    this.dataSource = new MatTableDataSource(flightResponse);
   }
 
   /**
@@ -54,7 +54,8 @@ export class FlightTableDataSource extends DataSource<FlightResponseWithDate> {
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect() {}
+  disconnect() {
+  }
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,
@@ -77,15 +78,22 @@ export class FlightTableDataSource extends DataSource<FlightResponseWithDate> {
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
-        case 'id': return compare(+a.id, +b.id, isAsc);
-        case 'airlineName': return compare(a.airlineName, b.airlineName, isAsc);
-        case 'numberSeats': return compare(a.numberSeats, b.numberSeats, isAsc);
-        case 'price': return compare(a.price, b.price, isAsc);
-        case 'srcAirportName': return compare(a.srcAirportName, b.srcAirportName, isAsc);
-        case 'dstAirportName': return compare(a.dstAirportName, b.dstAirportName, isAsc);
-        case 'departureDate': return compare(a.departureDateParse, b.departureDateParse, isAsc);
-        case 'flightTime': return compare(a.flightTime, b.flightTime, isAsc);
-        default: return 0;
+        case 'id':
+          return compare(+a.id, +b.id, isAsc);
+        case 'airlineName':
+          return compare(a.airlineName, b.airlineName, isAsc);
+        case 'numberSeats':
+          return compare(a.numberSeats, b.numberSeats, isAsc);
+        case 'price':
+          return compare(a.price, b.price, isAsc);
+        case 'srcAirportName':
+          return compare(a.srcAirportName, b.srcAirportName, isAsc);
+        case 'dstAirportName':
+          return compare(a.dstAirportName, b.dstAirportName, isAsc);
+        case 'departureDate':
+          return compare(a.departureDateParse, b.departureDateParse, isAsc);
+        default:
+          return 0;
       }
     });
   }
@@ -97,17 +105,17 @@ export class FlightTableDataSource extends DataSource<FlightResponseWithDate> {
       if (res) {
         this.flightService.deleteFlight(row.id).subscribe(
           () => {
-            const oneFlight = this.dataSource.data.find(flight => flight.id == row.id)
+            const oneFlight = this.dataSource.data.find(flight => flight.id == row.id);
             this.dataSource.data.splice(this.dataSource.data.indexOf(oneFlight), 1);
             this.flightService.isLoading.next(2);
-            this.snackbar.showSnackbar('Pomyślnie usunięto lot', 'success')
+            this.snackbar.showSnackbar('Pomyślnie usunięto lot', 'success');
           },
           () => {
             this.snackbar.showSnackbar('Wystąpił błąd podczas usuwania lot', 'fail');
           }
-        )
+        );
       }
-    })
+    });
   }
 }
 

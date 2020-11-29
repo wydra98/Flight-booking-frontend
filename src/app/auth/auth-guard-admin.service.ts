@@ -7,7 +7,8 @@ import {AuthorizationService} from './authorization.service';
 })
 export class AuthGuardAdminService implements CanActivate {
 
-  constructor(private auth: AuthorizationService, public router: Router) {}
+  constructor(private auth: AuthorizationService, public router: Router) {
+  }
 
   // if user isn't logged in we navigate him to LogIn page
   canActivate(): boolean {

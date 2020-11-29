@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
-import {URL} from "../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, Observable} from "rxjs";
-import {Router} from "@angular/router";
-import {Airport} from "../../models/airport";
-import {FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
-import {FlightRequest, FlightResponse, FlightResponseWithDate} from "./flight-to-view";
-import {map} from "rxjs/operators";
-import {Airline} from "../../models/airline";
+import {URL} from '../../../environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {Router} from '@angular/router';
+import {Airport} from '../../models/airport';
+import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
+import {FlightRequest, FlightResponse, FlightResponseWithDate} from './flight-to-view';
+import {Airline} from '../../models/airline';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +20,8 @@ export class FlightService {
 
   constructor(private httpClient: HttpClient,
               private router: Router) {
-    this.fetchAirports()
-    this.fetchAirlines()
+    this.fetchAirports();
+    this.fetchAirlines();
   }
 
   private readonly MONTHS = {
@@ -42,11 +41,11 @@ export class FlightService {
 
 
   getChosenFlight(): Observable<FlightResponse> {
-    return this.chosenFlightResponse.asObservable()
+    return this.chosenFlightResponse.asObservable();
   }
 
   getLoading(): Observable<number> {
-    return this.isLoading.asObservable()
+    return this.isLoading.asObservable();
   }
 
   navigateToEdit(row) {
@@ -66,7 +65,7 @@ export class FlightService {
       departureDateParse: this.parsedDate(flightResponse.departureDate),
       departureTime: flightResponse.departureTime,
       flightTime: flightResponse.flightTime,
-    }
+    };
   }
 
   private parsedDate(date: string) {
@@ -133,7 +132,7 @@ export class FlightService {
   }
 
   public addFlight(flightRequest: FlightRequest): Observable<any> {
-    return this.httpClient.post<FlightRequest[]>(URL + '/flights', flightRequest)
+    return this.httpClient.post<FlightRequest[]>(URL + '/flights', flightRequest);
   }
 
   public getAirports(): Airport[] {
@@ -152,11 +151,11 @@ export class FlightService {
 
   private mapTime(date: string): string {
     let [time, phrase] = date.toString().split(' ');
-    let [hourString, minuteString] = time.split(":")
-    let hour = parseInt(hourString)
-    let minute = parseInt(minuteString)
-    if(phrase == "PM"){
-      hour += 12
+    let [hourString, minuteString] = time.split(':');
+    let hour = parseInt(hourString);
+    let minute = parseInt(minuteString);
+    if (phrase == 'PM') {
+      hour += 12;
     }
     return `${hour}:${minute}`;
   }
@@ -170,16 +169,16 @@ export class FlightService {
   }
 
   public fetchFlightResponse(): Observable<any> {
-    return this.httpClient.get(URL + '/flights/get')
+    return this.httpClient.get(URL + '/flights/get');
   }
 
   public deleteFlight(id: number): Observable<any> {
-    this.isLoading.next(1)
+    this.isLoading.next(1);
     return this.httpClient.delete(URL + '/flights/delete', {
       params: {
         id: id.toString()
       }
-    })
+    });
   }
 
   public editFlight(flightRequests: FlightRequest): Observable<any> {
@@ -189,18 +188,16 @@ export class FlightService {
   public fetchAirlines(): void {
     this.httpClient.get<Airline[]>(URL + '/airlines/get').subscribe(
       (airlines) => {
-        this.airlines = airlines
+        this.airlines = airlines;
       }
-    )
+    );
   }
 
   public fetchAirports(): void {
     this.httpClient.get<Airport[]>(URL + '/airports/get').subscribe(
       (airports) => {
-        this.airports = airports
+        this.airports = airports;
       }
-    )
+    );
   }
-
-
 }

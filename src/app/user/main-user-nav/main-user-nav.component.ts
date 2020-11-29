@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
-import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
-import {map, shareReplay} from "rxjs/operators";
-import {Router} from "@angular/router";
-import {AuthorizationService} from "../../auth/authorization.service";
-import {SnackBarComponent} from "../../snack-bar/snack-bar.component";
-import {DialogService} from "../../services/dialog.service";
+import {Component} from '@angular/core';
+import {Observable} from 'rxjs';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {map, shareReplay} from 'rxjs/operators';
+import {Router} from '@angular/router';
+import {AuthorizationService} from '../../auth/authorization.service';
+import {SnackBarComponent} from '../../snack-bar/snack-bar.component';
+import {DialogService} from '../../services/dialog.service';
 
 @Component({
   selector: 'app-main-user-nav',
@@ -35,6 +35,6 @@ export class MainUserNavComponent {
         this.snackbar.showSnackbar('Pomyślnie wylogowano', 'success');
         this.auth.logout();
       }
-    })
+    });
   }
 }

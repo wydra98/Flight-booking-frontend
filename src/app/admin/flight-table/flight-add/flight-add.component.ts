@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {DialogService} from "../../../services/dialog.service";
-import {SnackBarComponent} from "../../../snack-bar/snack-bar.component";
-import {Router} from "@angular/router";
-import {FormGroup} from "@angular/forms";
-import {FlightService} from "../flight.service";
-import {Type} from "../../../user/search-flight/Type";
-import {BehaviorSubject} from "rxjs";
-import {Airport} from "../../../models/airport";
-import {Airline} from "../../../models/airline";
+import {DialogService} from '../../../services/dialog.service';
+import {SnackBarComponent} from '../../../snack-bar/snack-bar.component';
+import {Router} from '@angular/router';
+import {FormGroup} from '@angular/forms';
+import {FlightService} from '../flight.service';
+import {Type} from '../../../user/search-flight/Type';
+import {BehaviorSubject} from 'rxjs';
+import {Airport} from '../../../models/airport';
+import {Airline} from '../../../models/airline';
 
 let typeColumn = [];
 
@@ -34,7 +34,9 @@ export class FlightAddComponent implements OnInit {
   ngOnInit(): void {
     this.airports = this.flightService.getAirports();
     this.airlines = this.flightService.getAirlines();
-    this.airports.forEach((airport) => { typeColumn.push(airport.city+', '+airport.country)});
+    this.airports.forEach((airport) => {
+      typeColumn.push(airport.city + ', ' + airport.country);
+    });
     this.flightForm = this.flightService.createFlightRequestForm();
     this.determineMinDate();
     this.createTypesList();
@@ -66,14 +68,14 @@ export class FlightAddComponent implements OnInit {
       if (res) {
         this.flightService.addFlight(this.flightService.mapToFlightRequest(this.flightForm)).subscribe(
           () => {
-            this.snackbar.showSnackbar("Pomyślnie dodano lot", 'success')
+            this.snackbar.showSnackbar('Pomyślnie dodano lot', 'success');
             this.router.navigate(['flight']);
           },
           (err) => {
             this.snackbar.showSnackbar(err.error, 'fail');
           }
-        )
+        );
       }
-    })
+    });
   }
 }
