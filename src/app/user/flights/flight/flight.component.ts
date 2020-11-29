@@ -24,6 +24,9 @@ export class FlightComponent implements OnInit {
   }
 
   public onFlightSelection(): void {
+    let tmp = this.viewData.sourcePlace
+    this.viewData.sourcePlace = this.viewData.destinationPlace
+    this.viewData.destinationPlace = tmp;
     this.chosenFlight.next(this.flight);
   }
 

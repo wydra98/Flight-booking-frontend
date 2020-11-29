@@ -22,7 +22,7 @@ export class FlightsComponent implements OnInit, OnDestroy {
     this.getSignal();
     this.isDataFetched = false;
     this.getComponentsTitle();
-    setTimeout(() => this.isDataFetched = true, 20000);
+    setTimeout(() => this.isDataFetched = true, 40000);
   }
 
   public onFlightSelection(chosenFlight: Trip): void {
